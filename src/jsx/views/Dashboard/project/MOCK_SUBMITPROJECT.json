@@ -1,0 +1,67 @@
+[
+	{
+		"group": "General details",
+		"content": [
+			{
+				"name": "SP1",
+				"label": "Project name",
+				"control": "input",
+				"type": "text",
+				"styles": "vertical",
+				"rows": 1,
+				"required": "Y",
+				"answer": []
+			},
+            {
+				"name": "SP2",
+				"label": "Project logo",
+				"control": "file",
+				"type": "image",
+				"styles": "vertical",
+				"rows": 1,
+				"required": "Y",
+				"answer": []
+			},
+            {
+				"name": "SP3",
+				"label": "Ecosystem",
+				"control": "input",
+				"type": "text",
+				"styles": "vertical",
+				"rows": 1,
+				"required": "Y",
+				"answer": []
+			},
+            {
+				"name": "SP4",
+				"label": "Core Team",
+				"control": "input",
+				"type": "text",
+				"styles": "vertical",
+				"rows": 8,
+				"required": "Y",
+				"answer": []
+			},
+            {
+				"name": "SP5",
+				"label": "Project summary (max 125 characters)",
+				"control": "input",
+				"type": "textarea",
+				"styles": "vertical",
+				"rows": 4,
+				"required": "Y",
+				"answer": []
+			},
+            {
+				"name": "SP6",
+				"label": "Project description",
+				"control": "input",
+				"type": "textarea",
+				"styles": "vertical",
+				"rows": 8,
+				"required": "Y",
+				"answer": []
+			}
+		]
+	}
+]

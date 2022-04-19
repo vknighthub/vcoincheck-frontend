@@ -1,0 +1,51 @@
+[data-theme-version="dark"] {
+    .sidebar-right {
+		.card-tabs{
+			.nav-tabs{
+				border-color:var(--rgba-primary-1)!important;
+				background:#fff;
+				.nav-item{
+					.nav-link{
+						color:$black!important;
+					}
+				} 
+			}
+		}
+		.form-control{
+			background:$white;
+			color:$black;
+			border-color:$border-color;
+		}
+		.default-select .list{
+			background:$white;
+			.option{
+				&.selected,&.focus,&:hover{
+					background:rgba($black,0.05)!important;
+				}
+			}
+		}
+		.bootstrap-select .btn {
+			border-color: #e8e8e8 !important;
+		}
+		.dropdown-menu {
+			background-color: #fff;
+			box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, .1);
+			.dropdown-item {
+				&.selected,
+				&.selected.active,
+				&.active,
+				&:hover, 
+				&:focus {
+					background-color: var(--rgba-primary-1);
+					color: var(--primary)!important;
+				}
+			}
+		}
+		.sidebar-right-inner>h4{
+			color:$black!important;
+		}
+		.nice-select .option {
+			background: #fff;
+		}
+    }
+}

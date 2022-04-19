@@ -1,0 +1,75 @@
+import { Card, Col, Table } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
+
+
+const ReviewList = (props) => {
+
+	const reviewList = props.review
+
+	const handleReviewClick = (rowid) => {
+		props.handleSetReviewID(rowid)
+	}
+
+	return (
+		<>
+			<Col lg={12}>
+				<Card>
+					<Card.Header>
+						<Card.Title className="fs-26 text-primary" >Review List</Card.Title>
+					</Card.Header>
+					<Card.Body>
+						<Table responsive>
+							<thead>
+								<tr>
+									<th className="width80">
+										<strong>#</strong>
+									</th>
+									<th>
+										<strong>Review ID</strong>
+									</th>
+									<th>
+										<strong>DATE</strong>
+									</th>
+									<th>
+										<strong>Score</strong>
+									</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								{reviewList.map((review, index) => (
+									<tr key={index}>
+										<td>
+											<strong>{index + 1}</strong>
+										</td>
+										<td>{review.reviewid}</td>
+										<td>{review.reviewdate}</td>
+										<td>{review.scores}</td>
+										<td>
+											<Link onClick={() => props.checkView()}
+												to="#"
+												className="btn btn-success shadow btn-xs sharp mr-2"
+											>
+												<i className="fa fa-book"></i>
+											</Link>
+											<Link onClick={() => { props.checkBuy(); handleReviewClick(review.reviewid) }}
+												to="#"
+												className="btn btn-primary shadow btn-xs sharp"
+											>
+												<i className="fa fa-exchange-alt"></i>
+											</Link>
+										</td>
+									</tr>
+								))}
+
+							</tbody>
+						</Table>
+					</Card.Body>
+				</Card>
+			</Col>
+		</>
+	);
+};
+
+export default ReviewList;

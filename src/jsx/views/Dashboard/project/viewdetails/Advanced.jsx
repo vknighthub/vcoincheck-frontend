@@ -1,0 +1,31 @@
+import { Formik } from "formik";
+import FormikControl from "../../../../components/Forms/Formik/FormikControl";
+
+const Advanced = (props) => {
+    const advancequestion = props.reviewinfo.main_data
+    return (
+        <div className="my-post-content pt-3">
+            <div className="settings-form">
+                <Formik
+                >{() => (
+                    <form >
+                        {advancequestion.map((groups, index) => (
+                            <div key={index}>
+                                {groups.group && <h4 className="text-primary pb-3">{groups.group}</h4>}
+                                {groups.content.map((controls, index) => (
+                                    <div key={index}>
+                                        <FormikControl control={controls.control} styles={controls.styles} label={controls.label} name={controls.name} options={controls.answer} answer ={controls.choose} component="input" disabled/>
+                                        {controls.control === 'input' && <FormikControl control={controls.control} type={controls.type} label={controls.label} name={controls.name} className="form-control" rows={controls.rows} disabled/>}
+                                    </div>
+                                ))}
+                            </div>
+                        ))}
+                    </form>
+                )}
+                </Formik>
+            </div>
+        </div>
+    )
+}
+
+export default Advanced;
