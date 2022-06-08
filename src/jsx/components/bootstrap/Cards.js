@@ -147,6 +147,9 @@ const UiCards = () => {
               <Card.Text>
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
+                <ul>
+                  <li>Looking to bring new ideas to life and help with the future of decentralized platforms</li>
+                </ul>
               </Card.Text>
               <Button
                 as='a'

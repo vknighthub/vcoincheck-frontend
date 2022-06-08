@@ -2,12 +2,16 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import loginbg from "../../images/bg-login.jpg";
 
+import { useTranslation, withTranslation } from 'react-i18next';
+import { withRouter } from 'react-router-dom';
 import { forgotPasswordAction, loadingToggleAction } from '../../store/actions/AuthActions';
 import LinkIcon from '../components/vKnightHub/Control/LinkIcon';
 import Asideleft from './WidgetBasic/AsideLeft';
 
 
 function ForgotPassword(props) {
+   const { t } = useTranslation();
+
    const [username, setUsername] = useState('');
    const [email, setEmail] = useState('');
    let errorsObj = { username: '', email: '' };
@@ -32,9 +36,9 @@ function ForgotPassword(props) {
       }
 
       let postdata = {
-			username: username,
-			email: email
-		}
+         username: username,
+         email: email
+      }
 
       dispatch(loadingToggleAction(true));
       dispatch(forgotPasswordAction(postdata, props.history));
@@ -43,7 +47,7 @@ function ForgotPassword(props) {
    return (
       <div className="login-main-page" style={{ backgroundImage: "url(" + loginbg + ")" }}>
          <div className="login-wrapper">
-            <Asideleft />
+            <Asideleft t={t} />
             <div className="login-aside-right gradient_one">
                <div className="row m-0 justify-content-center h-100 align-items-center">
                   <div className="col-xl-7 col-xxl-7">
@@ -52,8 +56,8 @@ function ForgotPassword(props) {
                            <div className="col-xl-12">
                               <div className="auth-form-1">
                                  <div className="mb-4">
-                                    <h3 className="text-white mb-1">Welcome to vCoincheck</h3>
-                                    <p className="text-white">Forgot Password</p>
+                                    <h3 className="text-white mb-1">{t('welcome')} vCoincheck</h3>
+                                    <p className="text-white">{t('forgotpwd')}</p>
                                  </div>
                                  {props.errorMessage && (
                                     <div className='bg-red-300 text-red-900 border border-red-900 p-1 my-2'>
@@ -63,7 +67,7 @@ function ForgotPassword(props) {
                                  <form onSubmit={onLogin}>
                                     <div className="form-group">
                                        <label className="mb-2 ">
-                                          <strong className="text-white">Username</strong>
+                                          <strong className="text-white">{t('username')}</strong>
                                        </label>
                                        <input type="text" className="form-control"
                                           value={username} autoComplete="username"
@@ -72,7 +76,7 @@ function ForgotPassword(props) {
                                        {errors.username && <div className="text-danger fs-12">{errors.username}</div>}
                                     </div>
                                     <div className="form-group">
-                                       <label className="mb-2 "><strong className="text-white">Email</strong></label>
+                                       <label className="mb-2 "><strong className="text-white">{t('email')}</strong></label>
                                        <input
                                           type="email"
                                           className="form-control"
@@ -90,7 +94,7 @@ function ForgotPassword(props) {
                                           type="submit"
                                           className="btn bg-dark text-light btn-block"
                                        >
-                                          Reset password
+                                          {t('resetpwd')}
                                        </button>
                                     </div>
                                  </form>
@@ -100,7 +104,6 @@ function ForgotPassword(props) {
                                        <LinkIcon className="ai-icon" to="/" name="Back to home" />
                                     </div>
                                  </div>
-
                               </div>
                            </div>
                         </div>
@@ -114,4 +117,4 @@ function ForgotPassword(props) {
    )
 }
 
-export default ForgotPassword;
+export default withTranslation()(withRouter((ForgotPassword)));

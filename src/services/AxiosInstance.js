@@ -5,27 +5,28 @@ import queryString from 'query-string';
 const axiosInstance = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
     headers: {
+        'Access-Control-Allow-Origin': '*',
         'content-type': 'application/json',
-    }, 
+    },
     paramsSerializer: params => queryString.stringify(params),
 });
 
-axiosInstance.interceptors.request.use(async(config) => {
+axiosInstance.interceptors.request.use(async (config) => {
     const state = store.getState();
     const token = state.auth.auth.result.token;
     config.params = config.params || {};
-    config.headers ={
+    config.headers = {
         'Authorization': `Bearer ${token}`,
     }
     return config;
 });
 
 axiosInstance.interceptors.response.use((response) => {
-    if (response && response.data){
+    if (response && response.data) {
         return response.data;
     }
     return response;
-},(error) => {
+}, (error) => {
     throw error;
 });
 

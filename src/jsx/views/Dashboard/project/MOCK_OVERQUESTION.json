@@ -1,0 +1,159 @@
+[
+    {
+        "group": "None",
+        "content": [
+            {
+                "name": "OR1",
+                "label": "Project name",
+                "control": "input",
+                "type": "text",
+                "answer": [],
+                "required": "Y"
+            },
+            {
+                "name": "OR2",
+                "label": "Project logo",
+                "control": "file",
+                "type": "image",
+                "answer": [],
+                "required": "Y"
+            },
+            {
+                "name": "OR3",
+                "label": "Ecosystem",
+                "control": "input",
+                "type": "text",
+                "answer": [],
+                "required": "Y"
+            },
+            {
+                "name": "OR4",
+                "label": "What the project does, briefly about the technical solution the project wants to do (this information is from the website and whitepaper) or simply copy C68, C98 or other organization",
+                "control": "input",
+                "type": "textarea",
+                "answer": [],
+                "required": "Y"
+            },
+            {
+                "name": "OR5",
+                "label": "About coreteam information",
+                "control": "input",
+                "type": "textarea",
+                "answer": [],
+                "required": "Y"
+            },
+            {
+                "name": "OR6",
+                "label": "Token name",
+                "control": "input",
+                "type": "text",
+                "answer": [],
+                "required": "N"
+            },
+            {
+                "name": "OR7",
+                "label": "Token type (Ex: CNT, ERC20…)",
+                "control": "input",
+                "type": "text",
+                "answer": [],
+                "required": "N"
+            },
+            {
+                "name": "OR8",
+                "label": "Total supply",
+                "control": "input",
+                "type": "text",
+                "answer": [],
+                "required": "N"
+            },
+            {
+                "name": "OR9",
+                "label": "Release date",
+                "control": "input",
+                "type": "date",
+                "answer": [],
+                "required": "N"
+            },
+            {
+                "name": "OR10",
+                "label": "Type of release (ICO, nameO, IEO, ISO…)",
+                "control": "input",
+                "type": "text",
+                "answer": [],
+                "required": "N"
+            },
+            {
+                "name": "OR11",
+                "label": "Tokenomic chart (image)",
+                "control": "file",
+                "type": "image",
+                "answer": [],
+                "required": "N"
+            },
+            {
+                "name": "OR12",
+                "label": "Website",
+                "control": "input",
+                "type": "text",
+                "answer": [],
+                "required": "N"
+            },
+            {
+                "name": "OR13",
+                "label": "Twitter",
+                "control": "input",
+                "type": "text",
+                "answer": [],
+                "required": "N"
+            },
+            {
+                "name": "OR14",
+                "label": "Facebook",
+                "control": "input",
+                "type": "text",
+                "answer": [],
+                "required": "N"
+            },
+            {
+                "name": "OR15",
+                "label": "Github",
+                "control": "input",
+                "type": "text",
+                "answer": [],
+                "required": "N"
+            },
+            {
+                "name": "OR16",
+                "label": "Telegram",
+                "control": "input",
+                "type": "text",
+                "answer": [],
+                "required": "N"
+            },
+            {
+                "name": "OR17",
+                "label": "Reddit",
+                "control": "input",
+                "type": "text",
+                "answer": [],
+                "required": "N"
+            },
+            {
+                "name": "OR18",
+                "label": "Medium",
+                "control": "input",
+                "type": "text",
+                "answer": [],
+                "required": "N"
+            },
+            {
+                "name": "OR19",
+                "label": "Discord",
+                "control": "input",
+                "type": "text",
+                "answer": [],
+                "required": "N"
+            }
+        ]
+    }
+]

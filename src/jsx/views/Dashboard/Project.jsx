@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { withTranslation, useTranslation } from "react-i18next";
 import PageTitle from "../../layouts/PageTitle";
 import ProjectTable from "./project/ProjectTable";
 import TopProject from "./project/TopProject";
@@ -6,22 +7,22 @@ import TopProject from "./project/TopProject";
 
 
 const Project = () => {
+    const { t } = useTranslation();
 
     return (
         <Fragment>
-            <PageTitle activeMenu="All Project" motherMenu="Project" />
-            <TopProject/>
+            <PageTitle activeMenu={t('allproject')} motherMenu={t('project')} path="project" />
+            <TopProject t={t} />
             <div className="row">
                 <div className="col-xl-12 col-xxl-12 col-lg-12">
                     <div className="card">
-                        <ProjectTable title="ALL PROJECT"/>
+                        <ProjectTable title={t('allproject')}/>
                     </div>
                 </div>
             </div>
-
         </Fragment>
     );
 };
 
 
-export default Project;
+export default withTranslation()(Project);

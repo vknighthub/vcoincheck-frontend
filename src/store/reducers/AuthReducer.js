@@ -10,67 +10,67 @@ import {
 import { CONFIRMED_BONUSSCORE_USER, CONFIRMED_CHANGE_AVATAR_USER, CONFIRMED_MNUSSCORE_USER } from '../actions/types/UserType';
 
 let menu = [{
-    "name": "Home",
+    "name": { en: "Home", vn: "Trang Chủ", jp: "家" },
     "path": "/",
     "class": "ai-icon",
     "icon": "flaticon-381-networking",
     "menu_sub": []
 },
 {
-    "name": "Project",
+    "name": { en: "Project", vn: "Dự án", jp: "計画" },
     "path": "#",
     "class": "ai-icon has-arrow",
     "icon": "flaticon-381-television",
     "menu_sub": [
         {
-            "name": "Project list",
+            "name": { en: "Project list", vn: "Danh sách dự án", jp: "市場情報" },
             "path": "/project"
         }
     ]
 },
 {
-    "name": "Market info",
+    "name": { en: "Market info", vn: "Thông tin thị trường", jp: "としょうかん" },
     "path": "/market-info",
     "class": "ai-icon",
     "icon": "flaticon-381-controls-3",
     "menu_sub": []
 },
 {
-    "name": "Library",
+    "name": { en: "Library", vn: "Thư viện", jp: "としょうかん" },
     "path": "#",
     "class": "ai-icon has-arrow",
     "icon": "flaticon-381-notepad",
     "menu_sub": [
         {
-            "name": "Dictionary",
+            "name": { en: "Dictionary", vn: "Từ Điển", jp: "辞書" },
             "path": "/dictionary"
         },
         {
-            "name": "Cardano knowledge",
+            "name": { en: "Cardano knowledge", vn: "Kiến thức Cardano", jp: "カルダノの知識" },
             "path": "/cardano-knowledge"
         },
         {
-            "name": "Blockchain knowledge",
+            "name": { en: "Blockchain knowledge", vn: "Kiến thức Blockchain", jp: "ブロックチェーンの知識" },
             "path": "/blockchain-knowledge"
         }
     ]
 },
 {
-    "name": "Community",
+    "name": { en: "Community", vn: "Cộng đồng", jp: "コミュニティ" },
     "path": "/community",
     "class": "ai-icon",
     "icon": "flaticon-381-settings-2",
     "menu_sub": []
 },
 {
-    "name": "Events",
+    "name": { en: "Events", vn: "Tin tức", jp: "イベント" },
     "path": "/event",
     "class": "ai-icon",
     "icon": "flaticon-381-network",
     "menu_sub": []
 },
 {
-    "name": "Faqs",
+    "name": { en: "Faqs", vn: "Câu hỏi thường gặp", jp: "よくある質問" },
     "path": "/faq",
     "class": "ai-icon",
     "icon": "flaticon-381-layer-1",
@@ -148,7 +148,7 @@ export function AuthReducer(state = initialState, action) {
                 localId: '',
                 expiresIn: '',
                 refreshToken: '',
-                
+
             },
         };
     }

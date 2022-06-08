@@ -5,6 +5,7 @@ import { useDispatch, connect } from 'react-redux';
 import { Editor } from "@tinymce/tinymce-react";
 import { useState } from "react";
 import { UserDetails } from "../../../../../store/selectors/AuthSelectors";
+import { withTranslation, useTranslation } from 'react-i18next';
 
 const overviewSchema = Yup.object().shape({
     title: Yup.string()
@@ -20,6 +21,7 @@ const overviewSchema = Yup.object().shape({
 const AddCardano = (props) => {
 
     const [content, setContent] = useState('');
+    const { t } = useTranslation();
 
     const dispatch = useDispatch();
 
@@ -58,7 +60,7 @@ const AddCardano = (props) => {
                         handleSubmit,
                     }) => (
                         <form onSubmit={handleSubmit}>
-                            <h2 className="text-primary pb-5 text-center">Please fill in some information about the content of knowledge about Cardano</h2>
+                            <h2 className="text-primary pb-5 text-center">{t('addcardanotitle')}</h2>
                             <div
                                 className={`form-group ${values.title
                                     ? errors.title
@@ -67,13 +69,13 @@ const AddCardano = (props) => {
                                     : ""
                                     }`}
                             >
-                                <label>Title</label>
+                                <label>{t('title')}</label>
                                 <div className="input-group">
                                     <input
                                         type="text"
                                         className="form-control"
                                         id="val-title"
-                                        placeholder="Title"
+                                        placeholder={t('title')}
                                         name="title"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
@@ -103,13 +105,13 @@ const AddCardano = (props) => {
                                     : ""
                                     }`}
                             >
-                                <label>Brief introduction</label>
+                                <label>{t('briefintro')}</label>
                                 <div className="input-group">
                                     <input
                                         type="text"
                                         className="form-control"
                                         id="val-introduction"
-                                        placeholder="Ecosystem.."
+                                        placeholder={t('ecosystem')}
                                         name="introduction"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
@@ -139,7 +141,7 @@ const AddCardano = (props) => {
                                     : ""
                                     }`}
                             >
-                                <label>Illustration</label>
+                                <label>{t('illustration')}</label>
                                 <div className="custom-file">
                                     <input
                                         type="file"
@@ -150,7 +152,7 @@ const AddCardano = (props) => {
                                         onBlur={handleBlur}
                                         value={values.illustration}
                                     />
-                                    <label className='custom-file-label'>Choose file</label>
+                                    <label className='custom-file-label'>{t('choosefile')}</label>
                                     <div
                                         id="val-illustration-error"
                                         className="invalid-feedback animated fadeInUp"
@@ -175,7 +177,7 @@ const AddCardano = (props) => {
                                     : ""
                                     }`}
                             >
-                                <label>Content</label>
+                                <label>{t('content')}</label>
                                 <div className="summernote">
                                     <Editor
                                         initialValue="<p>This is the initial content of the editor</p>"
@@ -213,7 +215,7 @@ const AddCardano = (props) => {
                                 </div>
                             </div>
 
-                            <button className="btn btn-primary" type="submit">Submit</button>
+                            <button className="btn btn-primary" type="submit">{t('submit')}</button>
                             <br />
                         </form>
                     )}
@@ -230,4 +232,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, null)(AddCardano)
+export default withTranslation()(connect(mapStateToProps, null)(AddCardano))

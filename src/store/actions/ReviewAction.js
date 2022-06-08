@@ -29,7 +29,7 @@ export function confirmedGetAdvanceAction(advancequestion) {
 export function confirmedReviewAction(reviewresponses) {
     return {
         type: CONFIRMED_ADD_REVIEW,
-        reviewresponses: [reviewresponses],
+        reviewresponses,
     };
 };
 
@@ -89,9 +89,8 @@ export function addReviewAction(postData, actions) {
     return (dispatch) => {
         addReviewed(postData).then((response) => {
             dispatch(confirmedReviewAction(response.result.data));
-            actions();
+            actions(true);
         }).catch((error) => {
-            console.error("error" + JSON.stringify(error.response.data));
             const errorMessage = formatError(error.response.data);
             dispatch(failedReviewAction(errorMessage));
             Swal.fire("Failed!", errorMessage, "error");

@@ -141,7 +141,6 @@ export function getUserRolesAction(history) {
 };
 
 export function registerAction(postData, history) {
-    console.log("registerAction" + JSON.stringify(postData));
     return (dispatch) => {
         registerUser(postData)
             .then((response) => {
@@ -159,6 +158,11 @@ export function registerAction(postData, history) {
             .catch((error) => {
                 console.error("error" + error.message);
                 const errorMessage = formatError(error.response.data);
+                Swal.fire({
+                    title: "Failed!",
+                    html: errorMessage,
+                    icon: "error"
+                })
                 dispatch(registerFailedAction(errorMessage));
             });
     };
@@ -245,10 +249,10 @@ export function changeAvatarUserAction(postData) {
     return (dispatch) => {
         changeAvatarUser(postData)
             .then((response) => {
-                dispatch(changeAvatarUserConfirmAction(response));
                 if (response.errorcode !== 0) {
                     Swal.fire("Failed!", response.messagedetail, "error");
                 }
+                dispatch(changeAvatarUserConfirmAction(response));
             })
             .catch((error) => {
                 const errorMessage = formatError(error.response.data);

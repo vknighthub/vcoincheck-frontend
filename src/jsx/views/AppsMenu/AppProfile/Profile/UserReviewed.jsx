@@ -1,7 +1,9 @@
 import { NavLink } from "react-router-dom";
+import { useTranslation, withTranslation } from 'react-i18next';
 
 
 const UserReviewed = () => {
+    const { t } = useTranslation();
     return (
         <div className="row">
             <div className="col-lg-12 col-xl-12" >
@@ -37,7 +39,7 @@ const UserReviewed = () => {
                                             Project code: <span className="item"></span>{" "}
                                         </p>
                                         <p>
-                                            Ecosystem: <span className="item"></span>{" "}
+                                            {t('ecosystem')}: <span className="item"></span>{" "}
                                         </p>
                                         <p className="text-content">
 
@@ -54,4 +56,4 @@ const UserReviewed = () => {
 };
 
 
-export default UserReviewed;
+export default withTranslation()(UserReviewed);

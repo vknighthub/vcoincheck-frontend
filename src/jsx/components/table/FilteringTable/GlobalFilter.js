@@ -1,12 +1,12 @@
 import React from 'react';
 
-export const GlobalFilter = ( {filter, setFilter} ) =>{
-	return(
+export const GlobalFilter = ({ filter, setFilter, t }) => {
+	return (
 		<div>
-			Search : {' '}
+			{t('search')} : {' '}
 			<input className="ml-2 input-search form-control"
-				value={filter || ''}  onChange={e => setFilter(e.target.value)} style={{width: "20%"}}
-            />
+				value={filter || ''} onChange={e => setFilter(e.target.value)} style={{ width: "20%" }}
+			/>
 		</div>
 	)
 } 

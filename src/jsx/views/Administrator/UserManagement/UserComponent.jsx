@@ -3,16 +3,16 @@ import { Link, NavLink } from "react-router-dom";
 import Swal from "sweetalert2";
 import { deleteUserAction, loadingToggleAction } from "../../../../store/actions/UserAction";
 
-const UserComponent = ({ user, index }) => {
+const UserComponent = ({ user, index, t }) => {
     const dispatch = useDispatch();
     const getUserStatus = (status) => {
         switch (status) {
             case 'P':
-                return <i className="fa fa-circle text-warning mr-1"> Pending to Approve</i>
+                return <i className="fa fa-circle text-warning mr-1"> {t('pendingtoapprove')}</i>
             case 'N':
-                return <i className="fa fa-circle text-success mr-1"> Normal</i>
+                return <i className="fa fa-circle text-success mr-1"> {t('normal')}</i>
             case 'C':
-                return <i className="fa fa-circle text-danger mr-1"> Closed</i>
+                return <i className="fa fa-circle text-danger mr-1"> {t('closed')}</i>
             default: return ''
         }
     }
@@ -24,7 +24,7 @@ const UserComponent = ({ user, index }) => {
         if (status === 'P') {
             dispatch(loadingToggleAction(true));
             dispatch(deleteUserAction(postData));
-        }else{
+        } else {
             Swal.fire("Warning!", "This user is not allowed to be deleted", "warning");
         }
 

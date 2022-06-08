@@ -45,7 +45,6 @@ export function createPostAction(postData, history) {
 export function getPostsAction() {
     return (dispatch, getState) => {
         getPosts().then((response) => {
-			console.log(response);
             let posts = formatPosts(response.data);
             dispatch(confirmedGetPostsAction(posts));
         });

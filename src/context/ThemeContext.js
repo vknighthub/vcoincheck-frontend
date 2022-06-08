@@ -25,7 +25,7 @@ const ThemeContextProvider = (props) => {
         ? body.setAttribute("data-sidebar-style", "overlay")
         : body.setAttribute("data-sidebar-style", "full");
     };
-    body.setAttribute("data-typography", "poppins");
+    body.setAttribute("data-typography", "quicksand");
     body.setAttribute("data-theme-version", "dark");
     //body.setAttribute("data-theme-version", "dark");
     body.setAttribute("data-layout", "vertical");

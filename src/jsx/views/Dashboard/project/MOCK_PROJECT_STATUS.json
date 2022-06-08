@@ -1,0 +1,18 @@
+[
+    {
+        "id": "A",
+        "caption": "Approved"
+    },
+    {
+        "id": "F",
+        "caption": "Future"
+    },
+    {
+        "id": "O",
+        "caption": "Ongoing"
+    },
+    {
+        "id": "P",
+        "caption": "In Progress"
+    }
+]

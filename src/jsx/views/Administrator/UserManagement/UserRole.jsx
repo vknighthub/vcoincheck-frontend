@@ -1,11 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, Fragment } from "react";
+import { Fragment, useEffect } from "react";
+import { useTranslation, withTranslation } from "react-i18next";
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { getUserRolesAction } from '../../../../store/actions/UserAction';
 import PageTitle from "../../../layouts/PageTitle";
-import { useHistory } from 'react-router-dom';
 
 const UserRole = (props) => {
+    const { t } = useTranslation();
     const history = useHistory()
     const data = props.userroles;
 
@@ -46,7 +48,7 @@ const UserRole = (props) => {
                         <div className="card">
                             <div className="card-header d-block d-sm-flex border-0">
                                 <div>
-                                    <h4 className="fs-20 text-black">User role</h4>
+                                    <h4 className="fs-20 text-black">{t('userrole')}</h4>
                                 </div>
                             </div>
                             <div className="card-body tab-content p-0">
@@ -55,13 +57,13 @@ const UserRole = (props) => {
                                         <thead>
                                             <tr>
                                                 <th>
-                                                    <strong>Role ID</strong>
+                                                    <strong>{t('roleid')}</strong>
                                                 </th>
                                                 <th>
-                                                    <strong>Role name</strong>
+                                                    <strong>{t('rolename')}</strong>
                                                 </th>
                                                 <th>
-                                                    <strong>Role description</strong>
+                                                    <strong>{t('roledescription')}</strong>
                                                 </th>
                                             </tr>
                                         </thead>
@@ -91,4 +93,4 @@ const mapDispatchToProps = (dispatch) => {
         }
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(UserRole);
+export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(UserRole));

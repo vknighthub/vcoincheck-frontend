@@ -1,13 +1,15 @@
 import { useState } from 'react';
+import { useTranslation, withTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import loginbg from "../../images/bg-login.jpg";
-
 import { confirmOTPPasswordAction, loadingToggleAction } from '../../store/actions/AuthActions';
 import LinkIcon from '../components/vKnightHub/Control/LinkIcon';
 import Asideleft from './WidgetBasic/AsideLeft';
 
 
 function OTPPassword(props) {
+    const { t } = useTranslation();
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [otpcode, setOTPCode] = useState('');
@@ -49,7 +51,7 @@ function OTPPassword(props) {
     return (
         <div className="login-main-page" style={{ backgroundImage: "url(" + loginbg + ")" }}>
             <div className="login-wrapper">
-                <Asideleft />
+                <Asideleft t= {t}/>
                 <div className="login-aside-right gradient_one">
                     <div className="row m-0 justify-content-center h-100 align-items-center">
                         <div className="col-xl-7 col-xxl-7">
@@ -136,4 +138,4 @@ function OTPPassword(props) {
     )
 }
 
-export default OTPPassword;
+export default withTranslation()(withRouter((OTPPassword)));

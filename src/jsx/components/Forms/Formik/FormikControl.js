@@ -4,6 +4,8 @@ import File from '../../bootstrap/File';
 import InputText from '../../bootstrap/InputText';
 import RadioButtonHorizontal from '../../bootstrap/RadioButtonHorizontal'
 import RadioButtonVertical from '../../bootstrap/RadioButtonVertical'
+import Select from '../../bootstrap/Select';
+import Texteditor from '../../bootstrap/Texteditor';
 import Textarea from './../../bootstrap/Textarea';
 
 const FormikControl = (props) => {
@@ -17,6 +19,8 @@ const FormikControl = (props) => {
                     return <DatePicker {...rest} />
                 case 'textarea':
                     return <Textarea {...rest} />
+                case 'texteditor': 
+                    return <Texteditor {...rest} />
                 default:
                     return null
             }
@@ -29,6 +33,8 @@ const FormikControl = (props) => {
                 default:
                     return null;
             }
+        case 'select':
+            return <Select {...rest} />
         case 'file':
             return <File {...rest} />
         default:

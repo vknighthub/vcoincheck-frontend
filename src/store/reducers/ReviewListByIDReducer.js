@@ -24,7 +24,8 @@ const initialState = {
         basicreview: 0,
         advancereview: 0,
         expertreview: 0
-    }
+    },
+    activereviewed: "overviewed",
 }
 
 export default function ReviewListByIDReducer(state = initialState, actions) {

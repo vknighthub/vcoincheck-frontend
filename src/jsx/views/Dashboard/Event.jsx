@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { withTranslation, useTranslation } from "react-i18next";
 
 
 const ListNews = [
@@ -62,6 +63,7 @@ const RanKinglist = [
 ];
 
 const Event = () => {
+   const { t } = useTranslation();
    return (
       <Fragment>
          <>
@@ -70,15 +72,15 @@ const Event = () => {
                   <div className="card">
                      <div className="card-header d-block d-sm-flex border-1 text-center">
                         <h2 className="text-black mx-auto">
-                           News
+                           {t('news')}
                         </h2>
                      </div>
                      <div className="table-responsive card-body tab-content p-3">
-                        {ListNews.map((value,index)=>(
+                        {ListNews.map((value, index) => (
                            <a target="_blank" href={value.href} rel="noreferrer" key={index}>
                               <div className="row">
                                  <div className="col-xl-2 col-xxl-2 col-lg-2">
-                                    <img alt="" src={value.src} className="img-fluid mb-4"/>
+                                    <img alt="" src={value.src} className="img-fluid mb-4" />
                                  </div>
                                  <div className="col-xl-10 col-xxl-10 col-lg-10 mx-auto">
                                     <span>{value.content}</span>
@@ -91,13 +93,13 @@ const Event = () => {
                </div>
                <div className="col-xl-4 col-xxl-4 col-lg-4">
                   <div className="card">
-                  <div className="card-header d-block d-sm-flex border-1 text-center">
+                     <div className="card-header d-block d-sm-flex border-1 text-center">
                         <h2 className="text-black mx-auto">
-                           Top contributor
+                           {t('topcontributor')}
                         </h2>
                      </div>
                      <div className="table-responsive card-body tab-content p-3">
-                        Comming soon
+                        {t('commingsoon')}
                      </div>
                   </div>
                </div>
@@ -105,14 +107,14 @@ const Event = () => {
                   <div className="card">
                      <div className="card-header d-block d-sm-flex border-1 text-center">
                         <h2 className="text-black mx-auto">
-                              Ranking list
+                           {t('rankinglist')}
                         </h2>
                      </div>
                      <div className="table-responsive card-body tab-content p-3">
-                        {RanKinglist.map((value,index)=>(
+                        {RanKinglist.map((value, index) => (
                            <div className="row">
                               <div className="col-xl-2 col-xxl-2 col-lg-2">
-                                 <img alt="" src={value.src} className="img-fluid p-2"/>
+                                 <img alt="" src={value.src} className="img-fluid p-2" />
                               </div>
                               <div className="col-xl-7 col-xxl-67 col-lg-7">
                                  <p className="mt-1 mb-0 font-weight-bold">{value.proname}</p>
@@ -134,4 +136,4 @@ const Event = () => {
    );
 };
 
-export default Event;
+export default withTranslation()(Event);

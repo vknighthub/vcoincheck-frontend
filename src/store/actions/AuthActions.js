@@ -3,7 +3,6 @@ import {
     formatError,
     login,
     runLogoutTimer,
-    saveTokenInLocalStorage,
     signUp,
 } from '../../services/AuthService';
 import Swal from 'sweetalert2';
@@ -25,7 +24,6 @@ export function signupAction(email, password, history) {
     return (dispatch) => {
         signUp(email, password)
             .then((response) => {
-                saveTokenInLocalStorage(response.data);
                 runLogoutTimer(
                     dispatch,
                     response.data.expiresIn * 1000,
@@ -53,7 +51,6 @@ export function loginAction(username, password, history) {
     return (dispatch) => {
         login(username, password)
             .then((response) => {
-                saveTokenInLocalStorage(response.data);
                 dispatch(loginConfirmedAction(response.data));
                 if (history.action !== "PUSH") {
                     history.goBack();
@@ -73,13 +70,17 @@ export function forgotPasswordAction(posdata, history) {
     return (dispatch) => {
         forgotPassword(posdata)
             .then((response) => {
-                dispatch(resetPasswordConfirmedAction(response.data));
                 if (response.data.errorcode !== 0) {
                     Swal.fire("Failed!", response.data.messagedetail, "error");
                 } else {
-                    history.push("/page-otp-password");
+                    dispatch(resetPasswordConfirmedAction(response.data));
+                    Swal.fire("Succeed!", "We have sent to your mail a OTP code to vefiy reset password. Please get OTP code and input into page", "success")
+                    .then((response) =>{
+                        if (response) {
+                            history.push("/page-otp-password");
+                        }
+                    });
                 }
-
             })
             .catch((error) => {
                 const errorMessage = formatError(error.response.data);

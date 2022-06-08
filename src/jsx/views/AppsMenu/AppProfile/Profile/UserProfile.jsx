@@ -10,7 +10,7 @@ import UserReviewed from "./UserReviewed";
 
 
 export const UserProfile = (props) => {
-
+    const { t } = props;
     const user = props.users;
 
     const [activeToggle, setActiveToggle] = useState("review");
@@ -36,13 +36,13 @@ export const UserProfile = (props) => {
                                     <div className="text-center">
                                         <div className="row">
                                             <div className="col">
-                                                <h3 className="m-b-0">4</h3><span>Reputation</span>
+                                                <h3 className="m-b-0">4</h3><span>{t('reputation')}</span>
                                             </div>
                                             <div className="col">
-                                                <h3 className="m-b-0">140</h3> <span>Evaluation</span>
+                                                <h3 className="m-b-0">140</h3> <span>{t('evaluation')}</span>
                                             </div>
                                             <div className="col">
-                                                <h3 className="m-b-0">{user.scores}</h3> <span>Point</span>
+                                                <h3 className="m-b-0">{user.scores}</h3> <span>{t('points')}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -205,13 +205,13 @@ export const UserProfile = (props) => {
                             <div className="custom-tab-1">
                                 <ul className="nav nav-tabs">
                                     <li className="nav-item" onClick={() => setActiveToggle("posts")}>
-                                        <Link to="#my-posts" data-toggle="tab" className={`nav-link ${activeToggle === "review" ? "active show" : ""}`}>My review</Link>
+                                        <Link to="#my-posts" data-toggle="tab" className={`nav-link ${activeToggle === "review" ? "active show" : ""}`}>{t('myreview')}</Link>
                                     </li>
                                     <li className="nav-item" onClick={() => setActiveToggle("aboutMe")}>
-                                        <Link to="#about-me" data-toggle="tab" className={`nav-link ${activeToggle === "aboutMe" ? "active show" : ""}`}>About Me</Link>
+                                        <Link to="#about-me" data-toggle="tab" className={`nav-link ${activeToggle === "aboutMe" ? "active show" : ""}`}>{t('aboutme')}</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link to="#profile-settings" data-toggle="tab" onClick={() => setActiveToggle("setting")} className={`nav-link ${activeToggle === "setting" ? "active show" : ""}`}>Setting</Link>
+                                        <Link to="#profile-settings" data-toggle="tab" onClick={() => setActiveToggle("setting")} className={`nav-link ${activeToggle === "setting" ? "active show" : ""}`}>{t('setting')}</Link>
                                     </li>
                                 </ul>
                                 <div className="tab-content">
@@ -244,7 +244,7 @@ export const UserProfile = (props) => {
                                     <div id="about-me" className={`tab-pane fade ${activeToggle === "aboutMe" ? "active show" : ""}`}>
                                         <div className="profile-about-me">
                                             <div className="pt-4 border-bottom-1 pb-3">
-                                                <h4 className="text-primary">About Me</h4>
+                                                <h4 className="text-primary">{t('aboutme')}</h4>
                                                 <p className="mb-2">
                                                     A wonderful serenity has taken possession of my
                                                     entire soul, like these sweet mornings of spring
@@ -267,11 +267,11 @@ export const UserProfile = (props) => {
 
                                         <div className="profile-personal-info">
                                             <h4 className="text-primary mb-4">
-                                                Personal Information
+                                                {t('personalinfo')}
                                             </h4>
                                             <div className="row mb-2">
                                                 <div className="col-3">
-                                                    <h5 className="f-w-500"> Name<span className="pull-right">:</span></h5>
+                                                    <h5 className="f-w-500">{t('name')}<span className="pull-right">:</span></h5>
                                                 </div>
                                                 <div className="col-9">
                                                     <span>{`${user.firstname}  ${user.lastname}`}</span>
@@ -279,7 +279,7 @@ export const UserProfile = (props) => {
                                             </div>
                                             <div className="row mb-2">
                                                 <div className="col-3">
-                                                    <h5 className="f-w-500">Email<span className="pull-right">:</span></h5>
+                                                    <h5 className="f-w-500">{t('email')}<span className="pull-right">:</span></h5>
                                                 </div>
                                                 <div className="col-9">
                                                     <span>{user.email}</span>
@@ -287,7 +287,7 @@ export const UserProfile = (props) => {
                                             </div>
                                             <div className="row mb-2">
                                                 <div className="col-3">
-                                                    <h5 className="f-w-500">Birthday<span className="pull-right">:</span></h5>
+                                                    <h5 className="f-w-500">{t('birthday')}<span className="pull-right">:</span></h5>
                                                 </div>
                                                 <div className="col-9">
                                                     <span>{user.birthday}</span>
@@ -295,7 +295,7 @@ export const UserProfile = (props) => {
                                             </div>
                                             <div className="row mb-2">
                                                 <div className="col-3">
-                                                    <h5 className="f-w-500">Address<span className="pull-right">:</span></h5>
+                                                    <h5 className="f-w-500">{t('address')}<span className="pull-right">:</span></h5>
                                                 </div>
                                                 <div className="col-9">
                                                     <span>{user.address}</span>
@@ -303,7 +303,7 @@ export const UserProfile = (props) => {
                                             </div>
                                             <div className="row mb-2">
                                                 <div className="col-3">
-                                                    <h5 className="f-w-500">Phone<span className="pull-right">:</span></h5>
+                                                    <h5 className="f-w-500">{t('phone')}<span className="pull-right">:</span></h5>
                                                 </div>
                                                 <div className="col-9">
                                                     <span>{user.phone}</span>
@@ -313,7 +313,7 @@ export const UserProfile = (props) => {
                                     </div>
 
                                     <div id="profile-settings" className={`tab-pane fade ${activeToggle === "setting" ? "active show" : ""}`}>
-                                        {user && <ProfileSetting users={user} />}
+                                        {user && <ProfileSetting users={user} t={t} />}
                                     </div>
                                 </div>
                             </div>

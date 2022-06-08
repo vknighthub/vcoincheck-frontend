@@ -450,7 +450,7 @@ rect#chart_ChartBorder {
 
 .react-calendar {
   border: none !important;
-  font-family: "poppins", sans-serif;
+  font-family: "quicksand", sans-serif;
 }
 
 abbr[title],
@@ -459,14 +459,14 @@ abbr[data-original-title] {
 }
 button.react-calendar__tile.react-calendar__month-view__days__day.react-calendar__month-view__days__day--neighboringMonth {
   color: #dee2e6 !important;
-  font-family: "poppins", sans-serif;
+  font-family: "quicksand", sans-serif;
 }
 
 span.react-calendar__navigation__label__labelText.react-calendar__navigation__label__labelText--from {
   font-size: 20px;
   font-weight: 500;
   color: #000;
-  font-family: "poppins", sans-serif;
+  font-family: "quicksand", sans-serif;
 }
 button.react-calendar__navigation__arrow.react-calendar__navigation__prev-button,
 button.react-calendar__navigation__arrow.react-calendar__navigation__next-button {

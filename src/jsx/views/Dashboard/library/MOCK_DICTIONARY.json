@@ -1,0 +1,18 @@
+[
+	{
+		"name": "ACTOR",
+		"content": "In the blockchain industry, any entity that is capable of participating in an action or a network.",
+		"image": ""
+	},
+	{
+		"name": "ADDRESS",
+		"content": "In the blockchain industry, the public address of a private key. Addresses serve as an actor's or an account’s identity and are typically represented in hexadecimal notation.",
+		"image": ""	
+	},
+	{
+		"name": "APPLICATION-SPECIFIC INTEGRATED CIRCUIT (ASIC)",
+		"content": "<p>In the blockchain industry, the public address of a private key. Addresses serve as an actor's or an account’s identity and are typically represented in hexadecimal notation.</p><p>Due to its specialization, an ASIC is much more efficient and cost-effective than a generalized computer processor that can perform many functions. In the blockchain industry, ASIC boards have been used to perform the </p",
+		"image": ""
+	}
+]
+

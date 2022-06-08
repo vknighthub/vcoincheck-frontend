@@ -1,35 +1,35 @@
+import parse from 'html-react-parser';
 import { Tab } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import swal from "sweetalert";
-import GetStar from "../../../../utils/GetStar";
+import Swal from 'sweetalert2';
 import ProjectSvg from '../../../components/svg/Project/ProjectSvg';
-import StarRating from "./StarRating";
-import parse from 'html-react-parser'
 
 
 
-const checklogin = (isLogin, history) => {
-	if (!isLogin) {
-		swal({
-			title: "Are you want to review?",
-			text: "If you want to evaluate this project, please login first !!!",
-			icon: "warning",
-			buttons: true,
-			dangerMode: true,
-		}).then((willLogin) => {
-			if (willLogin) {
-				swal(
-					history.replace('/page-login')
-				);
-			} else {
-				swal("Please login to review project!");
-			}
-		})
-	}
-}
+
 const ProjectDescription = (props) => {
 	const login = props.isAuthenticated;
 	const project = props.project
+	const t = props.t
+
+	const checklogin = (isLogin, history) => {
+		if (!isLogin) {
+			Swal.fire({
+				title: `${t('questionreview')}`,
+				text: `${t('questionloginreview')}`,
+				icon: "question",
+				showCancelButton: true,
+				confirmButtonText: `${t('ok')}`,
+				cancelButtonText: `${t('cancel')}`,
+			}).then((willLogin) => {
+				if (willLogin.isConfirmed) {
+					history.replace('/page-login')
+				} else {
+					Swal.fire(`${t('confirmcancel')}`);
+				}
+			})
+		}
+	}
 
 	return (
 		<>
@@ -46,7 +46,6 @@ const ProjectDescription = (props) => {
 												<ProjectSvg image={project.proicon} width={400} height={400} />
 											</Tab.Pane>
 										</Tab.Content>
-
 									</Tab.Container>
 								</div>
 								{/*Tab slider End*/}
@@ -59,30 +58,30 @@ const ProjectDescription = (props) => {
 											<div className="comment-review star-rating">
 												<ul id="stars"
 													className="d-flex justify-content-center align-items-center">
-													<StarRating numberOfSelectedStar={GetStar(project.totalreview)} />
+													{t('scoring')}
 												</ul>
-
+												<div className="d-table mb-2">
+													<p className="price float-left d-block">{project.scores}</p>
+												</div>
 												{!login ?
 													<>
 														<span className="review-text">({project.totalreview}) / </span>
-														<Link onClick={checklogin(login, props.history)} to="#" className="product-review" >Review?</Link>
+														<Link onClick={() => checklogin(login, props.history)} to="#" className="product-review">{t('review')}?</Link>
 													</>
 													:
 													null
 												}
 											</div>
-											<div className="d-table mb-2">
-												<p className="price float-left d-block">325</p>
-											</div>
-											<p> Project code: <span className="item">{project.procd}</span>{" "}</p>
-											<p> Categories: <span className="item">{project.protype}</span></p>
+
+											<p>{t('projectcode')}: <span className="item ml-3">{project.procd}</span>{" "}</p>
+											<p>{t('categories')} : <span className="item ml-3">{project.protype}</span></p>
 											<p>
-												Ecosystem:&nbsp;&nbsp;
+												{t('ecosystem')}:&nbsp;&nbsp;
 												<span className="badge badge-success light mr-1">{project.Ecosystem}</span>
 											</p>
-											<p className="text-content">
+											<span className="text-content">
 												{parse(project.prodescr)}
-											</p>
+											</span>
 										</div>
 									</div>
 								</div>

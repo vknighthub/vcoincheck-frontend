@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { changePasswordUserAction } from '../../../../../store/actions/UserAction';
 
 const ProfileSetting = (props) => {
-
+    const { t } = props;
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -75,7 +75,7 @@ const ProfileSetting = (props) => {
             icon: "question",
         }).then((result) => {
             if (result.value) {
-                dispatch(changePasswordUserAction(postData)); 
+                dispatch(changePasswordUserAction(postData,history));
             }
         });
 
@@ -113,7 +113,7 @@ const ProfileSetting = (props) => {
             <div className="settings-form tab-content">
 
                 <div id="account-setting" className={`tab-pane fade ${activeToggle === "account-setting" ? "active show" : ""}`}>
-                    <h4 className="text-primary pb-3">Account Setting</h4>
+                    <h4 className="text-primary pb-3">{t('accountsetting')}</h4>
                     <Formik
                         initialValues={{
                             firstname: user.firstname,
@@ -134,7 +134,7 @@ const ProfileSetting = (props) => {
                             <form onSubmit={handleSubmit}>
                                 <div className="form-row">
                                     <div className="form-group col-md-6">
-                                        <label>First Name</label>
+                                        <label>{t('firstname')}</label>
                                         <input
                                             type="text"
                                             className="form-control"
@@ -145,7 +145,7 @@ const ProfileSetting = (props) => {
                                             disabled={disableControl} />
                                     </div>
                                     <div className="form-group col-md-6">
-                                        <label>Last Name</label>
+                                        <label>{t('lastname')}</label>
                                         <input
                                             type="text"
                                             className="form-control"
@@ -157,7 +157,7 @@ const ProfileSetting = (props) => {
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <label>Address</label>
+                                    <label>{t('address')}</label>
                                     <input
                                         type="text"
                                         className="form-control"
@@ -169,7 +169,7 @@ const ProfileSetting = (props) => {
                                 </div>
                                 <div className="form-row">
                                     <div className="form-group col-md-6">
-                                        <label>Phone</label>
+                                        <label>{t('phone')}</label>
                                         <input
                                             type="text"
                                             className="form-control"
@@ -180,7 +180,7 @@ const ProfileSetting = (props) => {
                                             disabled={disableControl} />
                                     </div>
                                     <div className="form-group col-md-6">
-                                        <label>Birthday</label>
+                                        <label>{t('dayofbirth')}</label>
                                         <input
                                             type="text"
                                             className="form-control"
@@ -198,7 +198,7 @@ const ProfileSetting = (props) => {
                 </div>
 
                 <div id="change-password" className={`tab-pane fade ${activeToggle === "change-password" ? "active show" : ""}`}>
-                    <h4 className="text-primary pb-3">Password Setting</h4>
+                    <h4 className="text-primary pb-3">{t('passwordsetting')}</h4>
                     <Formik
                         initialValues={{
                             oldpassword: '',
@@ -225,7 +225,7 @@ const ProfileSetting = (props) => {
                                     : ""
                                     }`}
                                 >
-                                    <label>Old password</label>
+                                    <label>{t('oldpwd')}</label>
                                     <input
                                         autoFocus
                                         type="password"
@@ -258,7 +258,7 @@ const ProfileSetting = (props) => {
                                     : ""
                                     }`}
                                 >
-                                    <label>New password</label>
+                                    <label>{t('newpwd')}</label>
                                     <input
                                         type="password"
                                         className="form-control"
@@ -290,7 +290,7 @@ const ProfileSetting = (props) => {
                                     : ""
                                     }`}
                                 >
-                                    <label>Confirm new password</label>
+                                    <label>{t('confirmnewpwd')}</label>
                                     <input
                                         type="password"
                                         className="form-control"
@@ -315,7 +315,7 @@ const ProfileSetting = (props) => {
                                 </div>
 
 
-                                <Requirements valid={valid} />
+                                <Requirements valid={valid} t={t}/>
 
                                 <button className="btn btn-primary mr-2" type="submit" hidden={hiddenSavePassword} >Save</button>
                             </form>
@@ -325,8 +325,8 @@ const ProfileSetting = (props) => {
 
                 {!hiddenEdit &&
                     <div className="pt-5">
-                        <Link className="btn btn-primary mr-2" onClick={() => changeUserInformations()}>Edit</Link>
-                        <Link to="#" className="btn btn-primary" onClick={() => changePasswordInformations()} >Change password</Link>
+                        <Link to="#" className="btn btn-primary mr-2" onClick={() => changeUserInformations()}>{t('edit')}</Link>
+                        <Link to="#" className="btn btn-primary" onClick={() => changePasswordInformations()} >{t('changepwd')}</Link>
                     </div>
                 }
 

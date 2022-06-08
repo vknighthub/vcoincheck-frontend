@@ -1,21 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Formik } from "formik";
-import { useState } from "react";
-import { Modal } from "react-bootstrap";
+import i18next from 'i18next';
+import { useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { addReviewAction, loadingToggleAction } from '../../../../../store/actions/ReviewAction';
+import GetContentLanguage from "../../../../../utils/GetContentLanguage";
 import FormikControl from "../../../../components/Forms/Formik/FormikControl";
-import { ProjectSvg } from "../../../../components/svg";
-import RatingComment from "../RatingComment";
 
 const Advanced = (props) => {
     const dispatch = useDispatch();
-    const [reviewModal, setReviewModal] = useState(false);
-
+    const language = i18next.language
+    const [showSuccess, setShowSuccess] = useState(false)
     const advanceQuestion = props.advancequestion
-    const project = props.project
+    const { project, reviewresponses } = props
+    const t = props.t
 
     const initialValues = (listQuestion) => {
         let obj = {}
@@ -26,6 +26,7 @@ const Advanced = (props) => {
         })
         return obj
     }
+
 
     const onSubmit = (listdata) => {
 
@@ -40,7 +41,7 @@ const Advanced = (props) => {
             listanswer.push(jobject)
         })
 
-        const postData = {
+        const postdata = {
             username: props.username,
             projectid: project.proid,
             reviewtype: props.reviewtype,
@@ -49,110 +50,97 @@ const Advanced = (props) => {
             }
         }
         Swal.fire({
-            title: "Are you sure you want to submit?",
-            html: "This review will have points so it's definitely worth it. Of-course, your review will be submit to community within approve by page manager.",
+            title: `${t('questionsubmit')}`,
+            html: `${t('submitadvancereview')}`,
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Submit",
-            cancelButtonText: "Cancel",
+            confirmButtonText: `${t('submitreview')}`,
+            cancelButtonText: `${t('cancel')}`,
         }).then((result) => {
             if (result.value) {
                 dispatch(loadingToggleAction(true));
-                dispatch(addReviewAction(postData, props.action));
+                dispatch(addReviewAction(postdata, setShowSuccess));
             }
         });
 
     }
 
+    const handleNextStep = () => {
+        props.action()
+    }
+
     return (
         <div className="my-post-content pt-3">
-            <div className="settings-form">
-                <Formik
-                    initialValues={initialValues(advanceQuestion)}
-                    onSubmit={(values,) => { onSubmit(values) }}
-                >{({ handleSubmit }) => (
-                    <form onSubmit={handleSubmit}>
-                        <h3 className="text-primary pb-5">Please answer a few questions below so we can see what you know about this project</h3>
-
-                        {advanceQuestion.map((groups, index) => (
-                            <div key={index}>
-                                {groups.group && <h4 className="text-primary pb-3">{groups.group}</h4>}
-                                {groups.content.map((controls, index) => (
-                                    <div key={index}>
-                                        <FormikControl control={controls.control} styles={controls.styles} label={controls.label} name={controls.name} options={controls.answer} component="input" />
-                                        {controls.control === 'input' && <FormikControl control={controls.control} type={controls.type} label={controls.label} name={controls.name} className="form-control" rows={controls.rows} />}
-                                    </div>
-                                ))}
-                            </div>
-                        ))}
-                        <button className="btn btn-primary" type="submit">Submit</button>
-                        <Link
-                            className="btn btn-success ml-3"
-                            to="#"
-                            data-toggle="modal"
-                            onClick={() => setReviewModal(true)}
-                            data-target="#reviewModal"
-                        >
-                            Evaluate?
-                        </Link>
-                    </form>
-                )}
-                </Formik>
-            </div>
-
-            <Modal show={reviewModal} onHide={setReviewModal} className="modal fade" id="reviewModal">
-                <>
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title">Evaluate Advance Review for {project.proname}</h5>
-                            <button
-                                type="button"
-                                className="close"
-                                data-dismiss="modal"
-                                onClick={() => setReviewModal(false)}
-                            >
-                                <span>×</span>
-                            </button>
-                        </div>
-                        <div className="modal-body">
-                            <form
-                                onSubmit={(e) => {
-                                    e.preventDefault();
-                                    setReviewModal(false);
-                                }}
-                            >
-                                <div className="text-center mb-4">
-                                    <ProjectSvg image={project.proicon} width={150} height={150} />
+            {!showSuccess ?
+                <div className="settings-form">
+                    <Formik
+                        initialValues={initialValues(advanceQuestion)}
+                        onSubmit={(values,) => { onSubmit(values) }}
+                    >{({ handleSubmit }) => (
+                        <form onSubmit={handleSubmit}>
+                            <h3 className="text-primary pb-5">{t('overviewtitle')}</h3>
+                            {advanceQuestion.map((groups, index) => (
+                                <div key={index}>
+                                    {groups.group && <h4 className="text-primary pb-3">{GetContentLanguage(language, groups.group)}</h4>}
+                                    {groups.content.map((controls, index) => {
+                                        var label = GetContentLanguage(language, controls.label)
+                                        return (
+                                            <div key={index}>
+                                                <FormikControl control={controls.control} styles={controls.styles} label={label} name={controls.name} options={controls.answer} component="input" language={language} />
+                                                {controls.control === 'input' && <FormikControl control={controls.control} type={controls.type} label={label} name={controls.name} className="form-control" rows={controls.rows} />}
+                                            </div>)
+                                    })}
                                 </div>
-                                <div className="form-group">
-                                    <div className="rating-widget mb-4 text-center">
-                                        {/* Rating Stars Box */}
-                                        <div className="rating-stars">
-                                            <ul
-                                                id="stars"
-                                                className="d-flex justify-content-center align-items-center"
-                                            >
-                                                <RatingComment />
-                                            </ul>
-
+                            ))}
+                            <button className="btn btn-primary" type="submit">{t('submitreview')}</button>
+                        </form>
+                    )}
+                    </Formik>
+                </div>
+                :
+                <div className="col-xl-12">
+                    <div className="card">
+                        <div className="card-body">
+                            <div className="post-details">
+                                <p className="mb-2 fs-24 text-success text-center">
+                                    {t('submitprojectsuccesstitle')}
+                                </p>
+                                <div className="profile-personal-info mt-5">
+                                    <h3 className="text-primary mb-4 text-center">
+                                        {t('reviewinfo')}
+                                    </h3>
+                                    <div className="row mb-2" >
+                                        <div className="col-3">
+                                            <h5 className="f-w-500">{t('estimatereviewscore')} <span className="pull-right">:</span></h5>
+                                        </div>
+                                        <div className="col-9">
+                                            {reviewresponses.review_score}
+                                        </div>
+                                    </div>
+                                    <div className="row mb-2" >
+                                        <div className="col-3">
+                                            <h5 className="f-w-500">{t('estimateprojectscore')} <span className="pull-right">:</span></h5>
+                                        </div>
+                                        <div className="col-9">
+                                            {reviewresponses.project_score}
                                         </div>
                                     </div>
                                 </div>
-                                <div className="form-group">
-                                    <textarea
-                                        className="form-control"
-                                        placeholder="Comment"
-                                        rows={5}
-                                        defaultValue={""}
-                                    />
-                                </div>
-                                <button className="btn btn-primary btn-block">Evaluate</button>
-                            </form>
+                            </div>
                         </div>
                     </div>
-                </>
-            </Modal>
+                    <Link
+                        className="btn btn-success ml-3"
+                        to="#"
+                        data-toggle="modal"
+                        onClick={() => handleNextStep()}
+                        data-target="#reviewModal"
+                    >
+                        {t('Next to Expert')}?
+                    </Link>
+                </div>
+            }
         </div >
 
     )

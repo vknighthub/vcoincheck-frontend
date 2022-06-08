@@ -1,14 +1,17 @@
 /// Menu
+import i18next from 'i18next';
 import MetisMenu from "metismenujs";
 import { Component } from "react";
+import { withTranslation } from 'react-i18next';
 /// Scroll
 import PerfectScrollbar from "react-perfect-scrollbar";
 import { connect } from "react-redux";
 /// Link
 import { Link } from "react-router-dom";
 import { isAdmin, isAuthenticated, MenuList } from "../../../store/selectors/AuthSelectors";
-
+import GetContentLanguage from "../../../utils/GetContentLanguage";
 import Donate from "../../components/PluginsMenu/Donate/Donate";
+
 
 
 class MM extends Component {
@@ -46,6 +49,7 @@ class SideBar extends Component {
   state = {
     loveEmoji: false,
   };
+
   render() {
     /// Path
     let path = window.location.pathname;
@@ -53,6 +57,9 @@ class SideBar extends Component {
     path = path.split("/");
 
     path = path[path.length - 1];
+
+    const { t } = this.props;
+    const language = i18next.language
 
     return (
       <div className="deznav">
@@ -62,14 +69,14 @@ class SideBar extends Component {
               <li className={`${"/" + path === menu.path ? "mm-active" : ""}`} key={index}>
                 <Link className={menu.class} to={menu.path} >
                   <i className={menu.icon}></i>
-                  <span className="nav-text">{menu.name}</span>
+                  <span className="nav-text">{GetContentLanguage(language, menu.name)}</span>
                 </Link>
                 {menu.menu_sub[0] &&
                   <ul>
                     {menu.menu_sub.map((content, index) => (
                       <li key={index}>
                         <Link className={`${"/" + path === content.path ? "mm-active" : ""}`} onClick={() => this.props.onClick()} to={content.path}>
-                          {content.name}
+                          {GetContentLanguage(language, content.name)}
                         </Link>
                       </li>
                     ))}
@@ -93,7 +100,7 @@ class SideBar extends Component {
                     fill="white"
                   />
                 </svg>
-                <span>Submit project</span>
+                <span>{t("submitproject")}</span>
               </Link>
             </div>
           }
@@ -101,6 +108,7 @@ class SideBar extends Component {
           <div className="add-menu-sidebar">
             <Donate></Donate>
           </div>
+
           <div className="copyright">
             <p>© 2022 All Rights Reserved </p>
           </div>
@@ -116,4 +124,4 @@ const mapStateToProps = (state) => {
     menulist: MenuList(state)
   };
 };
-export default connect(mapStateToProps, null)(SideBar);
+export default withTranslation()(connect(mapStateToProps, null)(SideBar));

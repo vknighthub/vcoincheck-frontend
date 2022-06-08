@@ -2,11 +2,12 @@ import parse from 'html-react-parser';
 import { connect } from 'react-redux';
 import { getBKByName } from './../../../../../store/selectors/BKSelector';
 import PostComment from '../../../../views/Dashboard/library/comment/PostComment'
+import { withTranslation, useTranslation } from "react-i18next";
 
 const BlockchainDetail = (props) => {
 
 	const bkdetail = props.bkdetail
-
+	const { t } = useTranslation();
 	return (
 		<div>
 			<div>
@@ -23,7 +24,7 @@ const BlockchainDetail = (props) => {
 									<ul className="mb-4 post-meta d-flex flex-wrap justify-content-center">
 										<li className="post-date mr-3">
 											<i className="fa fa-calender" />
-											Published date: {bkdetail.createdt}
+											{t('published')}: {bkdetail.createdt}
 										</li>
 									</ul>
 
@@ -40,7 +41,7 @@ const BlockchainDetail = (props) => {
 					</div>
 				</div>
 				<div className="row">
-					<PostComment />
+					<PostComment t={t} />
 				</div>
 			</div>
 		</div>
@@ -51,4 +52,4 @@ const mapStateToProps = (state, ownProps) => ({
 	bkdetail: getBKByName(state, ownProps.match.params.name)
 })
 
-export default connect(mapStateToProps, null)(BlockchainDetail);
+export default withTranslation()(connect(mapStateToProps, null)(BlockchainDetail));

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const ReviewList = (props) => {
 
 	const reviewList = props.review
+	const t = props.t
 
 	const handleReviewClick = (rowid) => {
 		props.handleSetReviewID(rowid)
@@ -16,7 +17,7 @@ const ReviewList = (props) => {
 			<Col lg={12}>
 				<Card>
 					<Card.Header>
-						<Card.Title className="fs-26 text-primary" >Review List</Card.Title>
+						<Card.Title className="fs-26 text-primary" >{t('reviewlist')}</Card.Title>
 					</Card.Header>
 					<Card.Body>
 						<Table responsive>
@@ -26,13 +27,16 @@ const ReviewList = (props) => {
 										<strong>#</strong>
 									</th>
 									<th>
-										<strong>Review ID</strong>
+										<strong>{t('reviewid')}</strong>
 									</th>
 									<th>
-										<strong>DATE</strong>
+										<strong>{t('reviewguy')}</strong>
 									</th>
 									<th>
-										<strong>Score</strong>
+										<strong>{t('reviewdate')}</strong>
+									</th>
+									<th>
+										<strong>{t('reviewscore')}</strong>
 									</th>
 									<th></th>
 								</tr>
@@ -44,6 +48,7 @@ const ReviewList = (props) => {
 											<strong>{index + 1}</strong>
 										</td>
 										<td>{review.reviewid}</td>
+										<td>{review.username}</td>
 										<td>{review.reviewdate}</td>
 										<td>{review.scores}</td>
 										<td>

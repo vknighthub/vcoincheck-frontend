@@ -1,9 +1,9 @@
 /*
     Table of Contents
 
-    Name                 : Chrev
-    Author               : DexignZone
-    Author Portfolio     : https://themeforest.net/user/dexignzone/portfolio
+    Name                 : vKnigtHub
+    Author               : AnhBen
+    Author Portfolio     : https://anhben.com
     
 
 
@@ -59,6 +59,7 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700");
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700");
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,600,700");
+@import url("https://fonts.googleapis.com/css?family=Quicksand:400,600,700");
 @import url("./../icons/simple-line-icons/css/simple-line-icons.css");
 @import url("./../icons/font-awesome-old/css/font-awesome.min.css");
 @import url("./../icons/material-design-iconic-font/css/materialdesignicons.min.css");
@@ -238,6 +239,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
   --danger: #FF2E2E;
   --light: #F4F5F9;
   --dark: #6e6e6e;
+  --veryperi:#9da2ff;
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
   --breakpoint-md: 768px;
@@ -20532,6 +20534,10 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
 
 [data-typography="helvetica"] {
   font-family: 'HelveticaNeue'; }
+  
+[data-typography="quicksand"] {
+    font-family: 'Quicksand'; }
+
 
 /*$primary  : #7356f1 !default;*/
 [data-theme-version="transparent"] {
@@ -20999,7 +21005,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
   background: #3b3d48;
   border-color: #3b3d48; }
 [data-theme-version="dark"] .dropdown svg circle {
-  fill: #fff; }
+  fill-opacity: 0.8; }
 [data-theme-version="dark"] .custom-image-select.style-1 .btn {
   background: #181f39 !important;
   color: #fff !important; }
@@ -21073,7 +21079,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
   [data-theme-version="dark"] .header-right .notification_dropdown .nav-link .badge {
     border-color: #1e2746; }
   [data-theme-version="dark"] .header-right .notification_dropdown .nav-link svg path {
-    fill: #fff; }
+    fill-opacity: 0.8; }
 [data-theme-version="dark"] .header-right .dropdown .nav-link {
   color: #fff; }
   [data-theme-version="dark"] .header-right .dropdown .nav-link:hover {
@@ -27032,7 +27038,7 @@ code {
   .table {
     font-size: 0.875rem !important; } }
 .table strong {
-  color: #6e6e6e; }
+  color: #9da2ff; }
 .table td {
   border-color: #f0f1f5;
   padding: 12px 9px; }
@@ -27500,6 +27506,7 @@ table.dataTable thead .sorting {
     max-width: 50%;
     flex: 0 0 50%; }
   .login-wrapper .social-icons {
+    
     display: flex; }
     .login-wrapper .social-icons li {
       margin-right: 10px; }
@@ -31073,7 +31080,7 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
   background: #3b3d48;
   border-color: #3b3d48; }
 [data-theme-version="dark"] .dropdown svg circle {
-  fill: #fff; }
+  fill-opacity: 0.8; }
 [data-theme-version="dark"] .custom-image-select.style-1 .btn {
   background: #181f39 !important;
   color: #fff !important; }
@@ -31147,7 +31154,7 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
   [data-theme-version="dark"] .header-right .notification_dropdown .nav-link .badge {
     border-color: #1e2746; }
   [data-theme-version="dark"] .header-right .notification_dropdown .nav-link svg path {
-    fill: #fff; }
+    fill-opacity: 0.8; }
 [data-theme-version="dark"] .header-right .dropdown .nav-link {
   color: #fff; }
   [data-theme-version="dark"] .header-right .dropdown .nav-link:hover {
@@ -31306,4 +31313,8 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
       display: block;
       max-height:250px;
     }
+    .ck.ck-editor {
+      width: 100%;
+    }
+    
 /*# sourceMappingURL=main.css.map */

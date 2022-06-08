@@ -5,7 +5,7 @@ import FileDialogue from '../../../../components/bootstrap/FileDialogue';
 
 export const Overviews = (props) => {
 
-    const user = props.users;
+    const { users, t } = props;
 
     return (
         <div className="row">
@@ -17,14 +17,14 @@ export const Overviews = (props) => {
                         </div>
                         <div className="profile-info">
                             <div className="profile-photo">
-                                <FileDialogue image={user.avatar ? user.avatar : profile} username ={user.username}/>
+                                <FileDialogue image={users.avatar ? users.avatar : profile} username={users.username} />
                             </div>
                             <div className="profile-details">
                                 <div className="profile-name px-3 pt-2">
-                                    <h4 className="text-primary mb-0">{`${user.firstname}  ${user.lastname}`}</h4>
+                                    <h4 className="text-primary mb-0">{`${users.firstname}  ${users.lastname}`}</h4>
                                 </div>
                                 <div className="profile-email px-2 pt-2">
-                                    <p>{user.username}</p>
+                                    <p>{users.username}</p>
                                 </div>
                                 <Dropdown className="dropdown ml-auto">
                                     <Dropdown.Toggle
@@ -56,11 +56,11 @@ export const Overviews = (props) => {
                                     <Dropdown.Menu className="dropdown-menu dropdown-menu-right">
                                         <Dropdown.Item className="dropdown-item">
                                             <i className="fa fa-users text-primary mr-2" />
-                                            View Project Details
+                                            {t('viewprojectdetails')}
                                         </Dropdown.Item>
                                         <Dropdown.Item className="dropdown-item">
                                             <i className="fa fa-image text-primary mr-2" />
-                                            Change cover
+                                            {t('changecover')}
                                         </Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>

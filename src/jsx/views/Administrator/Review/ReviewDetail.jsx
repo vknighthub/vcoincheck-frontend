@@ -4,7 +4,7 @@ import { Tab } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { getReviewListByUserProjectAction } from '../../../../store/actions/ReviewAction';
 import FilteringTable from '../../../components/table/FilteringTable/FilteringTable';
-import { COLUMNSUSERREVIEWLIST } from '../../Dashboard/project/Columns';
+import { COLUMNSUSERREVIEWLIST } from '../../Dashboard/project/locale/en/Columns';
 import ProjectReviewed from '../Project/ProjectReviewed';
 import Avatar from './../../../components/svg/User/Avatar';
 

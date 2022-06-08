@@ -1,15 +1,17 @@
 import { useState } from 'react';
+import { useTranslation, withTranslation } from 'react-i18next';
 import { connect, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import loginbg from "../../images/bg-login.jpg";
-import login from "../../images/bg-login2.png";
 //
-import logo from '../../images/Logo450x450.svg';
 import { loadingToggleAction, loginAction } from '../../store/actions/AuthActions';
 import LinkIcon from '../components/vKnightHub/Control/LinkIcon';
+import Asideleft from './WidgetBasic/AsideLeft';
 
 
 function Login(props) {
+
+  const { t } = useTranslation();
+
   const [username, setUsername] = useState('');
   let errorsObj = { username: '', password: '' };
   const [errors, setErrors] = useState(errorsObj);
@@ -40,18 +42,7 @@ function Login(props) {
   return (
     <div className="login-main-page" style={{ backgroundImage: "url(" + loginbg + ")" }}>
       <div className="login-wrapper">
-        <div className="login-aside-left" style={{ backgroundImage: "url(" + login + ")" }}>
-          <Link to={"#"} className="login-logo">
-            <img src={logo} alt="" className="mr-2 img-fluid" />
-          </Link>
-          <div className="login-description">
-            <div className="mt-5">
-              <Link to={"#"} className="text-black mr-4">Privacy Policy</Link>
-              <Link to={"#"} className="text-black mr-4">Contact</Link>
-              <Link to={"https://www.vknight.io/"} className="text-black">© 2021 vKnightHub</Link>
-            </div>
-          </div>
-        </div>
+        <Asideleft t = {t} />
         <div className="login-aside-right gradient_one">
           <div className="row m-0 justify-content-center h-100 align-items-center">
             <div className="col-xl-7 col-xxl-7">
@@ -60,8 +51,8 @@ function Login(props) {
                   <div className="col-xl-12">
                     <div className="auth-form-1">
                       <div className="mb-4">
-                        <h3 className="text-white mb-1">Welcome to vCoincheck</h3>
-                        <p className="text-white">Sign in by entering information below</p>
+                        <h3 className="text-white mb-1">{t('welcome')} vCoincheck</h3>
+                        <p className="text-white">{t('signinby')}</p>
                       </div>
                       {props.errorMessage && (
                         <div className='bg-red-300 text-red-900 border border-red-900 p-1 my-2'>
@@ -71,7 +62,7 @@ function Login(props) {
                       <form onSubmit={onLogin}>
                         <div className="form-group">
                           <label className="mb-2 ">
-                            <strong className="text-white">Username</strong>
+                            <strong className="text-white">{t('username')}</strong>
                           </label>
                           <input type="text" className="form-control"
                             value={username} autoComplete="username"
@@ -80,7 +71,7 @@ function Login(props) {
                           {errors.username && <div className="text-danger fs-12">{errors.username}</div>}
                         </div>
                         <div className="form-group">
-                          <label className="mb-2 "><strong className="text-white">Password</strong></label>
+                          <label className="mb-2 "><strong className="text-white">{t('password')}</strong></label>
                           <input
                             type="password"
                             className="form-control"
@@ -104,7 +95,7 @@ function Login(props) {
                                 className="form-check-label text-white"
                                 htmlFor="basic_checkbox_1 "
                               >
-                                Remember my preference
+                                {t('rememberme')}
                               </label>
                             </div>
                           </div>
@@ -114,26 +105,26 @@ function Login(props) {
                             type="submit"
                             className="btn bg-dark text-light btn-block"
                           >
-                            Sign In
+                            {t('signin')}
                           </button>
                         </div>
                       </form>
 
                       <div className="form-row d-flex justify-content-between mt-4 mb-2">
                         <div className="nav-item">
-                          <LinkIcon className="ai-icon" to="/page-register" name="Register user here" />
+                          <LinkIcon className="ai-icon" to="/page-register" name={t('register')} />
                         </div>
                       </div>
 
                       <div className="form-row d-flex justify-content-between mt-4 mb-2">
                         <div className="nav-item">
-                          <LinkIcon className="ai-icon" to="/page-forgot-password" name="Fogot password?" />
+                          <LinkIcon className="ai-icon" to="/page-forgot-password" name={t('forgotpwd')} />
                         </div>
                       </div>
 
                       <div className="form-row d-flex justify-content-between mt-4 mb-2">
                         <div className="nav-item">
-                          <LinkIcon className="ai-icon" to="/" name="Back to home" />
+                          <LinkIcon className="ai-icon" to="/" name={t('backtohome')} />
                         </div>
                       </div>
 
@@ -157,4 +148,4 @@ const mapStateToProps = (state) => {
     showLoading: state.auth.showLoading,
   };
 };
-export default connect(mapStateToProps)(Login);
+export default withTranslation()(connect(mapStateToProps)(Login));

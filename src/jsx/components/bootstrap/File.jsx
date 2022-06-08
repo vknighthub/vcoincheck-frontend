@@ -3,7 +3,7 @@ import React from 'react';
 import TextError from './TextError';
 
 const File = (props) => {
-    const { label, name, defaultValue, disabled, ...rest } = props
+    const { label, name, defaultValue, source, disabled, ...rest } = props
 
     const imageHandlerFile = (names, form) => {
         const preview = document.getElementById('img-' + names);
@@ -51,7 +51,7 @@ const File = (props) => {
                                         <label className='custom-file-label'>Choose file</label>
                                     </>
                                 }
-                                <img id={`img-${field.name}`} className="img-fluid pb-5" width={150} alt="" src={defaultValue} />
+                                <img id={`img-${field.name}`} className="img-fluid pb-5" width={150} alt="" src={source} />
 
                             </React.Fragment>
                         );

@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import Swal from "sweetalert2";
 import * as Yup from "yup";
 import { approveReviewScoreAction } from '../../../../store/actions/ReviewAction';
-import BackTo from './../../../components/vKnightHub/Control/BackTo';
 
 const ApproveProject = (props) => {
     const dispatch = useDispatch();
@@ -72,14 +71,12 @@ const ApproveProject = (props) => {
             cancelButtonText: "Close",
         }).then((result) => {
             if (result.value) {
-                try {
-                    dispatch(approveReviewScoreAction(postData))
-                    setHideApprove(true)
-                    Swal.fire("Approved!", "This reviewd has been approved.", "success");
-                    window.location.reload();
-                } catch (error) {
-                    Swal.fire("Failed!", "This reviewd has been failed." + error.message, "error");
-                }
+                dispatch(approveReviewScoreAction(postData))
+                setHideApprove(true)
+                Swal.fire("Approved!", "This reviewd has been approved.", "success")
+                    .then(() => {
+                        window.location.reload();
+                    });
             }
         });
     }
@@ -245,7 +242,6 @@ const ApproveProject = (props) => {
                                                             </div>
                                                         </div>
                                                         <button id="approve" className="btn btn-success mr-3" type="submit" hidden={hideApprove}>Approve</button>
-                                                        <BackTo className="btn btn-primary" to="/project-review-list" name="Back To List"/>
                                                         <br />
                                                     </form>
                                                 )}

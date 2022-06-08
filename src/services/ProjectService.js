@@ -5,7 +5,21 @@ export function getProject() {
         `/${process.env.REACT_APP_PROJECTLIST_ENDPOINT}`,
     );
 }
-
+export function getProjectManagement() {
+    return axiosInstance.get(
+        `/${process.env.REACT_APP_PROJECTMANAGEMENTLIST_ENDPOINT}`,
+    );
+}
+export function getProjectType() {
+    return axiosInstance.get(
+        `/${process.env.REACT_APP_GET_PROJECT_TYPE_ENDPOINT}`
+    );
+}
+export function getEcosystem() {
+    return axiosInstance.get(
+        `/${process.env.REACT_APP_GET_ECOSYSTEM_ENDPOINT}`
+    );
+}
 export function getHotProject() {
     return axiosInstance.post(
         `/${process.env.REACT_APP_HOTPROJECT_ENDPOINT}`,
@@ -25,6 +39,31 @@ export function getTopProject(tops) {
         { top: tops }
     );
 }
+export function submitProject(postData) {
+    return axiosInstance.post(
+        `/${process.env.REACT_APP_SUBMIT_PROJECT_ENDPOINT}`,
+        postData
+    );
+}
+export function approveProject(postData) {
+    return axiosInstance.post(
+        `/${process.env.REACT_APP_APPROVE_PROJECT_ENDPOINT}`,
+        postData
+    );
+}
+export function removeProject(postData) {
+    return axiosInstance.post(
+        `/${process.env.REACT_APP_REMOVE_PROJECT_ENDPOINT}`,
+        postData
+    );
+}
+export function editProject(postData) {
+    return axiosInstance.post(
+        `/${process.env.REACT_APP_SUBMIT_EDIT_ENDPOINT}`,
+        postData
+    );
+}
+
 
 export function formatProject(projectData) {
     let projects = [];

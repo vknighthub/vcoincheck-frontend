@@ -4566,6 +4566,9 @@ readers do not read off random characters that represent icons */
 .fa-zhihu:before {
   content: "\f63f"; }
 
+.fa-a:before {
+  content: "\41";}
+
 .sr-only {
   border: 0;
   clip: rect(0, 0, 0, 0);

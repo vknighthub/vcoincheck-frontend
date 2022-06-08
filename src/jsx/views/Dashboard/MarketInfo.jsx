@@ -1,14 +1,16 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { Dropdown } from "react-bootstrap";
+import { useTranslation, withTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 // img
-import bitcoin from "../../../images/svg/bitcoin.svg";
 import turkish from "../../../images/money/turkish-lira.svg";
+import bitcoin from "../../../images/svg/bitcoin.svg";
 // Chart
 import Chart from "../../components/vKnightHub/CoinDetails/Chart/Chart";
 
 const MarketInfo = () => {
+  const { t } = useTranslation();
   return (
     <Fragment>
       <div className="row">
@@ -179,7 +181,7 @@ const MarketInfo = () => {
           <div className="card">
             <div className="card-header border-0 pb-0 ">
               <div>
-                <h4 className="fs-20 text-black">Coin Chart</h4>
+                <h4 className="fs-20 text-black">{t('coinchart')}</h4>
                 <p className="mb-0 fs-13">Lorem ipsum dolor sit amet</p>
               </div>
               <Dropdown className="dropdown ml-auto custom-dropdown d-none d-md-block  mt-3 mt-sm-0 sabuj_ml_tb_2">
@@ -236,13 +238,13 @@ const MarketInfo = () => {
             <div className="card-body">
               <div className="row sp20 mb-4 align-items-center">
                 <div className="col-lg-3 col-md-4 mb-3 mb-sm-0">
-                  <p className="fs-18 mb-1">Price</p>
+                  <p className="fs-18 mb-1">{t('price')}</p>
                   <h2 className="fs-28 font-w600 text-black">$11,898.15</h2>
                 </div>
                 <div className="col-lg-6 col-md-8">
                   <div className="row sp20">
                     <div className="col-lg-4 col-sm-4 col-6 mb-3 mb-sm-0">
-                      <p className="fs-14 mb-1">24h% change</p>
+                      <p className="fs-14 mb-1">24h% {t('change')}</p>
                       <h3 className="fs-20 font-w600 text-success">
                         1.64%
                         <svg
@@ -260,11 +262,11 @@ const MarketInfo = () => {
                       </h3>
                     </div>
                     <div className="col-lg-4 col-sm-4 col-6 mb-3 mb-sm-0">
-                      <p className="fs-14 mb-1">Volume (24h)</p>
+                      <p className="fs-14 mb-1">{t('volume')} (24h)</p>
                       <h3 className="fs-20 font-w600 text-black">$47.22B</h3>
                     </div>
                     <div className="col-lg-4 col-sm-4">
-                      <p className="fs-14 mb-1">Market Cap</p>
+                      <p className="fs-14 mb-1">{t('marketcap')}</p>
                       <h3 className="fs-20 font-w600 text-black">$219.24B</h3>
                     </div>
                   </div>
@@ -291,7 +293,7 @@ const MarketInfo = () => {
         <div className="col-xl-3 col-xxl-4 col-lg-6">
           <div className="card">
             <div className="card-header pb-0 border-0">
-              <h4 className="mb-0 text-black fs-20">About</h4>
+              <h4 className="mb-0 text-black fs-20">{t('about')}</h4>
               <Dropdown className="dropdown custom-dropdown mb-0">
                 <Dropdown.Toggle
                   variant=""
@@ -333,13 +335,13 @@ const MarketInfo = () => {
                   className="dropdown-menu dropdown-menu-right"
                 >
                   <Link className="dropdown-item" to="/coin-details">
-                    Details
+                    {t('detail')}
                   </Link>
                   <Link
                     className="dropdown-item text-danger"
                     to="/coin-details"
                   >
-                    Cancel
+                    {t('cancel')}
                   </Link>
                 </Dropdown.Menu>
               </Dropdown>
@@ -370,7 +372,7 @@ const MarketInfo = () => {
             </div>
             <div className="card-footer border-0 pt-0 text-center">
               <Link to="/coin-details" className="btn-link d-flex">
-                Read more{" "}
+                {t('readmore')} {" "}
                 <i className="fa fa-chevron-right text-dark ml-auto scale-2" />
               </Link>
             </div>
@@ -379,7 +381,7 @@ const MarketInfo = () => {
         <div className="col-xl-3 col-xxl-4 col-lg-6 col-sm-6">
           <div className="card">
             <div className="card-header border-0">
-              <h4 className="mb-0 text-black fs-20">Sell Order</h4>
+              <h4 className="mb-0 text-black fs-20">{t('sellorder')}</h4>
               <Dropdown className="dropdown custom-dropdown mb-0">
                 <Dropdown.Toggle
                   variant=""
@@ -421,13 +423,13 @@ const MarketInfo = () => {
                   className="dropdown-menu dropdown-menu-right"
                 >
                   <Link className="dropdown-item" to="/coin-details">
-                    Details
+                    {t('detail')}
                   </Link>
                   <Link
                     className="dropdown-item text-danger"
                     to="/coin-details"
                   >
-                    Cancel
+                    {t('cancel')}
                   </Link>
                 </Dropdown.Menu>
               </Dropdown>
@@ -437,9 +439,9 @@ const MarketInfo = () => {
                 <table className="table text-center bg-warning-hover">
                   <thead>
                     <tr>
-                      <th className="text-left">Price</th>
-                      <th>Amount</th>
-                      <th className="text-right">Total</th>
+                      <th className="text-left">{t('price')}</th>
+                      <th>{t('amount')}</th>
+                      <th className="text-right">{t('total')}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -489,7 +491,7 @@ const MarketInfo = () => {
             </div>
             <div className="card-footer border-0 pt-0 text-center">
               <Link to="/coin-details" className="btn-link">
-                Show more <i className="fa fa-caret-right ml-2 scale-2" />
+                {t('showmore')} <i className="fa fa-caret-right ml-2 scale-2" />
               </Link>
             </div>
           </div>
@@ -497,7 +499,7 @@ const MarketInfo = () => {
         <div className="col-xl-3 col-xxl-4 col-lg-4 col-sm-6">
           <div className="card">
             <div className="card-header border-0">
-              <h4 className="mb-0 text-black fs-20">Buy Order</h4>
+              <h4 className="mb-0 text-black fs-20">{t('buyorder')}</h4>
               <Dropdown className="dropdown custom-dropdown mb-0">
                 <Dropdown.Toggle
                   variant=""
@@ -539,13 +541,13 @@ const MarketInfo = () => {
                   className="dropdown-menu dropdown-menu-right"
                 >
                   <Link className="dropdown-item" to="/coin-details">
-                    Details
+                    {t('detail')}
                   </Link>
                   <Link
                     className="dropdown-item text-danger"
                     to="/coin-details"
                   >
-                    Cancel
+                    {t('cancel')}
                   </Link>
                 </Dropdown.Menu>
               </Dropdown>
@@ -555,9 +557,9 @@ const MarketInfo = () => {
                 <table className="table bg-warning-hover text-center">
                   <thead>
                     <tr>
-                      <th className="text-left">Price</th>
-                      <th>Amount</th>
-                      <th className="text-right">Total</th>
+                      <th className="text-left">{t('price')}</th>
+                      <th>{t('amount')}</th>
+                      <th className="text-right">{t('total')}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -607,7 +609,7 @@ const MarketInfo = () => {
             </div>
             <div className="card-footer border-0 pt-0 text-center">
               <Link to="/coin-details" className="btn-link">
-                Show more <i className="fa fa-caret-right ml-2 scale-2" />
+                {t('showmore')} <i className="fa fa-caret-right ml-2 scale-2" />
               </Link>
             </div>
           </div>
@@ -616,7 +618,7 @@ const MarketInfo = () => {
           <div className="card">
             <div className="card-header border-0 pb-0 d-block d-md-flex">
               <div>
-                <h4 className="fs-20 text-black">Quick Trade</h4>
+                <h4 className="fs-20 text-black">{t('quicktrade')}</h4>
                 <p className="fs-13">Lorem ipsum dolor sit amet, consectetur</p>
               </div>
               <Dropdown className="dropdown custom-dropdown d-block mt-3 mt-sm-0">
@@ -673,7 +675,7 @@ const MarketInfo = () => {
                     <div className="input-group input-group-lg">
                       <div className="input-group-prepend">
                         <span className="input-group-text bg-transparent border rounded-0">
-                          Amount BTC
+                          {t('amount')} BTC
                         </span>
                       </div>
                       <input
@@ -687,7 +689,7 @@ const MarketInfo = () => {
                     <div className="input-group input-group-lg">
                       <div className="input-group-prepend">
                         <span className="input-group-text bg-transparent border  rounded-0">
-                          Price BPL
+                          {t('price')} BPL
                         </span>
                       </div>
                       <input
@@ -701,7 +703,7 @@ const MarketInfo = () => {
                     <div className="input-group input-group-lg">
                       <div className="input-group-prepend">
                         <span className="input-group-text bg-transparent border rounded-0">
-                          Fee (1%)
+                          {t('fee')} (1%)
                         </span>
                       </div>
                       <input
@@ -715,7 +717,7 @@ const MarketInfo = () => {
                     <div className="input-group input-group-lg">
                       <div className="input-group-prepend">
                         <span className="input-group-text bg-transparent border rounded-0">
-                          Total BPL
+                          {t('total')} BPL
                         </span>
                       </div>
                       <input
@@ -741,7 +743,7 @@ const MarketInfo = () => {
                     to="/coin-details"
                     className="btn btn-success rounded-0 mb-2"
                   >
-                    BUY
+                    {t('buy')}
                     <svg
                       className="ml-4 scale3"
                       width={16}
@@ -761,7 +763,7 @@ const MarketInfo = () => {
                     to="/coin-details"
                     className="btn ml-3 btn-danger rounded-0 mb-2"
                   >
-                    SELL
+                    {t('sell')}
                     <svg
                       className="ml-4 scale5"
                       width={16}
@@ -787,4 +789,4 @@ const MarketInfo = () => {
   );
 };
 
-export default MarketInfo;
+export default withTranslation()(MarketInfo);

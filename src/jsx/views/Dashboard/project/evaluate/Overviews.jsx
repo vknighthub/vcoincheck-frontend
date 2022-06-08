@@ -1,15 +1,19 @@
 import { Formik } from "formik";
+import i18next from 'i18next';
 import { connect, useDispatch } from 'react-redux';
-import * as Yup from "yup";
-import FormikControl from './../../../../components/Forms/Formik/FormikControl';
-import { addReviewAction } from './../../../../../store/actions/ReviewAction'
 import Swal from "sweetalert2";
+import * as Yup from "yup";
+import GetContentLanguage from "../../../../../utils/GetContentLanguage";
+import { addReviewAction } from './../../../../../store/actions/ReviewAction';
+import FormikControl from './../../../../components/Forms/Formik/FormikControl';
 
 
 const Overviews = (props) => {
     const dispatch = useDispatch();
+    const language = i18next.language
 
     const overQuestions = props.overquestion
+    const t = props.t
 
     const initialValues = (listQuestion) => {
         let obj = {}
@@ -54,13 +58,13 @@ const Overviews = (props) => {
             }
         }
         Swal.fire({
-            title: "Are you sure you want to submit?",
-            html: "Your review will be submit to community within approve by page manager.",
+            title: `${t('questionsubmit')}`,
+            html: `${t('questionsubmitdetail')}`,
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Submit",
-            cancelButtonText: "Cancel",
+            confirmButtonText: `${t('submitreview')}`,
+            cancelButtonText: `${t('cancel')}`,
         }).then((result) => {
             if (result.value) {
                 dispatch(addReviewAction(postData, props.action));
@@ -82,24 +86,27 @@ const Overviews = (props) => {
                         handleSubmit,
                     }) => (
                         <form onSubmit={handleSubmit}>
-                            <h3 className="text-primary pb-5">Please answer a few questions below so we can see what you know about this project</h3>
+                            <h3 className="text-primary pb-5">{t('overviewtitle')}</h3>
                             {overQuestions.map((groups, index) => (
                                 <div key={index}>
-                                    {groups.group && <h4 className="text-primary pb-3 pt-3" >{groups.group}</h4>}
-                                    {groups.content.map((controls, index) => (
-                                        <div key={index} >
-                                            <FormikControl
-                                                control={controls.control}
-                                                type={controls.type}
-                                                label={controls.label}
-                                                name={controls.name}
-                                                className="form-control"
-                                                onBlur={handleBlur} />
-                                        </div>
-                                    ))}
+                                    {groups.group && <h4 className="text-primary pb-3 pt-3" >{GetContentLanguage(language, groups.group)}</h4>}
+                                    {groups.content.map((controls, index) => {
+                                        var label = GetContentLanguage(language, controls.label)
+                                        return (
+                                            <div key={index} >
+                                                <FormikControl
+                                                    control={controls.control}
+                                                    type={controls.type}
+                                                    label={label}
+                                                    name={controls.name}
+                                                    className="form-control"
+                                                    onBlur={handleBlur} />
+                                            </div>
+                                        )
+                                    })}
                                 </div>
                             ))}
-                            <button className="btn btn-primary mt-5" type="submit">Submit</button>
+                            <button className="btn btn-primary mt-5" type="submit">{t('submitreview')}</button>
                             <br />
                         </form>
                     )}

@@ -1,13 +1,13 @@
-import { ProjectSvg } from '../../../components/svg';
-import { ColumnFilter } from '../../../components/table/FilteringTable/ColumnFilter';
+import { ProjectSvg } from '../../../../../components/svg';
+import { ColumnFilter } from '../../../../../components/table/FilteringTable/ColumnFilter';
 import { Link } from "react-router-dom";
 
 const getStatusType = (status) => {
 	switch (status) {
 		case 'P':
-			return <i className="fa fa-circle text-warning mr-1"> Pending to Approve</i>
+			return <i className="fa fa-circle text-warning mr-1"> 承認待ち</i>
 		case 'A':
-			return <i className="fa fa-circle text-success mr-1"> Approved</i>
+			return <i className="fa fa-circle text-success mr-1"> 承認済み</i>
 		default: return ''
 	}
 }
@@ -15,37 +15,37 @@ const getStatusType = (status) => {
 
 export const COLUMNSFILTER = [
 	{
-		Header: 'Icon',
-		Footer: 'Icon',
+		Header: 'I',
+		Footer: 'I',
 		Cell: (props) => (<Link to={`/ecom-project-detail/${props.row.original.proname}`}><ProjectSvg image={props.row.original.proicon} width={24} height={24} /></Link>),
 	},
 	{
-		Header: 'Name',
-		Footer: 'Name',
+		Header: '名前',
+		Footer: '名前',
 		accessor: 'proname',
 		Filter: ColumnFilter,
 	},
 	{
-		Header: 'Ecosystem',
-		Footer: 'Ecosystem',
+		Header: '生態系',
+		Footer: '生態系',
 		accessor: 'Ecosystem',
 		Filter: ColumnFilter,
 	},
 	{
-		Header: 'Categories',
-		Footer: 'Categories',
+		Header: 'カテゴリ',
+		Footer: 'カテゴリ',
 		accessor: 'protype',
 		Filter: ColumnFilter,
 	},
 	{
-		Header: 'Status',
-		Footer: 'Status',
+		Header: '状態',
+		Footer: '状態',
 		accessor: 'prosts',
 		Filter: ColumnFilter,
 	},
 	{
-		Header: 'No of viewed',
-		Footer: 'No of viewed',
+		Header: '閲覧数',
+		Footer: '閲覧数',
 		accessor: 'totalreview',
 		Filter: ColumnFilter,
 	},
@@ -53,26 +53,26 @@ export const COLUMNSFILTER = [
 
 export const COLUMNSREVIEWLIST = [
 	{
-		Header: 'Project',
-		Footer: 'Project',
+		Header: '計画',
+		Footer: '計画',
 		accessor: 'proname',
 		Filter: ColumnFilter,
 	},
 	{
-		Header: 'User',
-		Footer: 'User',
+		Header: 'ユーザー',
+		Footer: 'ユーザー',
 		accessor: 'username',
 		Filter: ColumnFilter,
 	},
 	{
-		Header: 'Categories',
-		Footer: 'Categories',
+		Header: 'カテゴリ',
+		Footer: 'カテゴリ',
 		accessor: 'protype',
 		Filter: ColumnFilter,
 	},
 	{
-		Header: 'Status',
-		Footer: 'Status',
+		Header: '状態',
+		Footer: '状態',
 		accessor: 'status',
 		Filter: ColumnFilter,
 		Cell: (props) => (
@@ -80,8 +80,8 @@ export const COLUMNSREVIEWLIST = [
 		)
 	},
 	{
-		Header: 'Admin',
-		Footer: 'Admin',
+		Header: '管理者',
+		Footer: '管理者',
 		Cell: (props) => (
 			<>
 				<Link to={`/project-review-list-action/${btoa(props.row.original.proname)}&${btoa(props.row.original.username)}&${btoa('false')}`} className="btn btn-success shadow btn-xs sharp mr-2"
@@ -142,3 +142,52 @@ export const COLUMNSUSERREVIEWLIST = [
 	},
 ]
 
+export const COLUMNSFILTERPROJECT = [
+	{
+		Header: 'I',
+		Footer: 'I',
+		Cell: (props) => (<Link to={`/ecom-project-detail/${props.row.original.proname}`}><ProjectSvg image={props.row.original.proicon} width={24} height={24} /></Link>),
+	},
+	{
+		Header: '名前',
+		Footer: '名前',
+		accessor: 'proname',
+		Filter: ColumnFilter,
+	},
+	{
+		Header: '生態系',
+		Footer: '生態系',
+		accessor: 'Ecosystem',
+		Filter: ColumnFilter,
+	},
+	{
+		Header: 'カテゴリ',
+		Footer: 'カテゴリ',
+		accessor: 'protype',
+		Filter: ColumnFilter,
+	},
+	{
+		Header: '状態',
+		Footer: '状態',
+		accessor: 'prosts',
+		Filter: ColumnFilter,
+	},
+	{
+		Header: '閲覧数',
+		Footer: '閲覧数',
+		accessor: 'totalreview',
+		Filter: ColumnFilter,
+	},
+	{
+		Header: '管理者',
+		Footer: '管理者',
+		Cell: (props) => (
+			<>
+				<Link to={`/project-management-action/${btoa(props.row.original.proname)}`} className="btn btn-success shadow btn-xs sharp mr-2"
+				>
+					<i className="fa fa-eye"></i>
+				</Link>
+			</>
+		)
+	},
+]

@@ -10,6 +10,7 @@ import { getBKAction } from "../../../store/actions/LibraryAction"
 import { isAuthenticated } from "../../../store/selectors/AuthSelectors"
 import CutText from "../../../utils/CutText"
 import PageTitle from "../../layouts/PageTitle"
+import { withTranslation, useTranslation } from 'react-i18next';
 
 
 
@@ -20,6 +21,8 @@ const getImage = (image) => {
 }
 
 const BlockchainKnowledge = (props) => {
+
+  const { t } = useTranslation();
 
   const knowledgelist = props.bk
 
@@ -34,7 +37,7 @@ const BlockchainKnowledge = (props) => {
 
   return (
     <Fragment>
-      <PageTitle activeMenu="Blockchain Knowledge" motherMenu="Library" />
+      <PageTitle activeMenu={t('blockchainknowledge')} motherMenu={t('library')} path={"blockchain-knowledge"}/>
       <div className="form-head d-flex mb-4 mb-md-5 align-items-start">
         <div className="input-group search-area d-inline-flex">
           <div className="input-group-append">
@@ -48,9 +51,9 @@ const BlockchainKnowledge = (props) => {
             placeholder="Search here"
           />
         </div>
-        {isAuthenticated && 
-          <Link to="/library/add-new-cardano-knowledge" className="btn btn-primary ml-auto">
-            + Add New Knowledge
+        {isAuthenticated &&
+          <Link to="/library/add-new-blockchain-knowledge" className="btn btn-primary ml-auto">
+            {t('addlibrary')}
           </Link>
         }
       </div>
@@ -105,4 +108,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BlockchainKnowledge);
+export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(BlockchainKnowledge));

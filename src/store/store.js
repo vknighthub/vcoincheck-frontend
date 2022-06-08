@@ -1,13 +1,18 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { reducer as reduxFormReducer } from 'redux-form';
+import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist-indexeddb-storage';
 import thunk from 'redux-thunk';
-import { loadState, saveState } from './localStorage';
 import { AuthReducer } from './reducers/AuthReducer';
 import BKReducer from './reducers/BKReducer';
 import CKReducer from './reducers/CKReducer';
+import ECosystemReducer from './reducers/ECosystemReducer';
+import FAQsReducer from './reducers/FAQsReducer';
 import HotProjectReducer from './reducers/HotProjectReducer';
 import ProjectDetailReducer from './reducers/ProjectDetailReducer';
+import ProjectManagementReducer from './reducers/ProjectManagementReducer';
 import ProjectsReducer from './reducers/ProjectReducer';
+import ProjectTypeReducer from './reducers/ProjectTypeReducer';
 import ReviewListByIDReducer from './reducers/ReviewListByIDReducer';
 import ReviewListByUserProjectReducer from './reducers/ReviewListByUserProjectReducer';
 import ReviewlistReducer from './reducers/ReviewListReducer';
@@ -23,6 +28,9 @@ const composeEnhancers =
 
 const reducers = combineReducers({
     projects: ProjectsReducer,
+    projectmanagement: ProjectManagementReducer,
+    projecttype: ProjectTypeReducer,
+    ecosystem: ECosystemReducer,
     hotproject: HotProjectReducer,
     topproject: TopProjectReducer,
     projectdetail: ProjectDetailReducer,
@@ -32,15 +40,22 @@ const reducers = combineReducers({
     reviewresponses: ReviewReducer,
     listreview: ReviewlistReducer,
     listreviewbyid: ReviewListByIDReducer,
-    form: reduxFormReducer,
     cardanoknowledge: CKReducer,
     blockchainknowledge: BKReducer,
-    reviewuserlist: ReviewListByUserProjectReducer
+    reviewuserlist: ReviewListByUserProjectReducer,
+    faqs: FAQsReducer,
+    form: reduxFormReducer,
 });
 
-const persistedState = loadState();
-const store = createStore(reducers, persistedState, composeEnhancers(middleware));
-store.subscribe(() => {
-    saveState(store.getState());
-})
+const persistConfig = {
+    key: 'root',
+    storage: storage('myDB'),
+}
+
+const persistedReducer = persistReducer(persistConfig, reducers)
+
+const store = createStore(persistedReducer, composeEnhancers(middleware));
+
+export const persistor = persistStore(store)
+
 export default store

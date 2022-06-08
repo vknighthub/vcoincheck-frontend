@@ -8,6 +8,13 @@ export function getLibrary(postData) {
     );
 }
 
+export function getDictionary(postData) {
+    return axiosInstance.post(
+        `/${process.env.REACT_APP_GET_DICTIONARY_ENDPOINT}`,
+        postData
+    );
+}
+
 export function formatCK(cardanoknowledge) {
     let ck = [];
     for (let key in cardanoknowledge) {

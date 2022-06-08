@@ -7,79 +7,79 @@ import HotProject from './HotProject';
 const ProjectList = (props) => {
 
 
-    const projects = props.projects;
+    const { projects, t } = props;
 
     useEffect(() => {
         props.fetchTopProject();
-    },[])
+    }, [])
 
     function showProjects(projectData) {
         let result = null;
-        if (projectData.length > 0){
-            result = projectData.map((project,index) => {
+        if (projectData.length > 0) {
+            result = projectData.map((project, index) => {
                 return (
-                    <HotProject key={index} project={project} index={index}/>
+                    <HotProject key={index} project={project} index={index} />
                 )
-            })  
+            })
         }
         return result;
     };
 
     return (
-            <>
-                <div className="card-header d-block d-sm-flex border-0">
-                    <div>
-                        <h4 className="fs-20 text-black">{props.title}</h4>
-                    </div>  
+        <>
+            <div className="card-header d-block d-sm-flex border-0">
+                <div>
+                    <h4 className="fs-20 text-black">{props.title}</h4>
                 </div>
-                <div className="card-body tab-content p-0">
-                    <div className="table-responsive">
-                        <table className="table shadow-hover card-table">
+            </div>
+            <div className="card-body tab-content p-0">
+                <div className="table-responsive">
+                    <table className="table shadow-hover card-table">
                         <thead>
                             <tr>
-                                <th className="width80">
-                                    <strong>No</strong>
+                                <th className="width100">
+                                    <strong>{t('no')}</strong>
                                 </th>
                                 <th>
-                                    <strong>Name</strong>
+                                    <strong>{t('projectname')}</strong>
                                 </th>
                                 <th>
-                                    <strong>ECOSystem</strong>
+                                    <strong>{t('ECOSystem')}</strong>
                                 </th>
                                 <th>
-                                    <strong>Categories</strong>
+                                    <strong>{t('categories')}</strong>
                                 </th>
                                 <th>
-                                    <strong>Status</strong>
+                                    <strong>{t('status')}</strong>
                                 </th>
                                 <th>
-                                    <strong>No of viewed</strong>
+                                    <strong>{t('noofviewed')}</strong>
                                 </th>
                                 <th>
-                                    <strong>Last contributed</strong>
+                                    <strong>{t('lastcontributed')}</strong>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             {showProjects(projects)}
                         </tbody>
-                        </table>
-                    </div>
+                    </table>
                 </div>
-            </>
-        );
+            </div>
+        </>
+    );
 };
 const mapStateToProps = state => {
     return {
         projects: state.projects
     }
 }
-const mapDispatchToProps = (dispatch) =>{
+const mapDispatchToProps = (dispatch) => {
     return {
-        fetchTopProject : () => {
+        fetchTopProject: () => {
             dispatch(getProjectsAction())
         }
     }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(ProjectList);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectList);
 

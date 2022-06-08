@@ -14,6 +14,7 @@ const ReviewProject = (props) => {
 
     const username = props.users.username;
     const project = props.project;
+    const t = props.t
 
     const actionStep = (curentStep) => {
         switch (curentStep) {
@@ -43,33 +44,57 @@ const ReviewProject = (props) => {
 
                                 <ul className="nav nav-tabs">
                                     <li className="nav-item" onClick={() => setActiveToggle("overview")} >
-                                        <Link to="#overview" data-toggle="tab" className={`nav-link ${activeToggle === "overview" ? "active show" : ""}`}>Overview</Link>
+                                        <Link to="#overview" data-toggle="tab" className={`nav-link ${activeToggle === "overview" ? "active show" : ""}`}>{t('overview')}</Link>
                                     </li>
                                     <li className="nav-item" onClick={() => setActiveToggle("basic-review")}>
-                                        <Link to="#basic-review" data-toggle="tab" className={`nav-link ${activeToggle === "basic-review" ? "active show" : ""}`}>Basic review</Link>
+                                        <Link to="#basic-review" data-toggle="tab" className={`nav-link ${activeToggle === "basic-review" ? "active show" : ""}`}>{t('basicreview')}</Link>
                                     </li>
                                     <li className="nav-item" onClick={() => setActiveToggle("advance-review")} >
-                                        <Link to="#advance-review" data-toggle="tab" className={`nav-link ${activeToggle === "advance-review" ? "active show" : ""}`}>Advance review</Link>
+                                        <Link to="#advance-review" data-toggle="tab" className={`nav-link ${activeToggle === "advance-review" ? "active show" : ""}`}>{t('advancereview')}</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link to="#expert-review" data-toggle="tab" onClick={() => setActiveToggle("expert-review")} className={`nav-link ${activeToggle === "expert-review" ? "active show" : ""}`}>Expert review</Link>
+                                        <Link to="#expert-review" data-toggle="tab" onClick={() => setActiveToggle("expert-review")} className={`nav-link ${activeToggle === "expert-review" ? "active show" : ""}`}>{t('expertreview')}</Link>
                                     </li>
                                 </ul>
 
                                 <div className="tab-content">
 
                                     <div id="overview" className={`tab-pane fade ${activeToggle === "overview" ? "active show" : ""}`} >
-                                        <Overviews projectid={project.proid} overquestion ={props.question.overquestion}  username={username} reviewtype={"OR"} action={() => actionStep("overview")} />
+                                        <Overviews
+                                            projectid={project.proid}
+                                            overquestion={props.question.overquestion}
+                                            username={username}
+                                            reviewtype={"OR"}
+                                            action={() => actionStep("overview")}
+                                            t={t} />
                                     </div>
 
                                     <div id="basic-review" className={`tab-pane fade ${activeToggle === "basic-review" ? "active show" : ""}`} >
-                                        <Basic projectid={project.proid} basicquestion={props.question.basicquestion} username={username} reviewtype={"BR"} action={() => actionStep("basic")} />
+                                        <Basic
+                                            projectid={project.proid}
+                                            basicquestion={props.question.basicquestion}
+                                            username={username}
+                                            reviewtype={"BR"}
+                                            action={() => actionStep("basic")}
+                                            t={t} />
                                     </div>
                                     <div id="advance-review" className={`tab-pane fade ${activeToggle === "advance-review" ? "active show" : ""}`}>
-                                        <Advanced project={project} advancequestion={props.question.advancequestion} username={username} reviewtype={"AR"} action={() => actionStep("advanced")} />
+                                        <Advanced
+                                            project={project}
+                                            advancequestion={props.question.advancequestion}
+                                            username={username}
+                                            reviewtype={"AR"}
+                                            action={() => actionStep("advanced")}
+                                            t={t} />
                                     </div>
                                     <div id="expert-review" className={`tab-pane fade ${activeToggle === "expert-review" ? "active show" : ""}`}>
-                                        <Expert project={project} expertquestion={props.question.expertquestion} username={username} reviewtype={"ER"} action={() => actionStep("expert")} />
+                                        <Expert
+                                            project={project}
+                                            expertquestion={props.question.expertquestion}
+                                            username={username}
+                                            reviewtype={"ER"}
+                                            action={() => actionStep("expert")}
+                                            t={t} />
                                     </div>
                                 </div>
                             </div>

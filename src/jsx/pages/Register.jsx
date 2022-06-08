@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { Link,withRouter } from 'react-router-dom'
 import { registerAction, loadingToggleAction } from '../../store/actions/UserAction';
+import { withTranslation, useTranslation } from 'react-i18next';
 
 //
 import logo from '../../images/Logo450x450.svg'
@@ -9,6 +10,8 @@ import login from "../../images/bg-login2.png";
 import loginbg from "../../images/bg-login.jpg";
 
 function Register(props) {
+  const { t } = useTranslation();
+
   const [username, setUsername] = useState('');
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
@@ -82,7 +85,6 @@ function Register(props) {
       }
       return data;
     }
-
     dispatch(loadingToggleAction(true));
     dispatch(registerAction(postData(), props.history));
   }
@@ -96,8 +98,8 @@ function Register(props) {
           </div>
           <div className="register-description">
             <div className="mt-5">
-              <Link to={"#"} className="text-black mr-4">Privacy Policy</Link>
-              <Link to={"#"} className="text-black mr-4">Contact</Link>
+              <Link to={"#"} className="text-black mr-4">{t('privacy')}</Link>
+              <Link to={"#"} className="text-black mr-4">{t('contact')}</Link>
               <Link to={"https://www.vknight.io/"} className="text-black">© 2021 vKnightHub</Link>
             </div>
           </div>
@@ -110,8 +112,8 @@ function Register(props) {
                   <div className="col-xl-12">
                     <div className="auth-form-1">
                       <div className="mb-4">
-                        <h3 className="text-white mb-1">Welcome to vCoincheck</h3>
-                        <p className="text-white">Register by entering information below</p>
+                        <h3 className="text-white mb-1">{t('welcome')} vCoincheck</h3>
+                        <p className="text-white">{t('registerby')}</p>
                       </div>
                       {props.errorMessage && (
                         <div className='bg-red-300 text-red-900 border border-red-900 p-1 my-2'>
@@ -127,7 +129,7 @@ function Register(props) {
                         <div className="row">
                           <div className="form-group col-xl-6 col-xl-6">
                             <label className="mb-2 ">
-                              <strong className="text-white">First name</strong>
+                              <strong className="text-white">{t('firstname')}</strong>
                             </label>
                             <input type="text" className="form-control"
                               value={firstname}
@@ -137,7 +139,7 @@ function Register(props) {
                           </div>
                           <div className="form-group col-xl-6 col-xl-6">
                             <label className="mb-2 ">
-                              <strong className="text-white">Last name</strong>
+                              <strong className="text-white">{t('lastname')}</strong>
                             </label>
                             <input type="text" className="form-control"
                               value={lastname}
@@ -147,7 +149,7 @@ function Register(props) {
                           </div>
                           <div className="form-group col-xl-6 col-xl-6">
                             <label className="mb-2 ">
-                              <strong className="text-white">Username</strong>
+                              <strong className="text-white">{t('username')}</strong>
                             </label>
                             <input type="text" className="form-control"
                               value={username}
@@ -157,7 +159,7 @@ function Register(props) {
                           </div>
                           <div className="form-group col-xl-6 col-xl-6">
                             <label className="mb-2 ">
-                              <strong className="text-white">Day of birth</strong>
+                              <strong className="text-white">{t('dayofbirth')}</strong>
                             </label>
                             <input type="date" className="form-control"
                               value={birthday}
@@ -167,7 +169,7 @@ function Register(props) {
                           </div>
                           <div className="form-group col-xl-6 col-xl-6">
                             <label className="mb-2 ">
-                              <strong className="text-white">Gender</strong>
+                              <strong className="text-white">{t('gender')}</strong>
                             </label>
                             <div className="row mt-3 ml-5">
                               <div className="col-xl-6 col-xl-6">
@@ -178,7 +180,7 @@ function Register(props) {
                                   onChange={() => setChecked(true)}
                                 />
                                 <label className="mb-2 ">
-                                  <strong className="text-white">Male</strong>
+                                  <strong className="text-white">{t('male')}</strong>
                                 </label>
                               </div>
                               <div className="col-xl-6 col-xl-6">
@@ -189,14 +191,14 @@ function Register(props) {
                                   onChange={() => setChecked(false)}
                                 />
                                 <label className="mb-2 ">
-                                  <strong className="text-white">Female</strong>
+                                  <strong className="text-white">{t('female')}</strong>
                                 </label>
                               </div>
                             </div>
                           </div>
                           <div className="form-group col-xl-6 col-xl-6">
                             <label className="mb-2 ">
-                              <strong className="text-white">Phone</strong>
+                              <strong className="text-white">{t('phone')}</strong>
                             </label>
                             <input type="text" className="form-control"
                               value={phone}
@@ -206,7 +208,7 @@ function Register(props) {
                           </div>
                           <div className="form-group col-xl-6 col-xl-6">
                             <label className="mb-2 ">
-                              <strong className="text-white">Email</strong>
+                              <strong className="text-white">{t('email')}</strong>
                             </label>
                             <input type="text" className="form-control"
                               value={email}
@@ -216,7 +218,7 @@ function Register(props) {
                           </div>
                           <div className="form-group col-xl-6 col-xl-6">
                             <label className="mb-2 ">
-                              <strong className="text-white">Address</strong>
+                              <strong className="text-white">{t('address')}</strong>
                             </label>
                             <input type="text" className="form-control"
                               value={address}
@@ -231,7 +233,7 @@ function Register(props) {
                               <label
                                 className="form-check-label text-white"
                               >
-                                Password will be send for you by email you input
+                                {t('emailsendtoyou')}
                               </label>
                             </div>
                           </div>
@@ -241,7 +243,7 @@ function Register(props) {
                             type="submit"
                             className="btn bg-dark text-light btn-block"
                           >
-                            Register
+                            {t('register')}
                           </button>
                         </div>
                       </form>
@@ -287,7 +289,7 @@ function Register(props) {
                               <polyline points="16 17 21 12 16 7" />
                               <line x1={21} y1={12} x2={9} y2={12} />
                             </svg>
-                              Back to home
+                            {t('backtohome')}
                           </Link>
                         </div>
                       </div>
@@ -304,4 +306,4 @@ function Register(props) {
   )
 }
 
-export default Register;
+export default withTranslation()(withRouter((Register)));

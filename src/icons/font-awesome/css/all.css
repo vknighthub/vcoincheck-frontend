@@ -4566,6 +4566,85 @@ readers do not read off random characters that represent icons */
 .fa-zhihu:before {
   content: "\f63f"; }
 
+.fa-a:before {
+  content: "\41";
+}
+.fa-b:before {
+  content: "\42";
+}
+.fa-c:before {
+  content: "\43";
+}
+.fa-d:before {
+  content: "\44";
+}
+.fa-e:before {
+  content: "\45";
+}
+.fa-f:before {
+  content: "\46";
+}
+.fa-g:before {
+  content: "\47";
+}
+.fa-h:before {
+  content: "\48";
+}
+.fa-i:before {
+  content: "\49";
+}
+.fa-j:before {
+  content: "\4a";
+}
+.fa-k:before {
+  content: "\4c";
+}
+.fa-l:before {
+  content: "\4c";
+}
+.fa-m:before {
+  content: "\4d";
+}
+.fa-n:before {
+  content: "\4e";
+}
+.fa-o:before {
+  content: "\4f";
+}
+.fa-p:before {
+  content: "\50";
+}
+.fa-q:before {
+  content: "\51";
+}
+.fa-r:before {
+  content: "\52";
+}
+.fa-s:before {
+  content: "\53";
+}
+.fa-t:before {
+  content: "\54";
+}
+.fa-u:before {
+  content: "\55";
+}
+.fa-v:before {
+  content: "\56";
+}
+.fa-w:before {
+  content: "\57";
+}
+.fa-x:before {
+  content: "\58";
+}
+.fa-y:before {
+  content: "\59";
+}
+.fa-z:before {
+  content: "\5a";
+}
+
 .sr-only {
   border: 0;
   clip: rect(0, 0, 0, 0);

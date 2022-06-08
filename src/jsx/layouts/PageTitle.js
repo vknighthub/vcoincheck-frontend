@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const PageTitle = ({ pageHeading, motherMenu, activeMenu, path}) => {
+const PageTitle = ({ pageHeading, motherMenu, activeMenu, path, activeDisplay}) => {
 
 	return (
 		<div className="page-titles">
@@ -11,7 +11,7 @@ const PageTitle = ({ pageHeading, motherMenu, activeMenu, path}) => {
 					<Link to={`/${path}`}>{motherMenu}</Link>
 				</li>
 				<li className="breadcrumb-item active">
-					<Link to="#">{path}</Link>
+					<Link to="#">{activeDisplay}</Link>
 				</li>
 			</ol>
 		</div>

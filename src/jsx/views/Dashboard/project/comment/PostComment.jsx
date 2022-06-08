@@ -1,6 +1,9 @@
 
+import { withTranslation, useTranslation } from "react-i18next";
 import Avatar from './../../../../components/svg/User/Avatar';
+
 const PostComment = () => {
+    const { t } = useTranslation();
     return (
         <div className="col-lg-12">
             <div className="card">
@@ -10,7 +13,7 @@ const PostComment = () => {
                             className="comment-reply-title text-success mb-5"
                             id="reply-title"
                         >
-                            Leave a Reply{" "}
+                            {t('reply')}{" "}
                         </h4>
                         <form
                             className="comment-form"
@@ -18,8 +21,6 @@ const PostComment = () => {
                             onSubmit={(e) => e.preventDefault()}
                         >
                             <div className="row">
-
-
                                 <div className="col-lg-12">
                                     <div className="form-group">
                                         <div><Avatar width={40} />  Hoangnv</div>
@@ -27,7 +28,7 @@ const PostComment = () => {
                                             rows={8}
                                             className="form-control mt-2"
                                             name="comment"
-                                            placeholder="Comment"
+                                            placeholder={t('comment')}
                                             id="comment"
                                             defaultValue={""}
                                         />
@@ -37,10 +38,10 @@ const PostComment = () => {
                                     <div className="form-group">
                                         <input
                                             type="submit"
-                                            value="Post Comment"
+                                            value={t('submitcomment')}
                                             className="submit btn btn-primary"
                                             id="submit"
-                                            name="submit"
+                                            name="comment"
                                         />
                                     </div>
                                 </div>
@@ -52,4 +53,4 @@ const PostComment = () => {
         </div>
     )
 }
-export default PostComment
+export default withTranslation()(PostComment)

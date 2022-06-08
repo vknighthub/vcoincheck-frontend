@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useTranslation, withTranslation } from "react-i18next";
 import { connect, useDispatch } from 'react-redux';
 import { useHistory, withRouter } from "react-router-dom";
 import swal from "sweetalert";
+import Swal from "sweetalert2";
 import { getProjectDetailAction } from '../../../../store/actions/ProjectAction';
 import { minusScoreUserAction } from '../../../../store/actions/UserAction';
 import { isAuthenticated, UserDetails } from '../../../../store/selectors/AuthSelectors';
@@ -13,6 +15,8 @@ import ReviewList from './ReviewList';
 import ReviewProject from './ReviewProject';
 
 const ProjectDetail = (props) => {
+	const { t } = useTranslation();
+
 	const login = props.isAuthenticated;
 	const projectname = props.match.params.proname;
 	const project = props.projectDetail
@@ -20,15 +24,14 @@ const ProjectDetail = (props) => {
 	const history = useHistory();
 	const dispatch = useDispatch();
 
-
 	const [showReviewList, setShowReviewList] = useState(true);
 	const [reviewID, setReviewID] = useState('');
 
 	const checkView = (isBuy) => {
 		if (!isBuy) {
 			swal({
-				title: "Are you want to view details? ",
-				text: "If you want to view details this review, please buy first !!!",
+				title: `${t('questionviewdetail')}`,
+				text: `${t('questionbuyviewdetail')}`,
 				icon: "warning",
 				dangerMode: true,
 			})
@@ -47,25 +50,24 @@ const ProjectDetail = (props) => {
 	const checkBuy = (users, scoreneed) => {
 
 		if (users.scores >= scoreneed) {
-			swal({
-				title: "Are you sure want to exchange score to view detail?",
-				text: "Yours score is " + users.scores + " scores, If you want to exchange this review, you need exchange " + scoreneed + " score",
-				icon: "warning",
-				buttons: true,
-				dangerMode: true,
+			Swal.fire({
+				title: `${t('exchangescoreviewdetail')}`,
+				text: `${t('exchangescoreviewdetailquestion', { score: users.scores, scoreneed: scoreneed })}`,
+				icon: "question",
+				showCancelButton: true,
+				confirmButtonText: `${t('ok')}`,
+				cancelButtonText: `${t('cancel')}`,
 			}).then((willExchange) => {
-				if (willExchange) {
-					swal(
-						exchangeScores(users, scoreneed, false)
-					);
+				if (willExchange.isConfirmed) {
+					exchangeScores(users, scoreneed, false)
 				} else {
-					swal("Please buy to view details this review!");
+					swal(`${t('remindbuyreview')}`);
 				}
 			})
 		} else {
 			swal({
-				title: "You no have enough scores to continue",
-				text: "Please earn more " + (scoreneed - users.scores) + " scores to view",
+				title: `${t('noenoughtoreview')}`,
+				text: `${t('earnmorereview', { scoremore: scoreneed - users.scores })}`,
 				icon: "warning",
 				dangerMode: true,
 			})
@@ -78,14 +80,14 @@ const ProjectDetail = (props) => {
 
 
 	useBeforeRender(() => {
-		props.fetchProjectDetails(projectname,history)
+		props.fetchProjectDetails(projectname, history)
 	}, [projectname])
 
 	return (
 		<>
-			<PageTitle motherMenu="Project" activeMenu="Project detail" path="project"/>
+			<PageTitle motherMenu={t('project')} activeMenu={t('projectdetail')} path="project" activeDisplay={projectname} />
 			<div className="row">
-				{project.project_info && <ProjectDescription isAuthenticated={login} history={history} project={project.project_info} />} 
+				{project.project_info && <ProjectDescription isAuthenticated={login} history={history} project={project.project_info} t={t} />}
 
 				{login &&
 					<>
@@ -93,12 +95,12 @@ const ProjectDetail = (props) => {
 							(
 								<>
 									{project.review_info &&
-										<ReviewList review={project.review_info} handleSetReviewID={setReviewID} checkView={() => checkView(false)} checkBuy={() => checkBuy(user, 50)} />
+										<ReviewList review={project.review_info} handleSetReviewID={setReviewID} checkView={() => checkView(false)} checkBuy={() => checkBuy(user, 50)} t={t} />
 									}
-									{project && <ReviewProject project={project.project_info} question = {project.question_info} />}
+									{project && <ReviewProject project={project.project_info} question={project.question_info} t={t} />}
 								</>
 							) : (
-								<ProjectReviewed reviewid={reviewID} user = {user} setBackToProject={() => setBackToProject()} />
+								<ProjectReviewed reviewid={reviewID} user={user} setBackToProject={() => setBackToProject()} />
 							)
 						}
 					</>
@@ -119,10 +121,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		fetchProjectDetails: (projectName,history) => {
-			dispatch(getProjectDetailAction(projectName,history))
+		fetchProjectDetails: (projectName, history) => {
+			dispatch(getProjectDetailAction(projectName, history))
 		}
 	}
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProjectDetail));
+export default withTranslation()(withRouter(connect(mapStateToProps, mapDispatchToProps)(ProjectDetail)));

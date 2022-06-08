@@ -15,6 +15,8 @@ import Error403 from './pages/Error403'
 import Error404 from './pages/Error404'
 import Error500 from './pages/Error500'
 import Error503 from './pages/Error503'
+import ErrorCors from './pages/ErrorCors'
+
 import LockScreen from './pages/LockScreen'
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -26,6 +28,8 @@ import Question from "./views/Administrator/Question"
 import UserProfile from './views/Administrator/UserManagement/UserProfile'
 import UserRole from "./views/Administrator/UserManagement/UserRole"
 import UserManager from "./views/Administrator/UserManager"
+import ProjectManagement from "./views/Administrator/Project/ProjectManagement"
+import ProjectManagementAction from "./views/Administrator/Project/ProjectManagementAction"
 /// App
 import BlockchainKnowledge from "./views/Dashboard/BlockchainKnowledge"
 import CardanoKnowledge from "./views/Dashboard/CardanoKnowledge"
@@ -53,7 +57,8 @@ import BlockchainDetail from './views/Dashboard/library/Cardano/BlockchainDetail
 import ProjectDetail from './views/Dashboard/project/ProjectDetail'
 import ProjectReviewList from './views/Dashboard/project/ProjectReviewList'
 import SubmitProject from './views/Dashboard/project/SubmitProject'
-
+import AddBlockChain from './views/Dashboard/library/Cardano/AddBlockChain'
+import CommunityDetail from './views/Dashboard/Community/CommunityDetail'
 
 
 const Markup = (props) => {
@@ -88,6 +93,8 @@ const Markup = (props) => {
     { url: 'user-list', component: UserManager },
     { url: 'user-role', component: UserRole },
     { url: 'user-active-profile/:username', component: UserProfile },
+    { url: 'project-management', component: ProjectManagement },
+    { url: 'project-management-action/:proname', component: ProjectManagementAction },
 
     /// views
     { url: 'app-profile', component: AppProfile },
@@ -102,13 +109,16 @@ const Markup = (props) => {
     { url: 'page-error-404', component: Error404 },
     { url: 'page-error-500', component: Error500 },
     { url: 'page-error-503', component: Error503 },
+    { url: 'page-error-cors', component: ErrorCors },
 
     { url: 'ecom-project-detail/:proname', component: ProjectDetail },
+    { url: 'community-details/:name', component: CommunityDetail },
 
     /// Cardano Knowledge - Detail
     { url: 'cardano-knowledge/:name', component: CardanoDetail },
     { url: 'blockchain-knowledge/:name', component: BlockchainDetail },
     { url: 'library/add-new-cardano-knowledge', component: AddCardano },
+    { url: 'library/add-new-blockchain-knowledge', component: AddBlockChain },
 
   ]
 

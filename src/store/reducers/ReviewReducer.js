@@ -1,13 +1,13 @@
-import { CONFIRMED_ADD_REVIEW  } from '../actions/types/ReviewProjectType';
+import { CONFIRMED_ADD_REVIEW } from '../actions/types/ReviewProjectType';
 
-const initialState = []
+const initialState = {}
 
 export default function ReviewReducer(state = initialState, actions) {
     if (actions.type === CONFIRMED_ADD_REVIEW) {
         state = actions.reviewresponses
-        return [
+        return {
             ...state,
-        ];
+        };
     }
     return state;
 }

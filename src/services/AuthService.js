@@ -42,10 +42,6 @@ export function formatError(errorResponse) {
         swal("Oops", errorResponse.messagedetail, "error");
 }
 
-export function saveTokenInLocalStorage(tokenDetails) {
-    localStorage.setItem('userDetails', JSON.stringify(tokenDetails));
-}
-
 export function runLogoutTimer(dispatch, timer, history) {
     setTimeout(() => {
         dispatch(logout(history));

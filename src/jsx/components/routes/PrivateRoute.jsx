@@ -10,6 +10,7 @@ const path_no_role = [
   '/page-error-404',
   '/page-error-500',
   '/page-error-503',
+  '/page-error-cors',
   '/page-login',
   '/page-register',
   '/project',
@@ -24,6 +25,7 @@ const path_no_role = [
   '/community',
   '/app-profile',
   '/ecom-project-detail/:proname',
+  '/community-details/:name',
   '/'
 ]
 const PrivateRoute = ({ AccessPath, component: Component, ...rest }) => {
@@ -31,7 +33,6 @@ const PrivateRoute = ({ AccessPath, component: Component, ...rest }) => {
   return (
     <Route {...rest} render={props => {
       let path = props.match.path;
-
       if (path_no_role.includes(path)) {
         return <Component {...props} />
       }
