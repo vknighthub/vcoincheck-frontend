@@ -1,4 +1,5 @@
-import { formatBK, formatCK, formatError, getDictionary, getLibrary } from '../../services/LibraryService';
+import Swal from 'sweetalert2';
+import { formatBK, formatCK, formatError, getDictionary, getLibrary, postCK } from '../../services/LibraryService';
 import {
     CONFIRMED_GET_BLOCKCHAIN_KNOWLEDGE,
     CONFIRMED_GET_CARDANO_KNOWLEDGE,
@@ -59,8 +60,31 @@ export function getDictionaryAction(postdata) {
         getDictionary(postdata).then((response) => {
             dispatch(confirmedGetDictionaryAction(response.result.data));
         }).catch((error) => {
-            const errorMessage = formatError(error.response.data);
-            console.error("error" + errorMessage);
+            Swal.fire("Failed!", error.message, "error");
+        });
+    };
+};
+
+export function postCKAction(postdata,historySubmit,url) {
+    return (dispatch) => {
+        postCK(postdata).then((response) => {
+            dispatch(confirmedGetCKAction(response.result.data));
+            Swal.fire({
+                title: "Submitted!",
+                html: "Thank you! Your post has been received and will be reviewed.",
+                icon: "success"
+            }).then((result) => {
+                if (result.value) {
+                    historySubmit.push(`/${url}`)
+                }
+            });
+        }).catch((error) => {
+            if (error.message === "Network Error") {
+                historySubmit.push('/page-error-cors')
+            } else {
+                const errorMessage = formatError(error.response.data);
+                Swal.fire("Failed!", errorMessage, "error");
+            }
         });
     };
 };

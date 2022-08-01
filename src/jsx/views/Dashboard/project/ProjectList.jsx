@@ -44,7 +44,7 @@ const ProjectList = (props) => {
                                     <strong>{t('projectname')}</strong>
                                 </th>
                                 <th>
-                                    <strong>{t('ECOSystem')}</strong>
+                                    <strong>{t('ecosystem')}</strong>
                                 </th>
                                 <th>
                                     <strong>{t('categories')}</strong>

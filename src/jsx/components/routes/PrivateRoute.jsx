@@ -26,6 +26,7 @@ const path_no_role = [
   '/app-profile',
   '/ecom-project-detail/:proname',
   '/community-details/:name',
+  '/event/news/:name',
   '/'
 ]
 const PrivateRoute = ({ AccessPath, component: Component, ...rest }) => {

@@ -7,7 +7,7 @@ import swal from "sweetalert";
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { isAdmin, isAuthenticated } from '../../../store/selectors/AuthSelectors';
-import { default as card1, default as user } from './../../../images/library/cardano.png';
+import { default as card1, default as user } from './../../../images/profile/1.png';
 
 const CardListBlog = [
   {

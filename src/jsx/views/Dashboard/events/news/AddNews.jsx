@@ -2,17 +2,14 @@ import { Formik } from "formik";
 import { useTranslation, withTranslation } from 'react-i18next';
 import { connect, useDispatch } from 'react-redux';
 import { useHistory } from "react-router-dom";
-import slug from "slug";
 import Swal from "sweetalert2";
 import * as Yup from "yup";
-import { postCKAction } from "../../../../../store/actions/LibraryAction";
 import { loadingToggleAction } from '../../../../../store/actions/ReviewAction';
-import { UserDetails } from "../../../../../store/selectors/AuthSelectors";
 import FormikControl from "../../../../components/Forms/Formik/FormikControl";
+import { postNewsAction } from '../../../../../store/actions/EventsAction';
+import { slug } from 'slug';
 
-
-
-const AddBlockChain = (props) => {
+const AddNews = () => {
 
     const { t } = useTranslation();
 
@@ -26,19 +23,41 @@ const AddBlockChain = (props) => {
         content: Yup.string()
             .required(`${t('entercontent')}`),
     });
-    const history = useHistory()
+
     const dispatch = useDispatch();
+    const history = useHistory()
+
+    const listTypeOfNews = [
+        {
+            id: 'URL',
+            name: 'Url'
+        },
+        {
+            id: 'CONTENT',
+            name: 'Content'
+        }
+    ]
+
+    const getListTypeOfNews = (list) => {
+        const listTYPEOFNEWS = [];
+        list.forEach((key) => {
+            const jobject = { "key": key.name, "value": key.id }
+            listTYPEOFNEWS.push(jobject)
+        })
+        return listTYPEOFNEWS
+    }
+
+    const dropdownOptionsTypeOfNews = getListTypeOfNews(listTypeOfNews)
 
     const onSubmit = (values) => {
         const postData = {
             title: values.title,
             name: slug(values.title, '-'),
-            type: 'Blockchain',
+            type: values.type,
             image: values.illustration,
             summary: values.introduction,
             content: values.content,
-            category: 2,
-            username: props.users.username
+            url: values.url,
         }
         Swal.fire({
             icon: "question",
@@ -52,7 +71,7 @@ const AddBlockChain = (props) => {
         }).then((result) => {
             if (result.value) {
                 dispatch(loadingToggleAction(true));
-                dispatch(postCKAction(postData, history, 'blockchain-knowledge'));
+                dispatch(postNewsAction(postData, history, 'event/news'));
             }
         });
     }
@@ -71,12 +90,23 @@ const AddBlockChain = (props) => {
                     onSubmit={(values,) => { onSubmit(values) }}
                 >
                     {({
-                        handleChange,
                         handleBlur,
                         handleSubmit,
+                        values
                     }) => (
                         <form onSubmit={handleSubmit}>
-                            <h2 className="text-primary pb-5 text-center">{t('addblockchaintitle')}</h2>
+                            <h2 className="text-primary pb-5 text-center">{t('addnewstitle')}</h2>
+
+                            <FormikControl
+                                control='select'
+                                type=''
+                                label={t('typeofnews')}
+                                name='type'
+                                className="form-control"
+                                rows=''
+                                onBlur={handleBlur}
+                                options={dropdownOptionsTypeOfNews}
+                            />
                             <FormikControl
                                 control='input'
                                 type='text'
@@ -86,7 +116,6 @@ const AddBlockChain = (props) => {
                                 rows=''
                                 onBlur={handleBlur}
                             />
-
                             <FormikControl
                                 control='input'
                                 type='text'
@@ -105,16 +134,33 @@ const AddBlockChain = (props) => {
                                 rows=''
                                 onBlur={handleBlur}
                             />
+                            {values.type === 'CONTENT' ?
+                                <>
+                                    <FormikControl
+                                        control='input'
+                                        type='texteditor'
+                                        label={t('content')}
+                                        name='content'
+                                        className="form-control"
+                                        rows=''
+                                        onBlur={handleBlur}
+                                    />
+                                </>
+                                :
+                                <>
+                                    <FormikControl
+                                        control='input'
+                                        type='text'
+                                        label={t('url')}
+                                        name='title'
+                                        className="form-control"
+                                        rows=''
+                                        onBlur={handleBlur}
+                                    />
+                                </>
 
-                            <FormikControl
-                                control='input'
-                                type='texteditor'
-                                label={t('content')}
-                                name='content'
-                                className="form-control"
-                                rows=''
-                                onBlur={handleBlur}
-                            />
+                            }
+
                             <button className="btn btn-primary" type="submit">{t('submit')}</button>
                             <br />
                         </form>
@@ -127,9 +173,8 @@ const AddBlockChain = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        reviewresponses: state.reviewresponses,
-        users: UserDetails(state)
+        reviewresponses: state.reviewresponses
     }
 }
 
-export default withTranslation()(connect(mapStateToProps, null)(AddBlockChain))
+export default withTranslation()(connect(mapStateToProps, null)(AddNews))

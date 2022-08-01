@@ -3,40 +3,37 @@ import { Fragment } from 'react';
 /// Bootstrap
 import { Card, Col, Row } from 'react-bootstrap';
 import { Link, NavLink } from 'react-router-dom';
-/// Compoents
+/// Components
 import { useEffect } from 'react';
+import { useTranslation, withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import { getCKAction } from '../../../store/actions/LibraryAction';
-import PageTitle from '../../layouts/PageTitle';
-import profile from '../../../images/profile/profile.png'
-import CutText from '../../../utils/CutText';
+import profile from '../../../images/profile/profile.png';
+import { getNewsAction } from '../../../store/actions/EventsAction';
 import { isAuthenticated } from '../../../store/selectors/AuthSelectors';
-import { withTranslation, useTranslation } from 'react-i18next';
+import CutText from '../../../utils/CutText';
+import PageTitle from '../../layouts/PageTitle';
 
 
 
 const getImage = (image) => {
-  if (image.length > 0) {
+  if (image) {
     return <img className="card-img-top img-fluid" src={image} alt="" />
   }
 }
 
-const CardanoKnowledge = (props) => {
+const News = (props) => {
 
-  const knowledgelist = props.ck
+  const newslist = props.news
   const { t } = useTranslation();
   const displayAction = props.isAuthenticated
-  let postData = {
-    catname: "cardano"
-  }
 
   useEffect(() => {
-    props.fetchListCK(postData);
+    props.fetchListNews();
   }, [])
 
   return (
     <Fragment>
-      <PageTitle activeMenu={t('cardanoknowledge')} motherMenu={t('library')} path={"cardano-knowledge"} />
+      <PageTitle activeMenu={t('news')} motherMenu={t('event')} path={"event/news"} />
 
       <div className="form-head d-flex mb-4 mb-md-5 align-items-start">
         <div className="input-group search-area d-inline-flex">
@@ -52,33 +49,33 @@ const CardanoKnowledge = (props) => {
           />
         </div>
         {displayAction &&
-          <Link to="/library/add-new-cardano-knowledge" className="btn btn-primary ml-auto">
-            {t('addlibrary')}
+          <Link to="/event/news/addnews" className="btn btn-primary ml-auto">
+            {t('postnews')}
           </Link>
         }
       </div>
 
       <Row>
-        {knowledgelist.map((knowledge, index) => (
+        {newslist.map((news, index) => (
           <Col xl='4' key={index}>
-            <NavLink to={`${props.match.url}/${knowledge.name}`} className='float-right'>
+            <NavLink to={`${props.match.url}/details/${news.name}`} className='float-right'>
               <Card className='mb-3'>
-                {getImage(knowledge.image)}
+                {getImage(news.image)}
                 <Card.Header>
                   <Card.Title className="fs-14 text-black">
-                    <h4>{knowledge.title}</h4>
+                    <h4>{news.title}</h4>
                     <div className="media mt-4">
                       <img src={profile} alt="" className="mr-3 rounded" width={25} />
                       <div className="media-body">
-                        <h5> {knowledge.username} </h5>
-                        <span className="mb-0 text-blue font-italic">{knowledge.createdt}</span>
+                        <h5> {news.username} </h5>
+                        <span className="mb-0 text-blue font-italic">{news.createdt}</span>
                       </div>
                     </div>
                   </Card.Title>
                 </Card.Header>
                 <Card.Body>
                   <Card.Text className="text-content subtitle">
-                    <CutText content={knowledge.summary} start={0} end={150} />
+                    <CutText content={news.summary} start={0} end={150} />
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -93,17 +90,17 @@ const CardanoKnowledge = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    ck: state.cardanoknowledge,
+    news: state.news,
     isAuthenticated: isAuthenticated(state),
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchListCK: (catname) => {
-      dispatch(getCKAction(catname))
+    fetchListNews: () => {
+      dispatch(getNewsAction())
     }
   }
 }
 
-export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(CardanoKnowledge))
+export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(News))

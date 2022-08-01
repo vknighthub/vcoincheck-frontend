@@ -1,5 +1,4 @@
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
+import { Editor } from "@tinymce/tinymce-react";
 import { ErrorMessage, Field } from 'formik';
 import TextError from './TextError';
 
@@ -8,28 +7,31 @@ const Texteditor = (props) => {
     return (
         <div className='form-group' key={name}>
             <label htmlFor={name}>{label}</label>
-            <div className="input-group">
+            <div className="summernote">
                 <Field
                     id={name}
                     name={name}
-                    render={({ field, form }) => {
+                    render={({ form }) => {
                         return (
                             <>
-                                <CKEditor
-                                    editor={ClassicEditor}
-                                    data={field.value}
-                                    onChange={(event, editor) => {
-                                        const data = editor.getData();
-                                        form.setFieldValue(name, data)
+                                <Editor
+                                    init={{
+                                        height: 500,
+                                        menubar: true,
+                                        plugins: [
+                                            "advlist autolink lists link image code charmap print preview anchor",
+                                            "searchreplace visualblocks code fullscreen",
+                                            "insertdatetime media table paste code help wordcount",
+                                        ],
+                                        toolbar:
+                                            "undo redo | formatselect | code |link | image | bold italic backcolor | alignleft aligncenter alignright alignjustify |  \n" +
+                                            "bullist numlist outdent indent | removeformat | help ",
+                                        content_style: 'body { color: #7e7e7e }'
                                     }}
-
-                                    onReady={editor => {
-                                        // Insert the toolbar before the editable area.
-                                        editor.ui.getEditableElement().parentElement.insertBefore(
-                                            editor.ui.view.toolbar.element,
-                                            editor.ui.getEditableElement(),
-                                        );
+                                    onEditorChange={(content) => {
+                                        form.setFieldValue(name, content)
                                     }}
+                                    name={name}
                                 />
                             </>
                         )

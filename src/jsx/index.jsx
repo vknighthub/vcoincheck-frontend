@@ -59,6 +59,9 @@ import ProjectReviewList from './views/Dashboard/project/ProjectReviewList'
 import SubmitProject from './views/Dashboard/project/SubmitProject'
 import AddBlockChain from './views/Dashboard/library/Cardano/AddBlockChain'
 import CommunityDetail from './views/Dashboard/Community/CommunityDetail'
+import News from './views/Dashboard/News'
+import AddNews from './views/Dashboard/events/news/AddNews'
+import NewsDetail from './views/Dashboard/events/news/NewsDetail'
 
 
 const Markup = (props) => {
@@ -119,6 +122,11 @@ const Markup = (props) => {
     { url: 'blockchain-knowledge/:name', component: BlockchainDetail },
     { url: 'library/add-new-cardano-knowledge', component: AddCardano },
     { url: 'library/add-new-blockchain-knowledge', component: AddBlockChain },
+
+    /// Events
+    { url: 'event/news', component: News },
+    { url: 'event/news/details/:name', component: NewsDetail },
+    { url: 'event/news/addnews', component: AddNews }
 
   ]
 

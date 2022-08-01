@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 import { AuthReducer } from './reducers/AuthReducer';
 import BKReducer from './reducers/BKReducer';
 import CKReducer from './reducers/CKReducer';
+import DictionaryReducer from './reducers/DictionaryReducer';
 import ECosystemReducer from './reducers/ECosystemReducer';
 import FAQsReducer from './reducers/FAQsReducer';
 import HotProjectReducer from './reducers/HotProjectReducer';
@@ -20,6 +21,7 @@ import ReviewReducer from './reducers/ReviewReducer';
 import TopProjectReducer from './reducers/TopProjectReducer';
 import UsersReducer from './reducers/UserReducer';
 import UserRoleReducer from './reducers/UserRoleReducer';
+import NewsReducer from './reducers/NewsReducer'
 
 const middleware = applyMiddleware(thunk);
 
@@ -40,10 +42,12 @@ const reducers = combineReducers({
     reviewresponses: ReviewReducer,
     listreview: ReviewlistReducer,
     listreviewbyid: ReviewListByIDReducer,
+    dictionary: DictionaryReducer,
     cardanoknowledge: CKReducer,
     blockchainknowledge: BKReducer,
     reviewuserlist: ReviewListByUserProjectReducer,
     faqs: FAQsReducer,
+    news: NewsReducer,
     form: reduxFormReducer,
 });
 

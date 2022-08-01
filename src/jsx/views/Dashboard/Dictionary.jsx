@@ -1,40 +1,39 @@
-import { Fragment, useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 /// Compoents
 import parse from 'html-react-parser';
 import { getDictionaryAction } from "../../../store/actions/LibraryAction";
 import PageTitle from "../../layouts/PageTitle";
 import { withTranslation, useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { connect } from 'react-redux';
 
 
-const list_alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-
-
-const Dictionary = () => {
+const Dictionary = (props) => {
   const { t } = useTranslation();
-
-  const [content, setContent] = useState()
+  const dispatch = useDispatch();
+  const list_alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+  const content = props.dictionary
 
   const handleDictionary = (alphabet) => {
-    let result = []
     let postData = {
-      dickey: alphabet.toUpperCase()
+      dictionarykey: alphabet.toUpperCase(),
+      dictionaryname: ""
     }
-    result = getDictionaryAction(postData)
-    setContent(result)
+    dispatch(getDictionaryAction(postData))
   }
 
   useEffect(() => {
-    let result = []
-    let postData = {
-      dictionarykey: 'A'
+    let postdata = {
+      dictionarykey: 'A',
+      dictionaryname: ""
     }
-    result = getDictionaryAction(postData)
-    setContent(result)
+    props.fetchListDictionary(postdata)
   }, [])
 
   return (
-    <Fragment>
+    <>
       <PageTitle activeMenu={t('dictionary')} motherMenu= {t('library')} path={"dictionary"}/>
 
       <div className="row">
@@ -65,8 +64,8 @@ const Dictionary = () => {
               <div className="card-body border-bottom">
                 {content.map((value, index) => (
                   <div className="card-body pt-3" key={index}>
-                    <div className="profile-blog ">
-                      <h4>{value.name}</h4>
+                    <div className="profile-blog">
+                      <h4 className="card-title card-intro-title text-secondary">{value.dicname}</h4>
                       <span className="mb-0">
                         {parse(value.content)}
                       </span>
@@ -78,8 +77,20 @@ const Dictionary = () => {
           </div>
         }
       </div>
-    </Fragment >
+    </>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+    dictionary: state.dictionary,
+  };
+};
 
-export default withTranslation()(Dictionary);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchListDictionary: (postData) => {
+      dispatch(getDictionaryAction(postData))
+    }
+  }
+}
+export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(Dictionary))

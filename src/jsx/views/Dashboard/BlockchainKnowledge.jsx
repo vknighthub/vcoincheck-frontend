@@ -25,7 +25,7 @@ const BlockchainKnowledge = (props) => {
   const { t } = useTranslation();
 
   const knowledgelist = props.bk
-
+  const displayAction = props.isAuthenticated
   let postData = {
     catname: "blockchain"
   }
@@ -37,7 +37,7 @@ const BlockchainKnowledge = (props) => {
 
   return (
     <Fragment>
-      <PageTitle activeMenu={t('blockchainknowledge')} motherMenu={t('library')} path={"blockchain-knowledge"}/>
+      <PageTitle activeMenu={t('blockchainknowledge')} motherMenu={t('library')} path={"blockchain-knowledge"} />
       <div className="form-head d-flex mb-4 mb-md-5 align-items-start">
         <div className="input-group search-area d-inline-flex">
           <div className="input-group-append">
@@ -51,7 +51,7 @@ const BlockchainKnowledge = (props) => {
             placeholder="Search here"
           />
         </div>
-        {isAuthenticated &&
+        {displayAction &&
           <Link to="/library/add-new-blockchain-knowledge" className="btn btn-primary ml-auto">
             {t('addlibrary')}
           </Link>

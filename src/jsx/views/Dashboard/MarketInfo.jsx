@@ -262,7 +262,7 @@ const MarketInfo = () => {
                       </h3>
                     </div>
                     <div className="col-lg-4 col-sm-4 col-6 mb-3 mb-sm-0">
-                      <p className="fs-14 mb-1">{t('volume')} (24h)</p>
+                      <p className="fs-14 mb-1">24 {t('volume')} </p>
                       <h3 className="fs-20 font-w600 text-black">$47.22B</h3>
                     </div>
                     <div className="col-lg-4 col-sm-4">

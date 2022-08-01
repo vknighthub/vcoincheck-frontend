@@ -181,5 +181,11 @@
     "prosts": "Trạng thái dự án",
     "scoring": "Điểm",
     "selecteprojectstatus": "Vui lòng chọn trạng thái dự án",
-    "remove": "Dự án"
+    "remove": "Dự án",
+    "event": "Sự kiện",
+    "postnews": "Thêm tin tức",
+    "addnewstitle": "Vui lòng điền một số thông tin về nội dung Tin tức",
+    "typeofnews": "Loại tin tức",
+    "selecttypeofnews": "Vui lòng chọn một loại hình tin tức",
+    "url" : "Đường dẫn liên kết"
 }

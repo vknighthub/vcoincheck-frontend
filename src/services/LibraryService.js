@@ -37,3 +37,10 @@ export function formatError(errorResponse) {
     if (errorResponse.errorcode !== 0)
         swal("Oops", errorResponse.messagedetail, "error");
 }
+
+export function postCK(postData) {
+    return axiosInstance.post(
+        `/${process.env.REACT_APP_ADD_LIBRARY_ENDPOINT}`,
+        postData
+    );
+}

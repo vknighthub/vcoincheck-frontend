@@ -181,5 +181,15 @@
     "prosts": "Project status",
     "scoring": "Scoring",
     "selecteprojectstatus": "Select project status",
-    "remove": "Remove"
+    "remove": "Remove",
+    "entertitle": "Please enter a title",
+    "enterintroduction": "Please enter a brief introduction",
+    "ennerillustration": "Please enter a type of illustration",
+    "entercontent": "Please enter a content",
+    "event": "Event",
+    "postnews": "Post news",
+    "addnewstitle": "Please fill in some information about the content of News",
+    "typeofnews": "Type of news",
+    "selecttypeofnews": "Select type of news",
+    "url" : "URL"
 }
