@@ -43,7 +43,11 @@ export const FilteringTable = ({ colunmsfilter, datafilter }) => {
 							{headerGroups.map(headerGroup => (
 								<tr {...headerGroup.getHeaderGroupProps()}>
 									{headerGroup.headers.map(column => (
-										<th {...column.getHeaderProps()}>
+										<th {...column.getHeaderProps(
+											{
+												style: { minWidth: column.minWidth, width: column.width },
+											}
+										)}>
 											{column.render('Header')}
 											{column.canFilter ? column.render('Filter') : null}
 										</th>
@@ -52,13 +56,20 @@ export const FilteringTable = ({ colunmsfilter, datafilter }) => {
 							))}
 						</thead>
 						<tbody {...getTableBodyProps()} className="" >
-
 							{page.map((row) => {
 								prepareRow(row)
 								return (
 									<tr {...row.getRowProps()}>
 										{row.cells.map((cell) => {
-											return <td {...cell.getCellProps()}> {cell.render('Cell')} </td>
+											return <td {...cell.getCellProps(
+												{
+													style: {
+														minWidth: cell.column.minWidth,
+														width: cell.column.width
+													},
+												}
+											)}> {cell.render('Cell')}
+											</td>
 										})}
 									</tr>
 								)

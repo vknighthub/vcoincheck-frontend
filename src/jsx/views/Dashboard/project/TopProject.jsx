@@ -18,7 +18,7 @@ const TopProject = (props) => {
         <>
             <div className="row">
                 {projectlist.map((project, index) => (
-                    <div className="col-lg-12 col-xl-6" key={index}>
+                    <div className="col-lg-12 col-xl-4" key={index}>
                         <div className="card">
                             <div className="card-body">
                                 <NavLink to={`ecom-project-detail/${project.proname}`} className="text-black">
@@ -39,7 +39,7 @@ const TopProject = (props) => {
                                                 <div className="comment-review star-rating">
                                                     <ul id="stars"
                                                         className="d-flex justify-content-center align-items-center">
-                                                        Scoring
+                                                        {t('score')}
                                                     </ul>
                                                     <p className="price mt-3">{project.scores}</p>
                                                 </div>
@@ -56,7 +56,7 @@ const TopProject = (props) => {
                                                 <p>
                                                     {t('ecosystem')}: <span className="item">{project.Ecosystem}</span>{" "}
                                                 </p>
-                                                <span className="text-content">
+                                                <span className="text-content fs-14">
                                                     {parse(project.prodescr.substring(0, 225))}
                                                 </span>
                                             </div>

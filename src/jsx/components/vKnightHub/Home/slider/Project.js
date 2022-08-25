@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
@@ -57,9 +58,12 @@ const Project = (props) => {
          {listProject.map((project, index) => (
             <div className="items" key={index}>
                <div>
-                  <ProjectSvg image={project.proicon} width={120} height={120}/>
-                  <h5 className="text-black mt-4">{project.proname}</h5>
-                  <span className="fs-12">{project.procd}</span>
+                  <NavLink to={`/ecom-project-detail/${project.proname}`}>
+                     <ProjectSvg image={project.proicon} width={120} height={120} style={{ minHeight: 120 }} />
+                     <h5 className="text-black mt-4">{project.proname}</h5>
+                     <span className="fs-12">{project.protype}</span>
+                  </NavLink>
+
                </div>
             </div>
          ))}

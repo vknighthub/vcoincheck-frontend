@@ -20,17 +20,19 @@ const path_no_role = [
   '/dictionary',
   '/cardano-knowledge',
   '/blockchain-knowledge',
+  '/catalyst-knowledge',
   '/cardano-knowledge/:name',
   '/blockchain-knowledge/:name',
+  '/catalyst-knowledge/:name',
   '/community',
   '/app-profile',
   '/ecom-project-detail/:proname',
   '/community-details/:name',
   '/event/news/:name',
+  '/library',
   '/'
 ]
 const PrivateRoute = ({ AccessPath, component: Component, ...rest }) => {
-
   return (
     <Route {...rest} render={props => {
       let path = props.match.path;

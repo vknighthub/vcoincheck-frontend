@@ -3,15 +3,15 @@ import { Fragment, useEffect } from "react"
 /// Bootstrap
 import { Card, Col, Row } from "react-bootstrap"
 import { connect } from "react-redux"
-import { Link, NavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 /// Compoents
+import { useTranslation, withTranslation } from 'react-i18next'
 import profile from '../../../images/profile/profile.png'
 import { getBKAction } from "../../../store/actions/LibraryAction"
 import { isAuthenticated } from "../../../store/selectors/AuthSelectors"
 import CutText from "../../../utils/CutText"
 import PageTitle from "../../layouts/PageTitle"
-import { withTranslation, useTranslation } from 'react-i18next';
-
+import GetContentLanguage from './../../../utils/GetContentLanguage'
 
 
 const getImage = (image) => {
@@ -23,50 +23,33 @@ const getImage = (image) => {
 const BlockchainKnowledge = (props) => {
 
   const { t } = useTranslation();
+  const i18nextLng = localStorage.getItem('i18nextLng')
+  const currentLanguageCode = i18nextLng || 'en'
 
   const knowledgelist = props.bk
-  const displayAction = props.isAuthenticated
   let postData = {
-    catname: "blockchain"
+    catname: "Blockchain Knowledge"
   }
 
   useEffect(() => {
     props.fetchListBK(postData);
   }, [])
 
-
   return (
     <Fragment>
-      <PageTitle activeMenu={t('blockchainknowledge')} motherMenu={t('library')} path={"blockchain-knowledge"} />
-      <div className="form-head d-flex mb-4 mb-md-5 align-items-start">
-        <div className="input-group search-area d-inline-flex">
-          <div className="input-group-append">
-            <span className="input-group-text">
-              <i className="flaticon-381-search-2" />
-            </span>
-          </div>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Search here"
-          />
-        </div>
-        {displayAction &&
-          <Link to="/library/add-new-blockchain-knowledge" className="btn btn-primary ml-auto">
-            {t('addlibrary')}
-          </Link>
-        }
-      </div>
+      <PageTitle activeMenu={t('blockchainknowledge')} motherMenu={t('library')} path={"library"} />
+
       <Row>
         {knowledgelist.map((knowledge, index) => (
+          GetContentLanguage(currentLanguageCode, knowledge.title) &&
           <Col xl="4" key={index}>
-            <NavLink to={`${props.match.url}/${knowledge.name}`}>
+            <NavLink to={`${props.match.url}/${btoa(knowledge.id)}`}>
               <Card className="mb-3">
                 <Card.Link href="#" className="float-right">
                   {getImage(knowledge.image)}
                   <Card.Header>
                     <Card.Title className="fs-14 text-black">
-                      <h4>{knowledge.title}</h4>
+                      <h4>{GetContentLanguage(currentLanguageCode, knowledge.title)}</h4>
                       <div className="media mt-4">
                         <img src={profile} alt="" className="mr-3 rounded img-fluid" width={25} />
                         <div className="media-body">
@@ -78,7 +61,7 @@ const BlockchainKnowledge = (props) => {
                   </Card.Header>
                   <Card.Body>
                     <Card.Text className="text-content subtitle">
-                      <CutText content={knowledge.summary} start={0} end={150} />
+                      <CutText content={GetContentLanguage(currentLanguageCode, knowledge.summary)} start={0} end={150} />
                     </Card.Text>
                   </Card.Body>
                 </Card.Link>

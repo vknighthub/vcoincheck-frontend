@@ -65,6 +65,7 @@ export function editProject(postData) {
 }
 
 
+
 export function formatProject(projectData) {
     let projects = [];
     for (let key in projectData) {
@@ -99,4 +100,11 @@ export function formatProjectDetail(projectData) {
 export function formatError(errorResponse) {
     if (errorResponse.errorcode !== 0)
         return errorResponse.messagedetail
+}
+
+export function setFeaturedProject(projectData) {
+    return axiosInstance.post(
+        `/${process.env.REACT_APP_SET_FEATURED_ENDPOINT}`,
+        projectData
+    );
 }

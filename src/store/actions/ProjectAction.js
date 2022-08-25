@@ -2,8 +2,8 @@ import Swal from 'sweetalert2';
 import {
     formatError, formatHotProject, formatProject, formatTopProject, getEcosystem, getHotProject, getProject, getProjectDetails, getProjectManagement, getProjectType, getTopProject, removeProject, submitProject
 } from '../../services/ProjectService';
-import { approveProject, editProject } from './../../services/ProjectService';
-import { CONFIRMED_EDIT_PROJECTS, CONFIRMED_GET_ECOSYSTEM_TYPE, CONFIRMED_GET_HOT_PROJECTS, CONFIRMED_GET_PROJECTS, CONFIRMED_GET_PROJECTS_DETAIL, CONFIRMED_GET_PROJECTS_MANAGEMENT, CONFIRMED_GET_PROJECTS_TYPE, CONFIRMED_GET_TOP_PROJECTS, CONFIRMED_SUBMIT_PROJECTS, CONFIRMED_APPROVE_PROJECTS, CONFIRMED_REMOVE_PROJECTS } from './types/ProjectType';
+import { approveProject, editProject, setFeaturedProject } from './../../services/ProjectService';
+import { CONFIRMED_EDIT_PROJECTS, CONFIRMED_GET_ECOSYSTEM_TYPE, CONFIRMED_GET_HOT_PROJECTS, CONFIRMED_GET_PROJECTS, CONFIRMED_GET_PROJECTS_DETAIL, CONFIRMED_GET_PROJECTS_MANAGEMENT, CONFIRMED_GET_PROJECTS_TYPE, CONFIRMED_GET_TOP_PROJECTS, CONFIRMED_SUBMIT_PROJECTS, CONFIRMED_APPROVE_PROJECTS, CONFIRMED_REMOVE_PROJECTS, CONFIRMED_SET_FEATURED_PROJECTS } from './types/ProjectType';
 
 
 export function confirmedGetProjectAction(projects) {
@@ -77,6 +77,13 @@ export function confirmedEditProjectAction(project) {
     return {
         type: CONFIRMED_EDIT_PROJECTS,
         payload: project
+    };
+};
+
+export function confirmedSetFeaturedProjectAction(isfeatured) {
+    return {
+        type: CONFIRMED_SET_FEATURED_PROJECTS,
+        payload: isfeatured
     };
 };
 
@@ -268,4 +275,32 @@ export function editProjectAction(postData, historyEdit) {
             });
     };
 };
+
+export function setFeaturedProjectAction(projectcode, historyEdit, t) {
+    return (dispatch) => {
+        setFeaturedProject(projectcode)
+            .then((response) => {
+                console.log(response)
+                dispatch(confirmedSetFeaturedProjectAction(response.result.data));
+                Swal.fire({
+                    title: `${t('featured')}`,
+                    html: `${t('successfeatured')}`,
+                    icon: "success"
+                }).then((result) => {
+                    if (result.value) {
+                        historyEdit.push('/project-management')
+                    }
+                });
+            }).catch((error) => {
+                if (error.message === "Network Error") {
+                    historyEdit.push('/page-error-cors')
+                } else {
+                    const errorMessage = formatError(error.response.data);
+                    Swal.fire("Failed!", errorMessage, "error");
+                }
+            });
+    };
+};
+
+
 

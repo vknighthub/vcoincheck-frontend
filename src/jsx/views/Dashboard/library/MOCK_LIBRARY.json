@@ -1,0 +1,18 @@
+[
+    {
+        "librarycd": 1,
+        "description": "Cardano Knowledge"
+    },
+    {
+        "librarycd": 2,
+        "description": "Blockchain Knowledge"
+    },
+    {
+        "librarycd": 3,
+        "description": "Cardano Dictionary"
+    },
+    {
+        "librarycd": 4,
+        "description": "Catalyst Knowledge"
+    }
+]

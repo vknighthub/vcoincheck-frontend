@@ -2,16 +2,17 @@
 import { Fragment } from 'react';
 /// Bootstrap
 import { Card, Col, Row } from 'react-bootstrap';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 /// Compoents
 import { useEffect } from 'react';
+import { useTranslation, withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
+import profile from '../../../images/profile/profile.png';
 import { getCKAction } from '../../../store/actions/LibraryAction';
-import PageTitle from '../../layouts/PageTitle';
-import profile from '../../../images/profile/profile.png'
-import CutText from '../../../utils/CutText';
 import { isAuthenticated } from '../../../store/selectors/AuthSelectors';
-import { withTranslation, useTranslation } from 'react-i18next';
+import CutText from '../../../utils/CutText';
+import PageTitle from '../../layouts/PageTitle';
+import GetContentLanguage from './../../../utils/GetContentLanguage';
 
 
 
@@ -22,12 +23,12 @@ const getImage = (image) => {
 }
 
 const CardanoKnowledge = (props) => {
-
+  const i18nextLng = localStorage.getItem('i18nextLng')
+  const currentLanguageCode = i18nextLng || 'en'
   const knowledgelist = props.ck
   const { t } = useTranslation();
-  const displayAction = props.isAuthenticated
   let postData = {
-    catname: "cardano"
+    catname: "Cardano Knowledge"
   }
 
   useEffect(() => {
@@ -36,37 +37,18 @@ const CardanoKnowledge = (props) => {
 
   return (
     <Fragment>
-      <PageTitle activeMenu={t('cardanoknowledge')} motherMenu={t('library')} path={"cardano-knowledge"} />
-
-      <div className="form-head d-flex mb-4 mb-md-5 align-items-start">
-        <div className="input-group search-area d-inline-flex">
-          <div className="input-group-append">
-            <span className="input-group-text">
-              <i className="flaticon-381-search-2" />
-            </span>
-          </div>
-          <input
-            type="text"
-            className="form-control"
-            placeholder={t('search')}
-          />
-        </div>
-        {displayAction &&
-          <Link to="/library/add-new-cardano-knowledge" className="btn btn-primary ml-auto">
-            {t('addlibrary')}
-          </Link>
-        }
-      </div>
+      <PageTitle activeMenu={t('cardanoknowledge')} motherMenu={t('library')} path={"library"} />
 
       <Row>
         {knowledgelist.map((knowledge, index) => (
+          GetContentLanguage(currentLanguageCode, knowledge.title) &&
           <Col xl='4' key={index}>
-            <NavLink to={`${props.match.url}/${knowledge.name}`} className='float-right'>
+            <NavLink to={`${props.match.url}/${btoa(knowledge.id)}`} className='float-right'>
               <Card className='mb-3'>
                 {getImage(knowledge.image)}
                 <Card.Header>
                   <Card.Title className="fs-14 text-black">
-                    <h4>{knowledge.title}</h4>
+                    <h4>{GetContentLanguage(currentLanguageCode, knowledge.title)}</h4>
                     <div className="media mt-4">
                       <img src={profile} alt="" className="mr-3 rounded" width={25} />
                       <div className="media-body">
@@ -78,12 +60,13 @@ const CardanoKnowledge = (props) => {
                 </Card.Header>
                 <Card.Body>
                   <Card.Text className="text-content subtitle">
-                    <CutText content={knowledge.summary} start={0} end={150} />
+                    <CutText content={GetContentLanguage(currentLanguageCode, knowledge.summary)} start={0} end={150} />
                   </Card.Text>
                 </Card.Body>
               </Card>
             </NavLink>
           </Col>
+
         ))}
 
       </Row>

@@ -53,7 +53,7 @@ import ForgotPassword from './pages/ForgotPassword'
 import OTPPassword from './pages/OTPPassword'
 import ReviewDetail from './views/Administrator/Review/ReviewDetail'
 import AppProfile from './views/AppsMenu/AppProfile/AppProfile'
-import BlockchainDetail from './views/Dashboard/library/Cardano/BlockchainDetail'
+import BlockchainDetail from './views/Dashboard/library/Blockchain/BlockchainDetail'
 import ProjectDetail from './views/Dashboard/project/ProjectDetail'
 import ProjectReviewList from './views/Dashboard/project/ProjectReviewList'
 import SubmitProject from './views/Dashboard/project/SubmitProject'
@@ -62,6 +62,12 @@ import CommunityDetail from './views/Dashboard/Community/CommunityDetail'
 import News from './views/Dashboard/News'
 import AddNews from './views/Dashboard/events/news/AddNews'
 import NewsDetail from './views/Dashboard/events/news/NewsDetail'
+import Library from './views/Dashboard/Library'
+import AddLibrary from './views/Dashboard/library/AddLibrary'
+import LibraryManagement from './views/Dashboard/library/LibraryManagement'
+import PostLibraryLang from './views/Dashboard/library/PostLibraryLang'
+import CatalystKnowledge from './views/Dashboard/CatalystKnowledge'
+import CatalystDetail from './views/Dashboard/library/Catalyst/CatalystDetail'
 
 
 const Markup = (props) => {
@@ -81,8 +87,10 @@ const Markup = (props) => {
     { url: 'dictionary', component: Dictionary },
     { url: 'cardano-knowledge', component: CardanoKnowledge },
     { url: 'blockchain-knowledge', component: BlockchainKnowledge },
+    { url: 'catalyst-knowledge', component: CatalystKnowledge },
     { url: 'community', component: Community },
     { url: 'submit-project', component: SubmitProject },
+    { url: 'library', component: Library },
 
 
 
@@ -98,6 +106,8 @@ const Markup = (props) => {
     { url: 'user-active-profile/:username', component: UserProfile },
     { url: 'project-management', component: ProjectManagement },
     { url: 'project-management-action/:proname', component: ProjectManagementAction },
+    { url: 'library-management', component: LibraryManagement },
+    { url: 'post-library-language/:name&:language', component: PostLibraryLang },
 
     /// views
     { url: 'app-profile', component: AppProfile },
@@ -120,8 +130,11 @@ const Markup = (props) => {
     /// Cardano Knowledge - Detail
     { url: 'cardano-knowledge/:name', component: CardanoDetail },
     { url: 'blockchain-knowledge/:name', component: BlockchainDetail },
+    { url: 'catalyst-knowledge/:name', component: CatalystDetail },
     { url: 'library/add-new-cardano-knowledge', component: AddCardano },
     { url: 'library/add-new-blockchain-knowledge', component: AddBlockChain },
+    { url: 'library/post-library', component: AddLibrary },
+
 
     /// Events
     { url: 'event/news', component: News },

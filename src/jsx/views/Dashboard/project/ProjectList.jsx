@@ -50,7 +50,7 @@ const ProjectList = (props) => {
                                     <strong>{t('categories')}</strong>
                                 </th>
                                 <th>
-                                    <strong>{t('status')}</strong>
+                                    <strong>{t('projectquality')}</strong>
                                 </th>
                                 <th>
                                     <strong>{t('noofviewed')}</strong>

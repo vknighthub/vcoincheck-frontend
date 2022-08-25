@@ -42,6 +42,10 @@ let menu = [{
     "icon": "flaticon-381-notepad",
     "menu_sub": [
         {
+            "name": { en: "Library", vn: "Thư viện", jp: "としょうかん" },
+            "path": "/library"
+        },
+        {
             "name": { en: "Dictionary", vn: "Từ Điển", jp: "辞書" },
             "path": "/dictionary"
         },
@@ -52,6 +56,10 @@ let menu = [{
         {
             "name": { en: "Blockchain knowledge", vn: "Kiến thức Blockchain", jp: "ブロックチェーンの知識" },
             "path": "/blockchain-knowledge"
+        },
+        {
+            "name": { en: "Catalyst knowledge", vn: "Kiến thức Catalyst", jp: "Catalystの知識" },
+            "path": "/catalyst-knowledge"
         }
     ]
 },
@@ -77,6 +85,16 @@ let menu = [{
     "menu_sub": []
 }]
 
+const routes = [
+    "/catalyst-knowledge/:name"
+]
+
+const project = [
+    {
+        project_info: '',
+        review_info: []
+    }
+]
 
 const initialState = {
     auth: {
@@ -100,8 +118,9 @@ const initialState = {
             failnumber: 0,
             scores: 0,
             avatar: '',
-            routes: '',
-            menu: menu
+            routes: routes,
+            menu: menu,
+            project_list: project,
         },
         localId: '',
         expiresIn: '',

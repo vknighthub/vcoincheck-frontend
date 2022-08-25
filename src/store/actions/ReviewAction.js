@@ -1,12 +1,12 @@
 import swal from 'sweetalert';
 import Swal from 'sweetalert2';
-import { addReviewed, approveReviewScore, formatData, formatError, getAllListReview, getListReviewByProject, getReviewListByID, getReviewListByUsernameProjectname } from '../../services/ReviewService';
+import { addReviewed, approveReviewScore, formatData, formatError, getAllListReview, getListReviewByProject, getReviewListByID, getReviewListByUsernameProjectname, setLikeReview } from '../../services/ReviewService';
 import HandleError from './../../jsx/components/vKnightHub/ErrorManagement/HandleError';
 import {
     CONFIRMED_ADD_REVIEW, CONFIRMED_GET_ADVANCE, CONFIRMED_GET_BASIC, CONFIRMED_GET_REVIEWLIST,
     CONFIRMED_GET_REVIEWLIST_BY_ID,
     CONFIRMED_GET_REVIEWLIST_BY_USER_PROJECT,
-    CONFIRMED_GET_SCORE_REVIEW, FAILED_ADD_REVIEW, LOADING_TOGGLE_ACTION
+    CONFIRMED_GET_SCORE_REVIEW, CONFIRMED_SETLIKED_REVIEWED, FAILED_ADD_REVIEW, LOADING_TOGGLE_ACTION
 } from './types/ReviewProjectType';
 import { CONFIRMED_BONUSSCORE_USER } from './types/UserType';
 
@@ -80,6 +80,13 @@ export function confirmedScoreReviewAction(scorereview) {
 export function bonusScoreUserConfirmedAction(data) {
     return {
         type: CONFIRMED_BONUSSCORE_USER,
+        payload: data,
+    };
+};
+
+export function confirmedSetLikedAction(data) {
+    return {
+        type: CONFIRMED_SETLIKED_REVIEWED,
         payload: data,
     };
 };
@@ -165,6 +172,17 @@ export function getReviewListByUserProjectAction(postData) {
                     swal("Oops", errorMessage.messagedetail, "error");
                 }
             }
+        });
+    };
+};
+
+export function setLikeReviewAction(postData) {
+    return (dispatch) => {
+        setLikeReview(postData).then((response) => {
+            dispatch(confirmedSetLikedAction(response));
+        }).catch((error) => {
+            const errorMessage = formatError(error.response);
+            console.error("error" + errorMessage)
         });
     };
 };

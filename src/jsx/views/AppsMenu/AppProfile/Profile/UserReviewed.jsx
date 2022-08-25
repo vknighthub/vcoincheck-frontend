@@ -2,7 +2,8 @@ import { NavLink } from "react-router-dom";
 import { useTranslation, withTranslation } from 'react-i18next';
 
 
-const UserReviewed = () => {
+const UserReviewed = ({ project }) => {
+    console.log(project)
     const { t } = useTranslation();
     return (
         <div className="row">

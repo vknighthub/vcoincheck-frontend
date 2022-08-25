@@ -1,6 +1,8 @@
 import { ProjectSvg } from '../../../../../components/svg';
 import { ColumnFilter } from '../../../../../components/table/FilteringTable/ColumnFilter';
 import { Link } from "react-router-dom";
+import GetContentLanguage from '../../../../../../utils/GetContentLanguage';
+import ColorQuality from '../../../../../../utils/ColorQuality';
 
 const getStatusType = (status) => {
 	switch (status) {
@@ -38,17 +40,27 @@ export const COLUMNSFILTER = [
 		Filter: ColumnFilter,
 	},
 	{
-		Header: 'Trạng thái',
-		Footer: 'Trạng thái',
-		accessor: 'prosts',
-		Filter: ColumnFilter,
-	},
-	{
 		Header: 'Lượt xem',
 		Footer: 'Lượt xem',
 		accessor: 'totalreview',
 		Filter: ColumnFilter,
 	},
+	{
+		Header: 'Chất lượng',
+		Footer: 'Chất lượng',
+		Cell: (props) => {
+			const lang = localStorage.getItem('i18nextLng')
+			const quality = GetContentLanguage(lang, props.row.original.quality)
+			const colorQuality = ColorQuality(lang,quality)
+			return (
+				<span className={`btn-link ${colorQuality} float-center`
+					}
+				>
+					{quality}
+				</span>
+			)
+		}
+	}
 ]
 
 export const COLUMNSREVIEWLIST = [
