@@ -10,3 +10,7 @@ export const REFUSE_GET_REVIEWLIST = '[Get Review List Action] Refused Get Revie
 export const CONFIRMED_GET_REVIEWLIST_BY_ID = '[Get Review List Action] Confirmed Get Review List BY ID';
 export const CONFIRMED_GET_SCORE_REVIEW = '[Review Action] Confirmed Get Score Review';
 export const CONFIRMED_GET_REVIEWLIST_BY_USER_PROJECT = '[Get Review List Action] Confirmed Get Review List BY User Project';
+export const CONFIRMED_SETLIKED_REVIEWED = '[Review Action] Confirmed Set Liked Review';
+
+
+

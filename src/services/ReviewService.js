@@ -21,6 +21,13 @@ export function getReviewListByUsernameProjectname(postData) {
     );
 }
 
+export function setLikeReview(postData) {
+    return axiosInstance.post(
+        `/${process.env.REACT_APP_SET_LIKEREVIEW_ENDPOINT}`,
+        postData,
+    );
+}
+
 
 
 export function formatData(data) {

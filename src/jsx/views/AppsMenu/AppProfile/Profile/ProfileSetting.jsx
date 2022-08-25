@@ -126,7 +126,6 @@ const ProfileSetting = (props) => {
                     >
                         {({
                             values,
-                            errors,
                             handleChange,
                             handleBlur,
                             handleSubmit,

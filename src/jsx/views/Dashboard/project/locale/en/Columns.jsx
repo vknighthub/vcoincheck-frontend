@@ -1,6 +1,8 @@
 import { ProjectSvg } from '../../../../../components/svg';
 import { ColumnFilter } from '../../../../../components/table/FilteringTable/ColumnFilter';
 import { Link } from "react-router-dom";
+import GetContentLanguage from './../../../../../../utils/GetContentLanguage';
+import ColorQuality from '../../../../../../utils/ColorQuality';
 
 const getStatusType = (status) => {
 	switch (status) {
@@ -24,6 +26,11 @@ export const COLUMNSFILTER = [
 		Footer: 'Name',
 		accessor: 'proname',
 		Filter: ColumnFilter,
+		Cell: (props) => (
+			<Link to={`/ecom-project-detail/${props.row.original.proname}`} className="text-success">
+				{props.row.original.proname}
+			</Link>
+		),
 	},
 	{
 		Header: 'Ecosystem',
@@ -38,17 +45,25 @@ export const COLUMNSFILTER = [
 		Filter: ColumnFilter,
 	},
 	{
-		Header: 'Status',
-		Footer: 'Status',
-		accessor: 'prosts',
-		Filter: ColumnFilter,
-	},
-	{
 		Header: 'No of viewed',
 		Footer: 'No of viewed',
 		accessor: 'totalreview',
 		Filter: ColumnFilter,
 	},
+	{
+		Header: 'Quality',
+		Footer: 'Quality',
+		Cell: (props) => {
+			const quality = GetContentLanguage(localStorage.getItem('i18nextLng'), props.row.original.quality)
+			return (
+				<span className={`btn-link ${ColorQuality(quality)} float-center`
+				}
+				>
+					{quality}
+				</span>
+			)
+		}
+	}
 ]
 
 export const COLUMNSREVIEWLIST = [
@@ -190,6 +205,6 @@ export const COLUMNSFILTERPROJECT = [
 				</Link>
 			</>
 		)
-	},
+	}
 ]
 

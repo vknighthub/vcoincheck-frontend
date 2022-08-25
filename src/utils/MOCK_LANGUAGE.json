@@ -1,0 +1,14 @@
+[
+    {
+        "languagecd": "VN",
+        "description": "Vietnamese"
+    },
+    {
+        "languagecd": "EN",
+        "description": "English"
+    },
+    {
+        "languagecd": "JP",
+        "description": "Japanese"
+    }
+]

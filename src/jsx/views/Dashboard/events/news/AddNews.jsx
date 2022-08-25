@@ -7,7 +7,7 @@ import * as Yup from "yup";
 import { loadingToggleAction } from '../../../../../store/actions/ReviewAction';
 import FormikControl from "../../../../components/Forms/Formik/FormikControl";
 import { postNewsAction } from '../../../../../store/actions/EventsAction';
-import { slug } from 'slug';
+import slug from 'slug';
 
 const AddNews = () => {
 
@@ -87,7 +87,7 @@ const AddNews = () => {
                         content: "",
                     }}
                     validationSchema={overviewSchema}
-                    onSubmit={(values,) => { onSubmit(values) }}
+                    onSubmit={(values) => { onSubmit(values) }}
                 >
                     {({
                         handleBlur,

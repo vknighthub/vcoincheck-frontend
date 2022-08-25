@@ -672,3 +672,9 @@ button.react-calendar__tile.react-calendar__month-view__days__day:hover {
   background: #aab6fe;
   cursor: pointer;
 }
+.editable {
+  min-height: 100px;
+  border: 1px dashed #ffff;
+  padding: 5px;
+  resize: none;
+}

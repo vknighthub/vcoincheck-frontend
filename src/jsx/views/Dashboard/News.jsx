@@ -75,7 +75,7 @@ const News = (props) => {
                 </Card.Header>
                 <Card.Body>
                   <Card.Text className="text-content subtitle">
-                    <CutText content={news.summary} start={0} end={150} />
+                    {news.summary && <CutText content={news.summary} start={0} end={150} /> }
                   </Card.Text>
                 </Card.Body>
               </Card>

@@ -10,26 +10,34 @@ import Advanced from './viewdetails/Advanced';
 import Basic from './viewdetails/Basic';
 import Expert from './viewdetails/Expert';
 import Overviews from './viewdetails/Overviews';
+import { useDispatch } from 'react-redux';
+import { setLikeReviewAction } from './../../../../store/actions/ReviewAction';
 
 
 
 const ProjectReviewed = (props) => {
-    const { reviewid, user, overview, basicquestion, advancequestion, expertquestion, islike, scorereviews, numberoflike} = props;
+    const { reviewid, user, overview, basicquestion, advancequestion, expertquestion, islike, scorereviews, numberoflike } = props;
     const [liked, setLiked] = useState(islike);
     const [activeToggle, setActiveToggle] = useState("");
     const [contentLike, setContentLike] = useState('');
+    const dispatch = useDispatch();
 
 
     useEffect(() => {
         props.fetchReview(reviewid, user.username)
         setActiveToggle(props.activereviewed)
-    }, [reviewid, user.username,props.activereviewed])
+    }, [reviewid, user.username, props.activereviewed])
 
-    const handleClickLike = (like, numberLike) => {
+    const handleClickLike = (review, user, like, numberLike) => {
         if (like) {
             setLiked(false)
             setContentLike(numberLike + ' people liked')
         } else {
+            const postdata = {
+                reviewid: review,
+                username: user
+            }
+            dispatch(setLikeReviewAction(postdata));
             setLiked(true)
             setContentLike('You and ' + numberLike + ' others people')
         }
@@ -54,7 +62,7 @@ const ProjectReviewed = (props) => {
                                 </div>
                             </div>
                             <div className="col-xl-3 col-lg-6  col-md-6 col-xxl-5 ">
-                                <Link to="#" onClick={() => handleClickLike(liked, numberoflike)}><i className={`fa fa-thumbs-up fs-18 mr-3 ${liked ? 'text-success' : ''}`}> Like</i></Link>
+                                <Link to="#" onClick={() => handleClickLike(reviewid, user.username, liked, numberoflike)}><i className={`fa fa-thumbs-up fs-18 mr-3 ${liked ? 'text-success' : ''}`}> Like</i></Link>
                                 <span className="item fs-14 mx-3">{contentLike}</span>
                             </div>
                         </div>

@@ -1,7 +1,7 @@
 
-const ProjectSvg = (props) => {
+const ProjectSvg = ({image,width,height,...rest}) => {
     return (
-        props.image && <img className="img-fluid" width={props.width} height={props.height} src={props.image} alt="" />
+        image && <img className="img-fluid" width={width} height={height} src={image} {...rest} alt=""/>
     )
 }
 export default ProjectSvg

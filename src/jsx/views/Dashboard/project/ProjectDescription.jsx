@@ -53,33 +53,35 @@ const ProjectDescription = (props) => {
 								<div className="col-xl-9 col-lg-6  col-md-6 col-xxl-7 col-sm-12">
 									<div className="product-detail-content">
 										{/*Product details*/}
-										<div className="new-arrival-content pr">
-											<h4>{project.proname}</h4>
-											<div className="comment-review star-rating">
-												<ul id="stars"
-													className="d-flex justify-content-center align-items-center">
-													{t('scoring')}
-												</ul>
-												<div className="d-table mb-2">
-													<p className="price float-left d-block">{project.scores}</p>
-												</div>
-												{!login ?
-													<>
-														<span className="review-text">({project.totalreview}) / </span>
-														<Link onClick={() => checklogin(login, props.history)} to="#" className="product-review">{t('review')}?</Link>
-													</>
-													:
-													null
-												}
+										<div className="new-arrival-content pr row">
+											<div className="col-xl-6 col-lg-6  col-md-6 col-xxl-6 ">
+												<h1>{project.proname}</h1>
+												<p>{t('projectcode')}: <span className="item ml-3">{project.procd}</span>{" "}</p>
+												<p>{t('categories')} : <span className="item ml-3">{project.protype}</span></p>
+												<p>
+													{t('ecosystem')}:&nbsp;&nbsp;
+													<span className="badge badge-success light mr-1">{project.Ecosystem}</span>
+												</p>
 											</div>
-
-											<p>{t('projectcode')}: <span className="item ml-3">{project.procd}</span>{" "}</p>
-											<p>{t('categories')} : <span className="item ml-3">{project.protype}</span></p>
-											<p>
-												{t('ecosystem')}:&nbsp;&nbsp;
-												<span className="badge badge-success light mr-1">{project.Ecosystem}</span>
-											</p>
-											<span className="text-content">
+											<div className="col-xl-6 col-lg-6  col-md-6 col-xxl-6 ">
+												<div className="row">
+													<div className="col-xl-6 col-lg-6  col-md-6 col-xxl-6 ">
+														<p>{t('projectscore')}: <span className="item ml-3">{project.scores}</span>{" "}</p>
+														<p>{t('projectquality')}: <span className="item ml-3">{project.scores}</span>{" "}</p>
+														<p>{t('noofreviewed')}: <span className="item ml-3">{project.totalreview}</span>{" "}</p>
+													</div>
+													<div className="col-xl-6 col-lg-6  col-md-6 col-xxl-6 ">
+														{!login ?
+															<>
+																<Link onClick={() => checklogin(login, props.history)} to="#" className="btn btn-success product-review">{t('review')}?</Link>
+															</>
+															:
+															null
+														}
+													</div>
+												</div>
+											</div>
+											<span className="text-content ml-3">
 												{parse(project.prodescr)}
 											</span>
 										</div>

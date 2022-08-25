@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-export const getPostById = (state, postId) => 
-    state.posts.posts.find((post) => post.id === postId);
+export const getLibraryByName = (state, name) => 
+    state.library.find((library) => library.name === name);
 
-export const getPost = () => createSelector([getPostById], (post) => post);
+export const getPost = () => createSelector([getLibraryByName], (library) => library);

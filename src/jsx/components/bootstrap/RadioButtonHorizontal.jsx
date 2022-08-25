@@ -26,7 +26,7 @@ const RadioButtonHorizontal = (props) => {
                                             value={option.value}
                                             checked={field.value === option.value || answer === option.value ? true : false}
                                         />
-                                        <label htmlFor={option.value}>{key}</label>
+                                        <label className='ml-1' htmlFor={option.value}>{key}</label>
                                     </label>
                                 </React.Fragment>
                             );

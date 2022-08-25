@@ -12,6 +12,7 @@ import UserReviewed from "./UserReviewed";
 export const UserProfile = (props) => {
     const { t } = props;
     const user = props.users;
+    console.log(user);
 
     const [activeToggle, setActiveToggle] = useState("review");
     const [sendMessage, setSendMessage] = useState(false);
@@ -215,10 +216,10 @@ export const UserProfile = (props) => {
                                     </li>
                                 </ul>
                                 <div className="tab-content">
-                                    <div id="my-review" className={`tab-pane fade ${activeToggle === "review" ? "active show" : ""}`} >
+                                    <div id="my-posts" className={`tab-pane fade ${activeToggle === "review" ? "active show" : ""}`} >
                                         <div className="my-post-content pt-3">
                                             <div className="profile-uoloaded-post border-bottom-1 pb-5">
-                                                <UserReviewed />
+                                                <UserReviewed project = {user.project_list}/>
                                             </div>
 
                                             {/* Modal */}

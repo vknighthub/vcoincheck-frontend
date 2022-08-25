@@ -3,7 +3,7 @@ import { ErrorMessage, Field } from 'formik';
 import TextError from './TextError';
 
 const Texteditor = (props) => {
-    const { label, name } = props
+    const { label, name, contents, ...rest } = props
     return (
         <div className='form-group' key={name}>
             <label htmlFor={name}>{label}</label>
@@ -31,7 +31,9 @@ const Texteditor = (props) => {
                                     onEditorChange={(content) => {
                                         form.setFieldValue(name, content)
                                     }}
+                                    initialValue={contents}
                                     name={name}
+                                    {...rest}
                                 />
                             </>
                         )

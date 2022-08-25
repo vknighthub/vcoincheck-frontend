@@ -36,7 +36,10 @@ const ReviewList = (props) => {
 										<strong>{t('reviewdate')}</strong>
 									</th>
 									<th>
-										<strong>{t('reviewscore')}</strong>
+										<strong>{t('projectscore')}</strong>
+									</th>
+									<th>
+										<strong><i className={`fa fa-thumbs-up fs-18 mr-3 text-success`}> Like</i></strong>
 									</th>
 									<th></th>
 								</tr>
@@ -51,6 +54,7 @@ const ReviewList = (props) => {
 										<td>{review.username}</td>
 										<td>{review.reviewdate}</td>
 										<td>{review.scores}</td>
+										<td>{review.likes}</td>
 										<td>
 											<Link onClick={() => props.checkView()}
 												to="#"

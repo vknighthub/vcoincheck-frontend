@@ -5,11 +5,16 @@ import storage from 'redux-persist-indexeddb-storage';
 import thunk from 'redux-thunk';
 import { AuthReducer } from './reducers/AuthReducer';
 import BKReducer from './reducers/BKReducer';
+import CAKReducer from './reducers/CAKReducer';
 import CKReducer from './reducers/CKReducer';
 import DictionaryReducer from './reducers/DictionaryReducer';
 import ECosystemReducer from './reducers/ECosystemReducer';
 import FAQsReducer from './reducers/FAQsReducer';
 import HotProjectReducer from './reducers/HotProjectReducer';
+import LibraryDetailsReducer from './reducers/LibraryDetailsReducer';
+import LibraryReducer from './reducers/LibraryReducer';
+import LibraryTopReducer from './reducers/LibraryTopReducer';
+import NewsReducer from './reducers/NewsReducer';
 import ProjectDetailReducer from './reducers/ProjectDetailReducer';
 import ProjectManagementReducer from './reducers/ProjectManagementReducer';
 import ProjectsReducer from './reducers/ProjectReducer';
@@ -21,7 +26,7 @@ import ReviewReducer from './reducers/ReviewReducer';
 import TopProjectReducer from './reducers/TopProjectReducer';
 import UsersReducer from './reducers/UserReducer';
 import UserRoleReducer from './reducers/UserRoleReducer';
-import NewsReducer from './reducers/NewsReducer'
+import LibraryNewTopicReducer from './reducers/LibraryNewTopicReducer';
 
 const middleware = applyMiddleware(thunk);
 
@@ -45,6 +50,11 @@ const reducers = combineReducers({
     dictionary: DictionaryReducer,
     cardanoknowledge: CKReducer,
     blockchainknowledge: BKReducer,
+    catalystknowledge: CAKReducer,
+    library: LibraryReducer,
+    toplibrary: LibraryTopReducer,
+    newtopiclibrary: LibraryNewTopicReducer,
+    librarydetail: LibraryDetailsReducer,
     reviewuserlist: ReviewListByUserProjectReducer,
     faqs: FAQsReducer,
     news: NewsReducer,
