@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
-import { SRLWrapper } from "simple-react-lightbox";
-import { default as profile01, default as profile02, default as profile03, default as profile04, default as profile05, default as profile06, default as profile07 } from "../../../../../images/profile/profile.png";
+import { default as profile05, default as profile06, default as profile07 } from "../../../../../images/profile/profile.png";
 import { UserDetails } from "../../../../../store/selectors/AuthSelectors";
 import ProfileSetting from './ProfileSetting';
 import UserReviewed from "./UserReviewed";
@@ -12,19 +11,9 @@ import UserReviewed from "./UserReviewed";
 export const UserProfile = (props) => {
     const { t } = props;
     const user = props.users;
-    console.log(user);
 
     const [activeToggle, setActiveToggle] = useState("review");
-    const [sendMessage, setSendMessage] = useState(false);
-
-
     const [replayModal, setReplayModal] = useState(false);
-
-    const options = {
-        settings: {
-            overlayColor: "#000000",
-        },
-    };
 
     return (
         <div className="row">
@@ -37,121 +26,26 @@ export const UserProfile = (props) => {
                                     <div className="text-center">
                                         <div className="row">
                                             <div className="col">
-                                                <h3 className="m-b-0">4</h3><span>{t('reputation')}</span>
+                                                <h3 className="m-b-0">{user.project_list.length}</h3><span>{t('project')}</span>
                                             </div>
                                             <div className="col">
-                                                <h3 className="m-b-0">140</h3> <span>{t('evaluation')}</span>
+                                                <h3 className="m-b-0">{user.list_review.length}</h3> <span>{t('review')}</span>
                                             </div>
                                             <div className="col">
                                                 <h3 className="m-b-0">{user.scores}</h3> <span>{t('points')}</span>
                                             </div>
                                         </div>
                                     </div>
-                                    {/* send Modal */}
-                                    <Modal className="modal fade" show={sendMessage}>
-                                        <div className="modal-content">
-                                            <div className="modal-header">
-                                                <h5 className="modal-title">Send Message</h5>
-                                                <Button variant="" type="button" className="close" data-dismiss="modal" onClick={() => setSendMessage(false)}>
-                                                    <span>×</span>
-                                                </Button>
-                                            </div>
-                                            <div className="modal-body">
-                                                <form className="comment-form" onSubmit={(e) => { e.preventDefault(); setSendMessage(false); }}>
-                                                    <div className="row">
-                                                        <div className="col-lg-6">
-                                                            <div className="form-group">
-                                                                <label htmlFor="author" className="text-black font-w600">  Name <span className="required">*</span> </label>
-                                                                <input type="text" className="form-control" defaultValue="Author" name="Author" placeholder="Author" />
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-lg-6">
-                                                            <div className="form-group">
-                                                                <label htmlFor="email" className="text-black font-w600"> Email <span className="required">*</span></label>
-                                                                <input type="text" className="form-control" defaultValue="Email" placeholder="Email" name="Email" />
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-lg-12">
-                                                            <div className="form-group">
-                                                                <label htmlFor="comment" className="text-black font-w600">Comment</label>
-                                                                <textarea rows={8} className="form-control" name="comment" placeholder="Comment" defaultValue={""} />
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-lg-12">
-                                                            <div className="form-group">
-                                                                <input type="submit" value="Post Comment" className="submit btn btn-primary" name="submit" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </Modal>
+
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div className="col-lg-12">
                         <div className="card">
                             <div className="card-header border-0 pb-0">
-                                <h5 className="text-black">Today Highlights</h5>
-                            </div>
-                            <div className="card-body pt-3"	>
-                                <div className="profile-blog ">
-                                    <img src={profile01} alt="profile" className="img-fluid  mb-4 w-100" />
-                                    <Link to="/post-details"> <h4>Darwin Creative Agency Theme</h4> </Link>
-                                    <p className="mb-0">
-                                        A small river named Duden flows by their place and supplies
-                                        it with the necessary regelialia. It is a paradisematic
-                                        country, in which roasted parts of sentences fly into your
-                                        mouth.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-12">
-                        <div className="card">
-                            <div className="card-header border-0 pb-0">
-                                <h5 className="text-black ">Interest</h5>
-                            </div>
-                            <div className="card-body pt-3">
-                                <div className="profile-interest ">
-                                    <SRLWrapper options={options}>
-                                        <div className="row sp4">
-                                            <div className="col-lg-4 col-xl-4 col-sm-4 col-6 int-col mb-1">
-                                                <a href={profile02}> <img src={profile02} alt="profileImage" className="img-fluid" /> </a>
-                                            </div>
-                                            <div className="col-lg-4 col-xl-4 col-sm-4 col-6 int-col mb-1">
-                                                <a href={profile03}> <img src={profile03} alt="profile" className="img-fluid" /></a>
-                                            </div>
-                                            <div className="col-lg-4 col-xl-4 col-sm-4 col-6 int-col mb-1">
-                                                <a href={profile04}><img src={profile04} alt="profile" className="img-fluid" /> </a>
-                                            </div>
-                                            <div className="col-lg-4 col-xl-4 col-sm-4 col-6 int-col mb-1">
-                                                {" "}
-                                                <a href={profile02}><img src={profile02} alt="profile" className="img-fluid" /> </a>
-                                            </div>
-                                            <div className="col-lg-4 col-xl-4 col-sm-4 col-6 int-col mb-1">
-                                                <a href={profile03} className="col-lg-4 col-xl-4 col-sm-4 col-6 int-col" >
-                                                    <img src={profile03} alt="profile" className="img-fluid" />
-                                                </a>
-                                            </div>
-                                            <div className="col-lg-4 col-xl-4 col-sm-4 col-6 int-col mb-1">
-                                                <a href={profile04} className="col-lg-4 col-xl-4 col-sm-4 col-6 int-col">
-                                                    <img src={profile04} alt="profile" className="img-fluid" />
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </SRLWrapper>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-12">
-                        <div className="card">
-                            <div className="card-header border-0 pb-0">
-                                <h5 className="text-black">Our Latest News</h5>
+                                <h5 className="text-black">My Latest Library</h5>
                             </div>
                             <div className="card-body pt-3">
                                 <div className="profile-news">
@@ -205,8 +99,8 @@ export const UserProfile = (props) => {
                         <div className="profile-tab">
                             <div className="custom-tab-1">
                                 <ul className="nav nav-tabs">
-                                    <li className="nav-item" onClick={() => setActiveToggle("posts")}>
-                                        <Link to="#my-posts" data-toggle="tab" className={`nav-link ${activeToggle === "review" ? "active show" : ""}`}>{t('myreview')}</Link>
+                                    <li className="nav-item" onClick={() => setActiveToggle("review")}>
+                                        <Link to="#my-review" data-toggle="tab" className={`nav-link ${activeToggle === "review" ? "active show" : ""}`}>{t('myreview')}</Link>
                                     </li>
                                     <li className="nav-item" onClick={() => setActiveToggle("aboutMe")}>
                                         <Link to="#about-me" data-toggle="tab" className={`nav-link ${activeToggle === "aboutMe" ? "active show" : ""}`}>{t('aboutme')}</Link>
@@ -216,10 +110,10 @@ export const UserProfile = (props) => {
                                     </li>
                                 </ul>
                                 <div className="tab-content">
-                                    <div id="my-posts" className={`tab-pane fade ${activeToggle === "review" ? "active show" : ""}`} >
+                                    <div id="my-review" className={`tab-pane fade ${activeToggle === "review" ? "active show" : ""}`} >
                                         <div className="my-post-content pt-3">
                                             <div className="profile-uoloaded-post border-bottom-1 pb-5">
-                                                <UserReviewed project = {user.project_list}/>
+                                                <UserReviewed project={user.list_review} user={user} />
                                             </div>
 
                                             {/* Modal */}

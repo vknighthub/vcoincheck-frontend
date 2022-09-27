@@ -7,7 +7,6 @@ import { getEcosystemAction } from './../../../../store/actions/ProjectAction';
 const EcosystemList = (props) => {
 
     const { t, listecosystem } = props
-
     useEffect(() => {
         props.fetchEcosystem();
     }, [])

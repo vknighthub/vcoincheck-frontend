@@ -15,6 +15,7 @@ export const CommentSection = ({
   maxDeep,
   t
 }) => {
+
   const [comments, setComments] = useState(commentsArray)
   useEffect(() => {
     setComments(commentsArray)

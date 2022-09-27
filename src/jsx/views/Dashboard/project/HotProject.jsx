@@ -15,7 +15,7 @@ const HotProject = ({ project, index }) => {
     }
 
     const quality = GetContentLanguage(currentLanguageCode, project.quality)
-    const colorQuality = ColorQuality(currentLanguageCode,quality)
+    const colorQuality = ColorQuality(currentLanguageCode, quality)
 
     return (
         <tr style={{ cursor: `pointer` }} onClick={() => handleRowClick(project.proname)}>
@@ -35,11 +35,7 @@ const HotProject = ({ project, index }) => {
             <td className="font-w500">{project.Ecosystem}</td>
             <td className="font-w600 ">{project.protype}</td>
             <td>
-                <span
-                    className={`btn-link ${colorQuality} float-center`}
-                >
-                    {quality}
-                </span>
+                {colorQuality}
             </td>
             <td>{project.totalreview}</td>
             <td>{project.modifydate}</td>

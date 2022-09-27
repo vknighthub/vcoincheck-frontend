@@ -32,6 +32,11 @@ export const COLUMNSFILTER = [
 		Footer: 'Hệ sinh thái',
 		accessor: 'Ecosystem',
 		Filter: ColumnFilter,
+		Cell: (props) => (
+			<Link to={`/project/ecosystem/${btoa(props.row.original.Ecosystemcd)}`} className="text-info">
+				{props.row.original.Ecosystem}
+			</Link>
+		),
 	},
 	{
 		Header: 'Loại dự án',
@@ -49,15 +54,10 @@ export const COLUMNSFILTER = [
 		Header: 'Chất lượng',
 		Footer: 'Chất lượng',
 		Cell: (props) => {
-			const lang = localStorage.getItem('i18nextLng')
-			const quality = GetContentLanguage(lang, props.row.original.quality)
-			const colorQuality = ColorQuality(lang,quality)
+			const quality = GetContentLanguage(localStorage.getItem('i18nextLng'), props.row.original.quality)
+			const colorquality = ColorQuality(localStorage.getItem('i18nextLng'), quality)
 			return (
-				<span className={`btn-link ${colorQuality} float-center`
-					}
-				>
-					{quality}
-				</span>
+				colorquality
 			)
 		}
 	}

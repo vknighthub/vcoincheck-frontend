@@ -1,15 +1,18 @@
+import { Web3ReactProvider } from "@web3-react/core";
 import React from "react";
+import "react-alice-carousel/lib/alice-carousel.css";
 import ReactDOM from "react-dom";
-import App from "./App";
-import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import store from './store/store';
-import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter } from 'react-router-dom';
+import { PersistGate } from "redux-persist/lib/integration/react";
 import SimpleReactLightbox from "simple-react-lightbox";
+import App from "./App";
 import ThemeContext from "./context/ThemeContext";
 import './i18n';
-import { PersistGate } from "redux-persist/lib/integration/react";
-import { persistor } from "./store/store"
+import CryptoContext from './jsx/views/Dashboard/market/CryptoContext';
+import reportWebVitals from "./reportWebVitals";
+import store, { persistor } from './store/store';
+import getLibrary from './utils/GetLibrary';
 
 ReactDOM.render(
     <React.StrictMode>
@@ -18,7 +21,11 @@ ReactDOM.render(
                 <SimpleReactLightbox>
                     <BrowserRouter basename='/'>
                         <ThemeContext>
-                            <App />
+                            <Web3ReactProvider getLibrary={getLibrary}>
+                                <CryptoContext>
+                                    <App />
+                                </CryptoContext>
+                            </Web3ReactProvider>
                         </ThemeContext>
                     </BrowserRouter>
                 </SimpleReactLightbox>

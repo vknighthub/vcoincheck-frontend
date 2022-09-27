@@ -1,19 +1,25 @@
-import { Fragment, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from "react";
+import { useTranslation, withTranslation } from "react-i18next";
 import { connect, useDispatch } from 'react-redux';
 import Swal from 'sweetalert2';
-import { updateStatusUserAction } from "../../../../store/actions/UserAction";
-import { getUserByUsername } from "../../../../store/selectors/UserSelectors";
+import { getUserDetailAction, updateStatusUserAction } from "../../../../store/actions/UserAction";
 import PageTitle from "../../../layouts/PageTitle";
 import Avatar from './../../../components/svg/User/Avatar';
+import UserRolePermit from "./UserRolePermit";
 
 
 const UserProfile = (props) => {
 	const dispatch = useDispatch();
-	const user = props.users;
+	const { t } = useTranslation();
+
+	const user = props.userdetail;
+
 	const [hideApprove, setHideApprove] = useState(false)
 	const [hideBlocked, setHideBlocked] = useState(false)
 	const [hideUnBlocked, setUnHideBlocked] = useState(false)
 	const [userStatus, setUserStatus] = useState(null)
+	const [apply, setApply] = useState(false)
 
 	const getStatusType = (status) => {
 		switch (status) {
@@ -58,10 +64,10 @@ const UserProfile = (props) => {
 			showCancelButton: true,
 		}).then((result) => {
 			if (result.value) {
-				
-					dispatch(updateStatusUserAction(postData))
-					setHideApprove(true)
-					setUserStatus('N')
+
+				dispatch(updateStatusUserAction(postData))
+				setHideApprove(true)
+				setUserStatus('N')
 			}
 		});
 	}
@@ -113,9 +119,16 @@ const UserProfile = (props) => {
 		});
 	}
 
+	useEffect(() => {
+		const data = {
+			username: props.match.params.username
+		}
+		props.fetchUserDetails(data);
+	}, [props.match.params.username, apply])
+
 	return (
-		<Fragment>
-			<PageTitle activeMenu="User active" motherMenu="User Management" path="user-list"/>
+		<>
+			<PageTitle activeMenu="User active" motherMenu="User Management" path="user-list" />
 			<div className="row">
 				<div className="col-xl-4">
 					<div className="row">
@@ -132,7 +145,7 @@ const UserProfile = (props) => {
 														className="img-fluid rounded-circle"
 														alt="profile"
 														width={300}
-													/> : <Avatar width={300} height={300}/>
+													/> : <Avatar width={300} height={300} />
 												}
 											</div>
 											<div className="profile-photo pb-5">
@@ -142,13 +155,13 @@ const UserProfile = (props) => {
 											</div>
 											<div className="row">
 												<div className="col">
-													<h3 className="m-b-0">4</h3><span>Reputation</span>
+													<h3 className="m-b-0">{user.project_list.length}</h3><span>{t('project')}</span>
 												</div>
 												<div className="col">
-													<h3 className="m-b-0">140</h3> <span>Evaluation</span>
+													<h3 className="m-b-0">{user.list_review.length}</h3> <span>{t('review')}</span>
 												</div>
 												<div className="col">
-													<h3 className="m-b-0">{user.scores}</h3> <span>Point</span>
+													<h3 className="m-b-0">{user.scores}</h3> <span>{t('points')}</span>
 												</div>
 											</div>
 										</div>
@@ -202,51 +215,7 @@ const UserProfile = (props) => {
 												</div>
 											</div>
 											<div className='form-group mt-5'>
-												<div className='form-check form-check-inline'>
-													<label className='form-check-label'>
-														<input
-															type='checkbox'
-															className='form-check-input'
-															value=''
-															checked
-															disabled
-														/>
-														Admin web
-													</label>
-												</div>
-												<div className='form-check form-check-inline'>
-													<label className='form-check-label'>
-														<input
-															type='checkbox'
-															className='form-check-input'
-															value=''
-															disabled
-														/>
-														Moderator project
-													</label>
-												</div>
-												<div className='form-check form-check-inline disabled'>
-													<label className='form-check-label'>
-														<input
-															type='checkbox'
-															className='form-check-input'
-															value=''
-															disabled
-														/>
-														Moderator library
-													</label>
-												</div>
-												<div className='form-check form-check-inline disabled'>
-													<label className='form-check-label'>
-														<input
-															type='checkbox'
-															className='form-check-input'
-															value=''
-															disabled
-														/>
-														Moderator community
-													</label>
-												</div>
+												<UserRolePermit rolelist={user.role_list} username={user.username} setApply={setApply} />
 											</div>
 											<div className='form-group mt-5'>
 												{showButton(user.username, userStatus ? userStatus : user.status)}
@@ -260,14 +229,20 @@ const UserProfile = (props) => {
 					</div>
 				</div>
 			</div>
-		</Fragment>
+		</>
 	);
 };
 
-const mapStateToProps = (state, ownProps) => ({
-	users: getUserByUsername(state, ownProps.match.params.username)
+const mapStateToProps = (state) => ({
+	userdetail: state.userdetail
 })
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = (dispatch) => {
+	return {
+		fetchUserDetails: (postData) => {
+			dispatch(getUserDetailAction(postData))
+		}
+	}
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
+export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(UserProfile));

@@ -50,6 +50,26 @@ export function changeAvatarUser(postData) {
     );
 }
 
+export function getUserDetail(postData) {
+    return axiosInstance.post(
+        `/${process.env.REACT_APP_GET_USER_DETAIL_ENDPOINT}`,
+        postData
+    );
+}
+
+export function setUserRoleForUser(postData) {
+    return axiosInstance.post(
+        `/${process.env.REACT_APP_SET_USER_ROLE_ENDPOINT}`,
+        postData
+    );
+}
+export function removeUserRoleForUser(postData) {
+    return axiosInstance.post(
+        `/${process.env.REACT_APP_REMOVE_USER_ROLE_ENDPOINT}`,
+        postData
+    );
+}
+
 
 export function formatData(data) {
     let list = [];

@@ -31809,6 +31809,11 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
   margin: 5px;
 }
 
+.fc { /* the calendar root */
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
 
 
 /*# sourceMappingURL=style.css.map */

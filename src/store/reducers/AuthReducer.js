@@ -89,7 +89,7 @@ const routes = [
     "/catalyst-knowledge/:name"
 ]
 
-const project = [
+const review = [
     {
         project_info: '',
         review_info: []
@@ -120,7 +120,8 @@ const initialState = {
             avatar: '',
             routes: routes,
             menu: menu,
-            project_list: project,
+            project_list: [],
+            list_review: review,
         },
         localId: '',
         expiresIn: '',

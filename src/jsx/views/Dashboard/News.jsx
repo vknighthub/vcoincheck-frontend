@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 /// Bootstrap
 import { Card, Col, Row } from 'react-bootstrap';
 import { Link, NavLink } from 'react-router-dom';
@@ -12,12 +12,13 @@ import { getNewsAction } from '../../../store/actions/EventsAction';
 import { isAuthenticated } from '../../../store/selectors/AuthSelectors';
 import CutText from '../../../utils/CutText';
 import PageTitle from '../../layouts/PageTitle';
+import SearchInput, { createFilter } from 'react-search-input'
 
 
 
 const getImage = (image) => {
   if (image) {
-    return <img className="card-img-top img-fluid" src={image} alt="" />
+    return <img className="card-img-top img-block" src={image} alt="" />
   }
 }
 
@@ -31,6 +32,14 @@ const News = (props) => {
     props.fetchListNews();
   }, [])
 
+  const [search, setSearch] = useState('')
+  const searchUpdated = (term) => {
+    setSearch(term)
+  }
+  const KEYS_TO_FILTERS = ['title']
+
+  const filtered = newslist.filter(createFilter(search, KEYS_TO_FILTERS))
+
   return (
     <Fragment>
       <PageTitle activeMenu={t('news')} motherMenu={t('event')} path={"event/news"} />
@@ -42,11 +51,8 @@ const News = (props) => {
               <i className="flaticon-381-search-2" />
             </span>
           </div>
-          <input
-            type="text"
-            className="form-control"
-            placeholder={t('search')}
-          />
+          <SearchInput type="text" inputClassName="form-control" placeholder={t('search')} onChange={searchUpdated} />
+
         </div>
         {displayAction &&
           <Link to="/event/news/addnews" className="btn btn-primary ml-auto">
@@ -56,13 +62,13 @@ const News = (props) => {
       </div>
 
       <Row>
-        {newslist.map((news, index) => (
+        {filtered.map((news, index) => (
           <Col xl='4' key={index}>
             <NavLink to={`${props.match.url}/details/${news.name}`} className='float-right'>
               <Card className='mb-3'>
                 {getImage(news.image)}
                 <Card.Header>
-                  <Card.Title className="fs-14 text-black">
+                  <Card.Title className="fs-14 text-black" style={{ minHeight: "120px" }}>
                     <h4>{news.title}</h4>
                     <div className="media mt-4">
                       <img src={profile} alt="" className="mr-3 rounded" width={25} />
@@ -73,9 +79,9 @@ const News = (props) => {
                     </div>
                   </Card.Title>
                 </Card.Header>
-                <Card.Body>
+                <Card.Body style={{ minHeight: "150px" }}>
                   <Card.Text className="text-content subtitle">
-                    {news.summary && <CutText content={news.summary} start={0} end={150} /> }
+                    {news.summary && <CutText content={news.summary} start={0} end={150} />}
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -98,7 +104,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchListNews: () => {
-      dispatch(getNewsAction())
+      dispatch(getNewsAction(dispatch))
     }
   }
 }

@@ -37,12 +37,22 @@ export const COLUMNSFILTER = [
 		Footer: 'Ecosystem',
 		accessor: 'Ecosystem',
 		Filter: ColumnFilter,
+		Cell: (props) => (
+			<Link to={`/project/ecosystem/${btoa(props.row.original.Ecosystemcd)}`} className="text-info">
+				{props.row.original.Ecosystem}
+			</Link>
+		),
 	},
 	{
 		Header: 'Categories',
 		Footer: 'Categories',
 		accessor: 'protype',
 		Filter: ColumnFilter,
+		Cell: (props) => (
+			<Link to={`/project/protype/${btoa(props.row.original.protypecd)}`} className="text-info">
+				{props.row.original.protype}
+			</Link>
+		),
 	},
 	{
 		Header: 'No of viewed',
@@ -55,12 +65,9 @@ export const COLUMNSFILTER = [
 		Footer: 'Quality',
 		Cell: (props) => {
 			const quality = GetContentLanguage(localStorage.getItem('i18nextLng'), props.row.original.quality)
+			const colorquality = ColorQuality(localStorage.getItem('i18nextLng'), quality)
 			return (
-				<span className={`btn-link ${ColorQuality(quality)} float-center`
-				}
-				>
-					{quality}
-				</span>
+				colorquality
 			)
 		}
 	}

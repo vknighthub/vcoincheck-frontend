@@ -1,63 +1,69 @@
+import Good from "../jsx/components/vKnightHub/Tags/Good";
+import Medium from "../jsx/components/vKnightHub/Tags/Medium";
+import Risk from "../jsx/components/vKnightHub/Tags/Risk";
+import Warning from "../jsx/components/vKnightHub/Tags/Warning";
+import Excellent from './../jsx/components/vKnightHub/Tags/Excellent';
+
 const ColorQuality = (language, qualityProject) => {
     let color = ''
     if (language === 'en') {
         switch (qualityProject) {
             case 'High risk':
-                color = 'text-danger'
+                color = <Risk tag="High risk" />
                 break;
             case 'Risk':
-                color = 'text-warning'
+                color = <Warning tag="Risk" />
                 break;
             case 'Medium':
-                color = 'text-white-50'
+                color = <Medium tag="Medium" />
                 break;
             case 'Good':
-                color = 'text-good'
+                color = <Good tag="Good" />
                 break;
             case 'Excellent':
-                color = 'text-success'
+                color = <Excellent tag="Excellent" />
                 break;
-            default: color = 'text-success'
+            default: color = <Excellent tag="Excellent" />
         }
     }
     if (language === 'vn') {
         switch (qualityProject) {
             case 'Rủi ro cao':
-                color = 'text-danger'
+                color = <Risk tag="Rủi ro cao" />
                 break;
             case 'Rủi ro':
-                color = 'text-warning'
+                color = <Warning tag="Rủi ro" />
                 break;
             case 'Trung bình':
-                color = 'text-white-50'
+                color = <Medium tag="Trung bình" />
                 break;
             case 'Tốt':
-                color = 'text-good'
+                color = <Good tag="Tốt" />
                 break;
             case 'Tuyệt vời':
-                color = 'text-success'
+                color = <Excellent tag="Tuyệt vời" />
                 break;
-            default: color = 'text-success'
+            default: color = <Excellent tag="Tuyệt vời" />
         }
     }
     if (language === 'jp') {
         switch (qualityProject) {
-            case 'Rủi ro cao':
-                color = 'text-danger'
+            case 'リスクが高い':
+                color = <Risk tag="リスクが高い" />
                 break;
             case '危険':
-                color = 'text-warning'
+                color = <Warning tag="危険" />
                 break;
             case '中くらい':
-                color = 'text-white-50'
+                color = <Medium tag="中くらい" />
                 break;
             case '良い':
-                color = 'text-good'
+                color = <Good tag="良い" />
                 break;
-            case 'Tuyệt vời':
-                color = 'text-success'
+            case '優秀な':
+                color = <Excellent tag="優秀な" />
                 break;
-            default: color = 'text-success'
+            default: color = <Excellent tag="優秀な" />
         }
     }
 

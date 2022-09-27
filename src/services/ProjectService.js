@@ -108,3 +108,17 @@ export function setFeaturedProject(projectData) {
         projectData
     );
 }
+
+export function getProjectByEcosystem(postData) {
+    return axiosInstance.post(
+        `/${process.env.REACT_APP_GET_PROJECT_ECOSYSTEM}`,
+        postData
+    );
+}
+
+export function getProjectByType(postData) {
+    return axiosInstance.post(
+        `/${process.env.REACT_APP_GET_PROJECT_TYPE}`,
+        postData
+    );
+}

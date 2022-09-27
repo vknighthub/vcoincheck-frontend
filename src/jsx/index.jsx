@@ -23,13 +23,13 @@ import Register from './pages/Register'
 import './step.css'
 /// Administrator
 import ECOSystem from "./views/Administrator/ECOSystem"
+import ProjectManagement from "./views/Administrator/Project/ProjectManagement"
+import ProjectManagementAction from "./views/Administrator/Project/ProjectManagementAction"
 import ProjectType from "./views/Administrator/ProjectType"
 import Question from "./views/Administrator/Question"
 import UserProfile from './views/Administrator/UserManagement/UserProfile'
 import UserRole from "./views/Administrator/UserManagement/UserRole"
 import UserManager from "./views/Administrator/UserManager"
-import ProjectManagement from "./views/Administrator/Project/ProjectManagement"
-import ProjectManagementAction from "./views/Administrator/Project/ProjectManagementAction"
 /// App
 import BlockchainKnowledge from "./views/Dashboard/BlockchainKnowledge"
 import CardanoKnowledge from "./views/Dashboard/CardanoKnowledge"
@@ -53,21 +53,27 @@ import ForgotPassword from './pages/ForgotPassword'
 import OTPPassword from './pages/OTPPassword'
 import ReviewDetail from './views/Administrator/Review/ReviewDetail'
 import AppProfile from './views/AppsMenu/AppProfile/AppProfile'
-import BlockchainDetail from './views/Dashboard/library/Blockchain/BlockchainDetail'
-import ProjectDetail from './views/Dashboard/project/ProjectDetail'
-import ProjectReviewList from './views/Dashboard/project/ProjectReviewList'
-import SubmitProject from './views/Dashboard/project/SubmitProject'
-import AddBlockChain from './views/Dashboard/library/Cardano/AddBlockChain'
+import OwnerReviewed from './views/AppsMenu/AppProfile/Profile/Review/OwnerReviewed'
+import CatalystKnowledge from './views/Dashboard/CatalystKnowledge'
 import CommunityDetail from './views/Dashboard/Community/CommunityDetail'
-import News from './views/Dashboard/News'
+import Ecosystem from './views/Dashboard/Ecosystem'
 import AddNews from './views/Dashboard/events/news/AddNews'
 import NewsDetail from './views/Dashboard/events/news/NewsDetail'
 import Library from './views/Dashboard/Library'
 import AddLibrary from './views/Dashboard/library/AddLibrary'
+import BlockchainDetail from './views/Dashboard/library/Blockchain/BlockchainDetail'
+import AddBlockChain from './views/Dashboard/library/Cardano/AddBlockChain'
+import CatalystDetail from './views/Dashboard/library/Catalyst/CatalystDetail'
 import LibraryManagement from './views/Dashboard/library/LibraryManagement'
 import PostLibraryLang from './views/Dashboard/library/PostLibraryLang'
-import CatalystKnowledge from './views/Dashboard/CatalystKnowledge'
-import CatalystDetail from './views/Dashboard/library/Catalyst/CatalystDetail'
+import News from './views/Dashboard/News'
+import ProjectDetail from './views/Dashboard/project/ProjectDetail'
+import ProjectReviewList from './views/Dashboard/project/ProjectReviewList'
+import SubmitProject from './views/Dashboard/project/SubmitProject'
+import ProjectByType from './views/Dashboard/ProjectByType'
+import FileManagement from './views/Dashboard/FileManagement'
+import FileDetails from './views/Dashboard/FileDetails'
+import CoinPage from './views/Dashboard/market/CoinPage'
 
 
 const Markup = (props) => {
@@ -91,6 +97,7 @@ const Markup = (props) => {
     { url: 'community', component: Community },
     { url: 'submit-project', component: SubmitProject },
     { url: 'library', component: Library },
+    { url: 'file-management', component: FileManagement },
 
 
 
@@ -125,9 +132,11 @@ const Markup = (props) => {
     { url: 'page-error-cors', component: ErrorCors },
 
     { url: 'ecom-project-detail/:proname', component: ProjectDetail },
+    { url: 'owner-project-review-detail/:reviewid&:username', component: OwnerReviewed },
+
     { url: 'community-details/:name', component: CommunityDetail },
 
-    /// Cardano Knowledge - Detail
+    /// Library - Detail
     { url: 'cardano-knowledge/:name', component: CardanoDetail },
     { url: 'blockchain-knowledge/:name', component: BlockchainDetail },
     { url: 'catalyst-knowledge/:name', component: CatalystDetail },
@@ -136,10 +145,21 @@ const Markup = (props) => {
     { url: 'library/post-library', component: AddLibrary },
 
 
+    /// Project
+    { url: 'project/ecosystem/:ecocode', component: Ecosystem },
+    { url: 'project/protype/:protypecd', component: ProjectByType },
+
     /// Events
     { url: 'event/news', component: News },
     { url: 'event/news/details/:name', component: NewsDetail },
-    { url: 'event/news/addnews', component: AddNews }
+    { url: 'event/news/addnews', component: AddNews },
+
+    /// Market info
+    { url: 'market-info/coins/:id', component: CoinPage },
+
+
+    /// Files
+    { url: 'file-management/:name', component: FileDetails },
 
   ]
 

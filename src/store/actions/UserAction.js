@@ -1,11 +1,11 @@
 import swal from 'sweetalert';
 import Swal from 'sweetalert2';
-import { deleteUser, formatData, formatError, getUser, getUserRole, minusScoreUser, registerUser, updateStatusUser } from '../../services/UserService';
+import { deleteUser, formatData, formatError, getUser, getUserRole, minusScoreUser, registerUser, updateStatusUser, getUserDetail, setUserRoleForUser, removeUserRoleForUser } from '../../services/UserService';
 import { changePasswordUser, changeAvatarUser } from './../../services/UserService';
 import {
     CONFIRMED_APPROVE_USER,
     CONFIRMED_CHANGE_AVATAR_USER,
-    CONFIRMED_CHANGE_PASSWORD_USER, CONFIRMED_DELETE_USER, CONFIRMED_GET_USERROLES, CONFIRMED_GET_USERS, CONFIRMED_MNUSSCORE_USER, CONFIRMED_REGISTER_USER, FAILED_REGISTER_USER, LOADING_TOGGLE_ACTION, REFUSE_CHANGE_PASSWORD_USER, REFUSE_DELETE_USER, REFUSE_MNUSSCORE_USER
+    CONFIRMED_CHANGE_PASSWORD_USER, CONFIRMED_DELETE_USER, CONFIRMED_GET_USERDETAIL, CONFIRMED_GET_USERROLES, CONFIRMED_GET_USERS, CONFIRMED_MNUSSCORE_USER, CONFIRMED_REGISTER_USER, CONFIRMED_REMOVE_ROLE_USER, CONFIRMED_SET_ROLE_USER, FAILED_REGISTER_USER, LOADING_TOGGLE_ACTION, REFUSE_CHANGE_PASSWORD_USER, REFUSE_DELETE_USER, REFUSE_MNUSSCORE_USER
 } from './types/UserType';
 
 
@@ -103,6 +103,27 @@ export function changeAvatarUserConfirmAction(data) {
     };
 };
 
+export function confirmedGetUserDetailAction(userdetail) {
+    return {
+        type: CONFIRMED_GET_USERDETAIL,
+        payload: userdetail,
+    };
+};
+
+
+export function setUserRoleConfirmAction(data) {
+    return {
+        type: CONFIRMED_SET_ROLE_USER,
+        payload: data,
+    };
+};
+
+export function removeUserRoleConfirmAction(data) {
+    return {
+        type: CONFIRMED_REMOVE_ROLE_USER,
+        payload: data,
+    };
+};
 
 export function getUsersAction(history) {
     return (dispatch) => {
@@ -136,6 +157,19 @@ export function getUserRolesAction(history) {
                     Swal.fire("Failed!", errorMessage, "error");
                 }
             }
+        });
+    };
+};
+
+
+export function getUserDetailAction(postData) {
+    return (dispatch) => {
+        getUserDetail(postData).then((response) => {
+            let userdetail = response.result;
+            dispatch(confirmedGetUserDetailAction(userdetail));
+        }).catch((error) => {
+            const errorMessage = error.response.data
+            Swal.fire("Failed!", errorMessage, "error");
         });
     };
 };
@@ -253,6 +287,41 @@ export function changeAvatarUserAction(postData) {
                     Swal.fire("Failed!", response.messagedetail, "error");
                 }
                 dispatch(changeAvatarUserConfirmAction(response));
+            })
+            .catch((error) => {
+                const errorMessage = formatError(error.response.data);
+                Swal.fire("Failed!", errorMessage, "error");
+                dispatch(deleteUserFailedAction(errorMessage));
+            });
+    };
+}
+
+
+export function setUserRoleAction(postData) {
+    return (dispatch) => {
+        setUserRoleForUser(postData)
+            .then((response) => {
+                if (response.errorcode !== 0) {
+                    Swal.fire("Failed!", response.messagedetail, "error");
+                }
+                dispatch(setUserRoleConfirmAction(response));
+            })
+            .catch((error) => {
+                const errorMessage = formatError(error.response.data);
+                Swal.fire("Failed!", errorMessage, "error");
+                dispatch(deleteUserFailedAction(errorMessage));
+            });
+    };
+}
+
+export function removeUserRoleAction(postData) {
+    return (dispatch) => {
+        removeUserRoleForUser(postData)
+            .then((response) => {
+                if (response.errorcode !== 0) {
+                    Swal.fire("Failed!", response.messagedetail, "error");
+                }
+                dispatch(removeUserRoleConfirmAction(response));
             })
             .catch((error) => {
                 const errorMessage = formatError(error.response.data);

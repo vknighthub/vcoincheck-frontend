@@ -30,6 +30,10 @@ const path_no_role = [
   '/community-details/:name',
   '/event/news/:name',
   '/library',
+  '/project/ecosystem/:ecocode',
+  '/project/protype/:protypecd',
+  '/event/news/details/:name',
+  '/market-info/coins/:id',
   '/'
 ]
 const PrivateRoute = ({ AccessPath, component: Component, ...rest }) => {

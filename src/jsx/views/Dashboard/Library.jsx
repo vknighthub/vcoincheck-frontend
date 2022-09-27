@@ -22,7 +22,7 @@ import { getNewTopicLibraryAction } from './../../../store/actions/LibraryAction
 
 const getImage = (image) => {
   if (image.length > 0) {
-    return <img className="card-img-top img-fluid" src={image} alt="" />
+    return <img className="card-img-top img-block" src={image} alt="" />
   }
 }
 
@@ -116,26 +116,31 @@ const Library = (props) => {
   return (
     <>
       <PageTitle activeMenu={t('library')} motherMenu={t('library')} path={"library"} />
+      <Row>
+        <div className="col-xl-12 col-xxl-12">
+          <div className="form-head d-flex mb-4 mb-md-5 align-items-start">
+            <div className="input-group d-inline-flex">
+              <div className="input-group-append">
+                <CircleLoader color="#641599"
+                  loading
+                  size={50}
+                  speedMultiplier={1} />
+                <span className="align-items-center  justify-content-center ml-2 mt-2 text-white">Top category</span>
+              </div>
 
-      <div className="form-head d-flex mb-4 mb-md-5 align-items-start">
-        <div className="input-group d-inline-flex">
-          <div className="input-group-append">
-            <CircleLoader color="#641599"
-              loading
-              size={50}
-              speedMultiplier={1} />
-            <span className="align-items-center  justify-content-center ml-2 mt-2 text-white">Top category</span>
-          </div>
-          {topcategory.map((category, index) => (
-            <div className="ml-5" key={index}>
-              <Link to={category.link} className="btn btn-primary ml-auto">
-                {category.title}
-              </Link>
+              {topcategory.map((category, index) => (
+                <div className="col-xl-2 ml-5 mt-2" key={index}>
+                  <Link to={category.link} className="btn-category btn-primary ml-auto">
+                    {category.title}
+                  </Link>
+
+                </div>
+              ))}
 
             </div>
-          ))}
-        </div>
-      </div>
+          </div> </div>
+
+      </Row>
 
 
       <Row>
@@ -155,7 +160,6 @@ const Library = (props) => {
                           </div>
                         </div>
                       </NavLink>
-
                     </div>
                   ))}
                 </Slider>
@@ -175,7 +179,7 @@ const Library = (props) => {
                   <Card className='mb-3'>
                     {getImage(knowledge.image)}
                     <Card.Header>
-                      <Card.Title className="fs-14 text-black">
+                      <Card.Title className="fs-14 text-black" style={{minHeight:"120px"}}>
                         <h4>{GetContentLanguage(currentLanguageCode, knowledge.title)}</h4>
                         <div className="media mt-4">
                           <img src={profile} alt="" className="mr-3 rounded" width={25} />
@@ -186,9 +190,9 @@ const Library = (props) => {
                         </div>
                       </Card.Title>
                     </Card.Header>
-                    <Card.Body>
+                    <Card.Body style={{minHeight:"100px"}}>
                       <Card.Text className="text-content subtitle">
-                        <CutText content={GetContentLanguage(currentLanguageCode, knowledge.summary)} start={0} end={150} />
+                        <CutText content={GetContentLanguage(currentLanguageCode, knowledge.summary)} start={0} end={70} />
                       </Card.Text>
                       <NavLink to={`/${GetCategory(knowledge.catid)}`} className="btn btn-tag mt-4">
                         <i className="fa fa-tag mr-2"></i>

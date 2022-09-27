@@ -47,6 +47,13 @@ export function commentLibrary(postData) {
     );
 }
 
+export function removeLibrary(postData) {
+    return axiosInstance.post(
+        `/${process.env.REACT_APP_REMOVE_LIBRARY_ENDPOINT}`,
+        postData
+    );
+}
+
 
 
 export function formatCK(cardanoknowledge) {

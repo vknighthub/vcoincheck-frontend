@@ -11,3 +11,5 @@ export const CONFIRMED_GET_ECOSYSTEM_TYPE = '[Project Action] Confirmed Get Proj
 export const CONFIRMED_APPROVE_PROJECTS = '[Project Action] Confirmed Approve Projects';
 export const CONFIRMED_REMOVE_PROJECTS = '[Project Action] Confirmed Remove Projects';
 export const CONFIRMED_SET_FEATURED_PROJECTS = '[Project Action] Confirmed Set Featured Projects';
+export const CONFIRMED_GET_PROJECTS_ECOSYSTEM = '[Project Action] Get Projects By ECOSYSTEM';
+export const CONFIRMED_GET_PROJECTS_BY_TYPE = '[Project Action] Get Projects By Type';

@@ -1,22 +1,41 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Dropdown } from "react-bootstrap";
+import { useTranslation, withTranslation } from 'react-i18next';
 import { connect, useDispatch } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
+import profile from '../../../images/profile/profile.png';
 import { logout } from "../../../store/actions/AuthActions";
 import { isAdmin, isAuthenticated } from "../../../store/selectors/AuthSelectors";
-import profile from '../../../images/profile/profile.png'
-import { withTranslation, useTranslation } from 'react-i18next';
+import { useWeb3React } from "@web3-react/core";
+import { connectors } from "../../components/vKnightHub/connector";
+import { truncateAddress } from './../../../utils/truncateAddress';
 
-function ProfilePage(props) {
+const ProfilePage = (props) => {
     const dispatch = useDispatch();
     const { t } = useTranslation();
-
+    const {
+        account,
+        activate,
+        deactivate,
+        active
+    } = useWeb3React();
     function onLogout() {
         dispatch(logout(props.history));
     }
+
+    const connectWallet = () => {
+        activate(connectors.injected);
+    }
+
+    const disconnectWallet = () => {
+        deactivate()
+    }
+
+
     if (props.isAuthenticated) {
         return (
             <>
-                <Dropdown className="nav-item dropdown header-profile ml-sm-4 ml-2">
+                <Dropdown className="nav-item dropdown header-profile ">
                     <Dropdown.Toggle
                         as="a"
                         to="#"
@@ -32,7 +51,21 @@ function ProfilePage(props) {
                         <img src={props.avatar ? props.avatar : profile} width={20} alt="" className="img-fluid" />
                     </Dropdown.Toggle>
 
-                    <Dropdown.Menu align="right" className="mt-2">
+                    <Dropdown.Menu align="right">
+                        {!active ?
+                            <Link to="#" className="dropdown-item ai-icon" onClick={() => connectWallet()}>
+                                <i className="fa fa-wallet"></i>
+                                <span className="ml-2">{t('connectwallet')}</span>
+                            </Link>
+                            :
+                            <>
+                                <Link to="#" className="dropdown-item ai-icon" onClick={() => disconnectWallet()}>
+                                    <i className="fa fa-wallet"></i>
+                                    <span className="ml-2">{truncateAddress(account)}</span>
+                                </Link>
+                            </>
+
+                        }
                         <Link to="/app-profile" className="dropdown-item ai-icon">
                             <svg
                                 id="icon-user1"

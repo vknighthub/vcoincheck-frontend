@@ -207,5 +207,8 @@
     "askcomment": "ログインまたはサインアップしてコメントを残す",
     "featured": "特徴",
     "areyousuresetfeatured": "このプロジェクトをおすすめとして設定してもよろしいですか?",
-    "successfeatured": "すごい！ プロジェクト情報がFeatured!に設定されました。 このプロジェクトはすぐにトップ 1 になります。 [OK] をクリックしてプロジェクト管理に戻ります"
+    "successfeatured": "すごい！ プロジェクト情報がFeatured!に設定されました。 このプロジェクトはすぐにトップ 1 になります。 [OK] をクリックしてプロジェクト管理に戻ります",
+    "connectwallet" : "ウォレットを接続",
+    "questionremovelibrary": "このライブラリを削除しますか?",
+    "submitremovelibrary": "ライブラリの削除を送信"
 }

@@ -2,15 +2,17 @@ import parse from 'html-react-parser';
 import { Tab } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Swal from 'sweetalert2';
+import ColorQuality from '../../../../utils/ColorQuality';
+import GetContentLanguage from '../../../../utils/GetContentLanguage';
 import ProjectSvg from '../../../components/svg/Project/ProjectSvg';
-
-
 
 
 const ProjectDescription = (props) => {
 	const login = props.isAuthenticated;
 	const project = props.project
 	const t = props.t
+	const i18nextLng = localStorage.getItem('i18nextLng')
+	const currentLanguageCode = i18nextLng || 'en'
 
 	const checklogin = (isLogin, history) => {
 		if (!isLogin) {
@@ -30,6 +32,9 @@ const ProjectDescription = (props) => {
 			})
 		}
 	}
+
+	const quality = GetContentLanguage(currentLanguageCode, project.quality)
+	const colorquality = ColorQuality(currentLanguageCode, quality)
 
 	return (
 		<>
@@ -67,7 +72,10 @@ const ProjectDescription = (props) => {
 												<div className="row">
 													<div className="col-xl-6 col-lg-6  col-md-6 col-xxl-6 ">
 														<p>{t('projectscore')}: <span className="item ml-3">{project.scores}</span>{" "}</p>
-														<p>{t('projectquality')}: <span className="item ml-3">{project.scores}</span>{" "}</p>
+														<p>{t('projectquality')}:
+															{colorquality}
+														</p>
+
 														<p>{t('noofreviewed')}: <span className="item ml-3">{project.totalreview}</span>{" "}</p>
 													</div>
 													<div className="col-xl-6 col-lg-6  col-md-6 col-xxl-6 ">

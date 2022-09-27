@@ -1,4 +1,7 @@
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
+import { removeLibraryAction } from "../../../../../../store/actions/LibraryAction";
 import GetContentLanguage from "../../../../../../utils/GetContentLanguage";
 import { ColumnFilter } from '../../../../../components/table/FilteringTable/ColumnFilter';
 import JP from './../../../../../components/svg/Icon/JP';
@@ -78,6 +81,43 @@ export const COLUMNSFILTER = [
 						</div>
 					</div>
 
+				</>
+			)
+		}
+	},
+	{
+		Header: 'Admin',
+		Footer: 'Admin',
+		Cell: (props) => {
+			const dispatch = useDispatch();
+			const history = useHistory()
+			const handleRemoveLibrary = () => {
+				const postData = {
+					id: props.row.original.id
+				}
+				Swal.fire({
+					icon: "question",
+					title: "Are you want to remove this library?",
+					html: "Submit a remove library",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "submit",
+					cancelButtonText: "cancel",
+				}).then((result) => {
+					if (result.value) {
+						dispatch(removeLibraryAction(postData,history));
+						window.location.reload(true);
+					}
+				});
+			}
+
+			return (
+				<>
+					<Link to="#" className="btn btn-danger shadow btn-xs sharp mr-2" onClick={() => handleRemoveLibrary()}
+					>
+						<i className="fa fa-trash"></i>
+					</Link>
 				</>
 			)
 		}

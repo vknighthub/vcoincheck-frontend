@@ -233,6 +233,7 @@ const ProfileSetting = (props) => {
                                         name="oldpassword"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
+                                        autoComplete = "current-password"
                                     />
                                     <div
                                         id="val-oldpassword-error"
@@ -265,6 +266,7 @@ const ProfileSetting = (props) => {
                                         name="newpassword"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
+                                        autoComplete = "new-password"
                                     />
                                     <div
                                         id="val-newpassword-error"
@@ -297,6 +299,7 @@ const ProfileSetting = (props) => {
                                         name="confirmnewpass"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
+                                        autoComplete = "confirm-password"
                                     />
                                     <div
                                         id="val-confirmnewpass-error"

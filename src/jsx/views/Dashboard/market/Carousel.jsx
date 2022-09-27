@@ -45,7 +45,7 @@ const Carousel = () => {
     let profit = coin?.price_change_percentage_24h >= 0;
 
     return (
-      <NavLink className={classes.carouselItem} to={`/coins/${coin.id}`}>
+      <NavLink className={classes.carouselItem} to={`/market-info/coins/${coin.id}`}>
         <img
           src={coin?.image}
           alt={coin.name}

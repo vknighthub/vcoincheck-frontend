@@ -6,7 +6,6 @@ import { withTranslation, useTranslation } from "react-i18next";
 const ECOSystem = () => {
    const { t } = useTranslation();
    return (
-      <Fragment>
          <>
             <PageTitle activeMenu={t('ecosystem')} motherMenu={t('project')} path={"project"} />
             <div className="row">
@@ -17,7 +16,6 @@ const ECOSystem = () => {
                </div>
             </div>
          </>
-      </Fragment>
    );
 };
 

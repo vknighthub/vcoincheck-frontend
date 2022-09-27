@@ -204,5 +204,8 @@
     "askcomment": "Đăng nhập hoặc đăng ký để tham gia bình luận",
     "featured" : "Nổi bật",
     "areyousuresetfeatured": "Bạn có chắc muốn thiết lập dự án này là nổi bật",
-    "successfeatured":"Tuyệt quá! Thông tin dự án đã được thiết lập Nổi bật !. Dự án này sẽ sớm lọt top 1. Nhấp vào [Ok] quay lại Quản lý dự án"
+    "successfeatured":"Tuyệt quá! Thông tin dự án đã được thiết lập Nổi bật !. Dự án này sẽ sớm lọt top 1. Nhấp vào [Ok] quay lại Quản lý dự án",
+    "connectwallet" : "Kết nối ví",
+    "questionremovelibrary": "Bạn có chắc muốn xóa bài viết này không?",
+    "submitremovelibrary": "Xóa bài viết"
 }

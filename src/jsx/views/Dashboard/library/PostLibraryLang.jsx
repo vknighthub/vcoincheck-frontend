@@ -182,8 +182,6 @@ const PostLibraryLang = (props) => {
                 >
                     {({
                         handleSubmit,
-                        errors,
-                        values
                     }) => (
                         <form onSubmit={handleSubmit}>
                             <h2 className="text-primary pb-5 text-center">{t('addblockchaintitle')}</h2>

@@ -8,6 +8,7 @@ export const CONFIRMED_GET_CATALYST_KNOWLEDGE = '[Library Action] Confirmed Get 
 export const CONFIRMED_POST_LIBRARY_KNOWLEDGE = '[Library Action] Confirmed Post Library';
 export const CONFIRMED_GET_LIBRARY_DETAIL = '[Library Action] Confirmed Get Library Details By ID';
 export const CONFIRMED_COMMENT_LIBRARY = '[Library Action] Confirmed Comment Library';
+export const CONFIRMED_REMOVE_LIBRARY = '[Library Action] Confirmed Remove Library';
 
 
 

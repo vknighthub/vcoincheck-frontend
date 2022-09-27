@@ -12,10 +12,12 @@ import ECosystemReducer from './reducers/ECosystemReducer';
 import FAQsReducer from './reducers/FAQsReducer';
 import HotProjectReducer from './reducers/HotProjectReducer';
 import LibraryDetailsReducer from './reducers/LibraryDetailsReducer';
+import LibraryNewTopicReducer from './reducers/LibraryNewTopicReducer';
 import LibraryReducer from './reducers/LibraryReducer';
 import LibraryTopReducer from './reducers/LibraryTopReducer';
 import NewsReducer from './reducers/NewsReducer';
 import ProjectDetailReducer from './reducers/ProjectDetailReducer';
+import ProjectEcosystemReducer from './reducers/ProjectEcosystemReducer';
 import ProjectManagementReducer from './reducers/ProjectManagementReducer';
 import ProjectsReducer from './reducers/ProjectReducer';
 import ProjectTypeReducer from './reducers/ProjectTypeReducer';
@@ -26,7 +28,8 @@ import ReviewReducer from './reducers/ReviewReducer';
 import TopProjectReducer from './reducers/TopProjectReducer';
 import UsersReducer from './reducers/UserReducer';
 import UserRoleReducer from './reducers/UserRoleReducer';
-import LibraryNewTopicReducer from './reducers/LibraryNewTopicReducer';
+import ProjectByTypeReducer from './reducers/ProjectByTypeReducer';
+import UserDetailReducer from './reducers/UserDetailReducer';
 
 const middleware = applyMiddleware(thunk);
 
@@ -38,9 +41,11 @@ const reducers = combineReducers({
     projectmanagement: ProjectManagementReducer,
     projecttype: ProjectTypeReducer,
     ecosystem: ECosystemReducer,
+    projectbytype: ProjectByTypeReducer,
     hotproject: HotProjectReducer,
     topproject: TopProjectReducer,
     projectdetail: ProjectDetailReducer,
+    projecteco: ProjectEcosystemReducer,
     users: UsersReducer,
     userroles: UserRoleReducer,
     auth: AuthReducer,
@@ -58,6 +63,7 @@ const reducers = combineReducers({
     reviewuserlist: ReviewListByUserProjectReducer,
     faqs: FAQsReducer,
     news: NewsReducer,
+    userdetail: UserDetailReducer,
     form: reduxFormReducer,
 });
 

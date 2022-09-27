@@ -1,139 +1,180 @@
-import React, { Fragment } from "react";
-import { withTranslation, useTranslation } from "react-i18next";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import { withTranslation } from "react-i18next";
+import { connect } from 'react-redux';
+import { getNewsAction } from '../../../store/actions/EventsAction';
 
 
-const ListNews = [
-   {
-      src: require("../../../images/event/sora.png").default,
-      content: "February 9th, 2022, Ecosystem Updates for SORA, Polkaswap, and Fearless Wallet...",
-      href: "https://medium.com/sora-xor/february-9th-2022-ecosystem-updates-for-sora-polkaswap-and-fearless-wallet-f09cca62599d",
-   },
-   {
-      src: require("../../../images/event/Subquery_Icon.png").default,
-      content: "SubQuery Data Powers Nova Wallet — a next-gen mobile wallet for the Polkadot & Kusama ecosystem...",
-      href: "https://subquery.medium.com/subquery-data-powers-nova-wallet-a-next-gen-mobile-wallet-for-the-polkadot-kusama-ecosystem-cfecd80a10e0",
-   },
-   {
-      src: require("../../../images/event/Unique-02.png").default,
-      content: "An NFT Workshop at ETH Denver by Unique Network CTO Greg Zaitsev...",
-      href: "https://medium.com/unique-network/an-nft-workshop-at-eth-denver-by-unique-network-cto-greg-zaitsev-5a7d65d1542e",
-   },
-   {
-      src: require("../../../images/event/Subquery_Icon.png").default,
-      content: "$RMRK token: current utility, DeFi options and Staking... Feb 8, 2022 3:28 PM",
-      href: "https://app.subsocial.network/@rmrkapp/rmrk-token-current-utility-de-fi-options-and-staking-31314",
-   },
-];
-const RanKinglist = [
-   {
-      proname: "Kulupu",
-      shotname: "KLP",
-      src: require("../../../images/event/sora.png").default,
-      price: "$0.019",
-      precent: "5.36%"
-   },
-   {
-      proname: "UniLend Finance",
-      shotname: "UFT",
-      src: require("../../../images/event/sora.png").default,
-      price: "$0.89",
-      precent: "4.48%"
-   },
-   {
-      proname: "Raize Network",
-      shotname: "RAZE",
-      src: require("../../../images/event/sora.png").default,
-      price: "$0.035",
-      precent: "0.59%"
-   },
-   {
-      proname: "Polkaswap",
-      shotname: "PSWAP",
-      src: require("../../../images/event/sora.png").default,
-      price: "$0.016",
-      precent: "0.02%"
-   },
-   {
-      proname: "kUSD",
-      shotname: "KUSD",
-      src: require("../../../images/event/sora.png").default,
-      price: "$1.00",
-      precent: "0.00%"
-   },
-];
+const Event = (props) => {
+   // const { t } = useTranslation();
+   const { news } = props;
+   const [weekendsVisible, setWeekendsVisible] = useState(true);
 
-const Event = () => {
-   const { t } = useTranslation();
-   return (
-      <Fragment>
+   const generateEvents = (news) => {
+      const listEvents = [];
+      news.forEach((value) => {
+         const list = {
+            id: value.id,
+            title: value.title,
+            url : `/event/news/details/${value.name}`,
+            extendedProps: {
+               logo: value.image
+            },
+            start: value.pubdt
+         }
+         listEvents.push(list)
+      })
+      return listEvents
+   }
+
+
+   const INITIAL_EVENTS = generateEvents(news);
+   console.log(INITIAL_EVENTS)
+
+   const renderEventContent = (eventInfo) => {
+      return (
          <>
-            <div className="row">
-               <div className="col-xl-4 col-xxl-4 col-lg-4">
-                  <div className="card">
-                     <div className="card-header d-block d-sm-flex border-1 text-center">
-                        <h2 className="text-black mx-auto">
-                           {t('news')}
-                        </h2>
-                     </div>
-                     <div className="table-responsive card-body tab-content p-3">
-                        {ListNews.map((value, index) => (
-                           <a target="_blank" href={value.href} rel="noreferrer" key={index}>
-                              <div className="row">
-                                 <div className="col-xl-2 col-xxl-2 col-lg-2">
-                                    <img alt="" src={value.src} className="img-fluid mb-4" />
-                                 </div>
-                                 <div className="col-xl-10 col-xxl-10 col-lg-10 mx-auto">
-                                    <span>{value.content}</span>
-                                 </div>
-                              </div>
-                           </a>
-                        ))}
-                     </div>
-                  </div>
-               </div>
-               <div className="col-xl-4 col-xxl-4 col-lg-4">
-                  <div className="card">
-                     <div className="card-header d-block d-sm-flex border-1 text-center">
-                        <h2 className="text-black mx-auto">
-                           {t('topcontributor')}
-                        </h2>
-                     </div>
-                     <div className="table-responsive card-body tab-content p-3">
-                        {t('commingsoon')}
-                     </div>
-                  </div>
-               </div>
-               <div className="col-xl-4 col-xxl-4 col-lg-4">
-                  <div className="card">
-                     <div className="card-header d-block d-sm-flex border-1 text-center">
-                        <h2 className="text-black mx-auto">
-                           {t('rankinglist')}
-                        </h2>
-                     </div>
-                     <div className="table-responsive card-body tab-content p-3">
-                        {RanKinglist.map((value, index) => (
-                           <div className="row">
-                              <div className="col-xl-2 col-xxl-2 col-lg-2">
-                                 <img alt="" src={value.src} className="img-fluid p-2" />
-                              </div>
-                              <div className="col-xl-7 col-xxl-67 col-lg-7">
-                                 <p className="mt-1 mb-0 font-weight-bold">{value.proname}</p>
-                                 <p className="mt-0 mb-0">{value.shotname}</p>
-                              </div>
-                              <div className="col-xl-3 col-xxl-3 col-lg-3">
-                                 <p className="mt-1 mb-0 font-weight-bold">{value.price}</p>
-                                 <span className="mt-0 mb-0 text-info">{value.precent}</span>
-                                 <span className="fas fa-angle-up pl-1 text-info"></span>
-                              </div>
-                           </div>
-                        ))}
-                     </div>
-                  </div>
-               </div>
-            </div>
+            <span style={{
+               boxSizing: "border-box",
+               display: "inline-block",
+               overflow: "hidden",
+               width: "initial",
+               height: "initial",
+               background: "none",
+               opacity: 1,
+               border: 0,
+               margin: 0,
+               padding: 0,
+               position: "relative",
+               maxWidth: "100%"
+            }}>
+               <span style={{
+                  boxSizing: "border-box",
+                  display: "block",
+                  width: "initial",
+                  height: "initial",
+                  backgroundk: "none",
+                  opacity: 1,
+                  border: 0,
+                  margin: 0,
+                  padding: 0,
+                  position: "relative",
+                  maxWidth: "100%"
+               }}>
+                  <img style={{
+                     display: "block",
+                     maxWidth: "100%",
+                     width: "initial",
+                     height: "initial",
+                     backgroundk: "none",
+                     opacity: 1,
+                     border: 0,
+                     margin: 0,
+                     padding: 0,
+                  }}
+                     src={"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"} alt="" />
+               </span>
+               <img alt="Moonriver One Year Recap"
+                  src={eventInfo.event.extendedProps.logo} decoding="async"
+                  style={{
+                     borderRadius: "24px",
+                     backgroundColor: "rgb(255, 255, 255)",
+                     position: "absolute",
+                     inset: 0,
+                     boxSizing: "border-box",
+                     padding: 0,
+                     margin: "auto",
+                     display: "block",
+                     width: 0,
+                     height: 0,
+                     maxWidth: "100%",
+                     minWidth: "100%",
+                     minHeight: "100%",
+                     maxHeight: "100%",
+                  }}></img>
+            </span>
          </>
-      </Fragment>
+      )
+   }
+   // const handleDateSelect = (selectInfo) => {
+   //    let title = prompt('Please enter a new title for your event')
+   //    let calendarApi = selectInfo.view.calendar
+
+   //    calendarApi.unselect() // clear date selection
+
+   //    if (title) {
+   //       calendarApi.addEvent({
+   //          id: createEventId(),
+   //          title,
+   //          start: selectInfo.startStr,
+   //          end: selectInfo.endStr,
+   //          allDay: selectInfo.allDay
+   //       })
+   //    }
+   // }
+
+   // const handleEventClick = (clickInfo) => {
+   //    if (window.confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+   //       clickInfo.event.remove()
+   //    }
+   // }
+
+
+   const handleEvents = (events) => {
+      setWeekendsVisible(events)
+   }
+   useEffect(() => {
+      props.fetchListNews();
+   }, [])
+
+   return (
+      <>
+         <FullCalendar
+            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+            themeSystem="bootstrap"
+            headerToolbar={{
+               left: 'prev,next today',
+               center: 'title',
+               right: ''
+            }}
+            initialView='dayGridMonth'
+            editable={true}
+            selectable={true}
+            selectMirror={true}
+            dayMaxEvents={true}
+            weekends={weekendsVisible}
+            initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
+            eventContent={renderEventContent} // custom render function
+            eventsSet={handleEvents} // called after events are initialized/added/changed/removed
+         // eventClick={handleEventClick} // called when events are clicked
+
+         // select={handleDateSelect} // Select to add event
+
+         /* you can update a remote database when these fire:
+         eventAdd={function () { }}
+         eventChange={function () { }}
+         eventRemove={function () { }}
+
+         */
+         />
+      </>
    );
 };
+const mapStateToProps = (state) => {
+   return {
+      news: state.news,
+   };
+};
 
-export default withTranslation()(Event);
+const mapDispatchToProps = (dispatch) => {
+   return {
+      fetchListNews: () => {
+         dispatch(getNewsAction())
+      }
+   }
+}
+export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(Event));

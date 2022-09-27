@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2';
-import { commentLibrary, formatError, getDictionary, getLibrary, getLibraryById, getLibraryNewTopic, getLibraryTop, postCK } from '../../services/LibraryService';
+import { commentLibrary, formatError, getDictionary, getLibrary, getLibraryById, getLibraryNewTopic, getLibraryTop, postCK, removeLibrary } from '../../services/LibraryService';
 import { addLangLibrary, getAllLibrary, postLibrary } from './../../services/LibraryService';
-import { CONFIRMED_GET_BLOCKCHAIN_KNOWLEDGE, CONFIRMED_GET_CARDANO_KNOWLEDGE, CONFIRMED_GET_DICTIONARY_KNOWLEDGE, CONFIRMED_GET_LIBRARY, CONFIRMED_GET_LIBRARY_DETAIL, CONFIRMED_POST_LIBRARY_KNOWLEDGE, CONFIRMED_GET_CATALYST_KNOWLEDGE, CONFIRMED_GET_TOP_LIBRARY, CONFIRMED_GET_NEW_TOPIC_LIBRARY, CONFIRMED_COMMENT_LIBRARY } from './types/LibraryType';
+import { CONFIRMED_GET_BLOCKCHAIN_KNOWLEDGE, CONFIRMED_GET_CARDANO_KNOWLEDGE, CONFIRMED_GET_DICTIONARY_KNOWLEDGE, CONFIRMED_GET_LIBRARY, CONFIRMED_GET_LIBRARY_DETAIL, CONFIRMED_POST_LIBRARY_KNOWLEDGE, CONFIRMED_GET_CATALYST_KNOWLEDGE, CONFIRMED_GET_TOP_LIBRARY, CONFIRMED_GET_NEW_TOPIC_LIBRARY, CONFIRMED_COMMENT_LIBRARY, CONFIRMED_REMOVE_LIBRARY } from './types/LibraryType';
 
 
 export function confirmedLibraryAction(library) {
@@ -75,6 +75,14 @@ export function confirmedCommmentLibraryAction(comment) {
         payload: comment
     };
 };
+
+export function confirmedRemoveLibraryAction(data) {
+    return {
+        type: CONFIRMED_REMOVE_LIBRARY,
+        payload: data
+    };
+};
+
 
 export function getLibraryAction(lang) {
     return (dispatch) => {
@@ -155,7 +163,7 @@ export function getDictionaryAction(postdata) {
     };
 };
 
-export function postCKAction(postdata,historySubmit,url) {
+export function postCKAction(postdata, historySubmit, url) {
     return (dispatch) => {
         postCK(postdata).then((response) => {
             dispatch(confirmedGetCKAction(response.result.data));
@@ -179,7 +187,7 @@ export function postCKAction(postdata,historySubmit,url) {
     };
 };
 
-export function postLibraryAction(postdata,historySubmit,url) {
+export function postLibraryAction(postdata, historySubmit, url) {
     return (dispatch) => {
         postLibrary(postdata).then((response) => {
             dispatch(confirmedPostLibraryAction(response.result.data));
@@ -203,7 +211,7 @@ export function postLibraryAction(postdata,historySubmit,url) {
     };
 };
 
-export function addLangLibraryAction(postdata,historySubmit,url) {
+export function addLangLibraryAction(postdata, historySubmit, url) {
     return (dispatch) => {
         addLangLibrary(postdata).then((response) => {
             dispatch(confirmedPostLibraryAction(response.result.data));
@@ -250,3 +258,14 @@ export function commentLibraryAction(postdata) {
     };
 };
 
+export function removeLibraryAction(postdata, historySubmit) {
+    return (dispatch) => {
+        removeLibrary(postdata).then((response) => {
+            dispatch(confirmedRemoveLibraryAction(response.result.data));
+            historySubmit.push('/library-management')
+        }).catch((error) => {
+            const errorMessage = formatError(error.response.data);
+            console.error("error" + errorMessage);
+        });
+    };
+};

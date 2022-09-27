@@ -10,7 +10,7 @@ const Project = () => {
     const { t } = useTranslation();
 
     return (
-        <Fragment>
+        <>
             <PageTitle activeMenu={t('allproject')} motherMenu={t('project')} path="project" />
             <TopProject t={t} />
             <div className="row">
@@ -20,7 +20,7 @@ const Project = () => {
                     </div>
                 </div>
             </div>
-        </Fragment>
+        </>
     );
 };
 

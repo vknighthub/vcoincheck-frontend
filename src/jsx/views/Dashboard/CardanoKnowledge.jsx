@@ -18,7 +18,7 @@ import GetContentLanguage from './../../../utils/GetContentLanguage';
 
 const getImage = (image) => {
   if (image.length > 0) {
-    return <img className="card-img-top img-fluid" src={image} alt="" />
+    return <img className="card-img-top img-block" src={image} alt="Cardano Knowledge" />
   }
 }
 
@@ -47,7 +47,7 @@ const CardanoKnowledge = (props) => {
               <Card className='mb-3'>
                 {getImage(knowledge.image)}
                 <Card.Header>
-                  <Card.Title className="fs-14 text-black">
+                  <Card.Title className="fs-14 text-black" style={{minHeight:"120px"}}>
                     <h4>{GetContentLanguage(currentLanguageCode, knowledge.title)}</h4>
                     <div className="media mt-4">
                       <img src={profile} alt="" className="mr-3 rounded" width={25} />
@@ -58,9 +58,9 @@ const CardanoKnowledge = (props) => {
                     </div>
                   </Card.Title>
                 </Card.Header>
-                <Card.Body>
+                <Card.Body style={{minHeight:"100px"}}>
                   <Card.Text className="text-content subtitle">
-                    <CutText content={GetContentLanguage(currentLanguageCode, knowledge.summary)} start={0} end={150} />
+                    <CutText content={GetContentLanguage(currentLanguageCode, knowledge.summary)} start={0} end={100} />
                   </Card.Text>
                 </Card.Body>
               </Card>

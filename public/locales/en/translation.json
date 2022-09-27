@@ -208,5 +208,9 @@
     "askcomment": "Log in or sign up to leave a comment",
     "featured" : "Featured",
     "areyousuresetfeatured": "Are you sure you want to set this project as Featured?",
-    "successfeatured":"Great! Project information have been set Featured!. This project will be top 1 soon. Click [Ok] back to Project management"
+    "successfeatured":"Great! Project information have been set Featured!. This project will be top 1 soon. Click [Ok] back to Project management",
+    "connectwallet" : "Connect wallet",
+    "questionremovelibrary": "Are you want to remove this library?",
+    "submitremovelibrary": "Submit a remove library"
+
 }

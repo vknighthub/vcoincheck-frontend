@@ -48,7 +48,7 @@ const BlockchainKnowledge = (props) => {
                 <Card.Link href="#" className="float-right">
                   {getImage(knowledge.image)}
                   <Card.Header>
-                    <Card.Title className="fs-14 text-black">
+                    <Card.Title className="fs-14 text-black" style={{minHeight:"120px"}}>
                       <h4>{GetContentLanguage(currentLanguageCode, knowledge.title)}</h4>
                       <div className="media mt-4">
                         <img src={profile} alt="" className="mr-3 rounded img-fluid" width={25} />
@@ -59,7 +59,7 @@ const BlockchainKnowledge = (props) => {
                       </div>
                     </Card.Title>
                   </Card.Header>
-                  <Card.Body>
+                  <Card.Body style={{minHeight:"100px"}}>
                     <Card.Text className="text-content subtitle">
                       <CutText content={GetContentLanguage(currentLanguageCode, knowledge.summary)} start={0} end={150} />
                     </Card.Text>

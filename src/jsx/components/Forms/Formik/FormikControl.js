@@ -7,6 +7,7 @@ import RadioButtonVertical from '../../bootstrap/RadioButtonVertical'
 import Select from '../../bootstrap/Select';
 import Texteditor from '../../bootstrap/Texteditor';
 import Textarea from './../../bootstrap/Textarea';
+import CheckboxGroup from './../../bootstrap/CheckboxGroup';
 
 const FormikControl = (props) => {
     const { control, type, styles, ...rest } = props
@@ -19,7 +20,7 @@ const FormikControl = (props) => {
                     return <DatePicker {...rest} />
                 case 'textarea':
                     return <Textarea {...rest} />
-                case 'texteditor': 
+                case 'texteditor':
                     return <Texteditor {...rest} />
                 default:
                     return null
@@ -37,6 +38,8 @@ const FormikControl = (props) => {
             return <Select {...rest} />
         case 'file':
             return <File {...rest} />
+        case 'checkbox':
+            return <CheckboxGroup {...rest} />
         default:
             return null;
     }

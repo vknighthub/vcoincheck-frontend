@@ -15,8 +15,10 @@ const CardanoDetail = (props) => {
 	const i18nextLng = localStorage.getItem('i18nextLng')
 	const currentLanguageCode = i18nextLng || 'en'
 	const { librarydetail, user } = props
-	const { t } = useTranslation();
+	const library_info = librarydetail.library_infor
+	const comment_info = librarydetail.comment_infor
 
+	const { t } = useTranslation();
 	const library = {
 		libraryid: atob(props.match.params.name)
 	}
@@ -25,19 +27,20 @@ const CardanoDetail = (props) => {
 		props.fetchLibDetail(library);
 	}, [])
 
-	const showLibrary = () => {
+	const showLibrary = (library) => {
 		var show = false
+		
 		switch (currentLanguageCode) {
 			case 'en':
-				if (librarydetail.keyen === 1)
+				if (library.keyen === 1)
 					show = true
 				break;
 			case 'vn':
-				if (librarydetail.keyvn === 1)
+				if (library.keyvn === 1)
 					show = true
 				break;
 			case 'jp':
-				if (librarydetail.keyjp === 1)
+				if (library.keyjp === 1)
 					show = true
 				break;
 			default:
@@ -45,9 +48,9 @@ const CardanoDetail = (props) => {
 		}
 		return show
 	}
-
+	
 	return (
-		showLibrary() ?
+		showLibrary(library_info) ?
 			<div>
 				<div>
 					<div className="row">
@@ -57,21 +60,21 @@ const CardanoDetail = (props) => {
 									<div className="post-details">
 
 										<h1 className="mb-2 text-black text-center pb-2">
-											{GetContentLanguage(currentLanguageCode, librarydetail.title)}
+											{GetContentLanguage(currentLanguageCode, library_info.title)}
 										</h1>
 
 										<ul className="mb-4 post-meta d-flex flex-wrap justify-content-center">
 											<li className="post-date mr-3">
 												<i className="fa fa-calendar mr-2" />
-												{t('published')}: {librarydetail.createdt}
+												{t('published')}: {library_info.createdt}
 											</li>
 										</ul>
 										<ul className="mb-4 post-meta d-flex flex-wrap justify-content-center">
 											<li className="post-date mr-3">
 												<i className="fa fa-user mr-2" />
 												{t('author')}:
-												<NavLink to={`/library/author/${librarydetail.username}`} className="ml-3">
-													{librarydetail.fullname}
+												<NavLink to={`/library/author/${library_info.username}`} className="ml-3">
+													{library_info.fullname}
 												</NavLink>
 											</li>
 										</ul>
@@ -79,7 +82,7 @@ const CardanoDetail = (props) => {
 										<ul className="mb-4 post-meta d-flex flex-wrap justify-content-center">
 											<li className="post-date mr-3">
 												<i className="fa fa-eye mr-2" />
-												{t('Viewd')}: {librarydetail.noofview}
+												{t('Viewd')}: {library_info.noofview}
 											</li>
 											<li className="post-date mr-3">
 												<i className="fa fa-thumbs-up mr-2" />
@@ -88,12 +91,12 @@ const CardanoDetail = (props) => {
 										</ul>
 
 
-										<img src={librarydetail.image} alt="" className="img-fluid mb-3 w-100" />
+										<img src={library_info.image} alt="" className="img-fluid mb-3 w-100" />
 										<p className="text-blue fs-18 my-3">
-											{GetContentLanguage(currentLanguageCode, librarydetail.summary)}
+											{GetContentLanguage(currentLanguageCode, library_info.summary)}
 										</p>
 										<div>
-											{parse(GetContentLanguage(currentLanguageCode, librarydetail.content))}
+											{parse(GetContentLanguage(currentLanguageCode, library_info.content))}
 										</div>
 									</div>
 								</div>
@@ -101,7 +104,7 @@ const CardanoDetail = (props) => {
 						</div>
 					</div>
 					<div className="row">
-						<PostComment t={t} user={user} />
+						<PostComment t={t} user={user} libraryid = {library_info.id} comments = {comment_info} />
 					</div>
 				</div>
 			</div>

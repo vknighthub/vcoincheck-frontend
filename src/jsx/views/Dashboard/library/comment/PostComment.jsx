@@ -8,6 +8,7 @@ import { CommentSection } from './../../../../components/vKnightHub/Comment/Comm
 
 
 const PostComment = ({ t, user, libraryid, comments }) => {
+
     const [comment, setComment] = useState(comments);
     const [insertComment, setInsertComment] = useState();
 
@@ -63,7 +64,7 @@ const PostComment = ({ t, user, libraryid, comments }) => {
                                 currentUser={
                                     username && { username: username, avatarUrl: avatarUrl, name: name }
                                 }
-                                commentsArray={comment}
+                                commentsArray={comment.length === 0 ? comments : comment}
                                 setComment={setComment}
                                 setInsertComment={setInsertComment}
                                 signinUrl={signinUrl}

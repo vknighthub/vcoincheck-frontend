@@ -2,8 +2,8 @@ import Swal from 'sweetalert2';
 import {
     formatError, formatHotProject, formatProject, formatTopProject, getEcosystem, getHotProject, getProject, getProjectDetails, getProjectManagement, getProjectType, getTopProject, removeProject, submitProject
 } from '../../services/ProjectService';
-import { approveProject, editProject, setFeaturedProject } from './../../services/ProjectService';
-import { CONFIRMED_EDIT_PROJECTS, CONFIRMED_GET_ECOSYSTEM_TYPE, CONFIRMED_GET_HOT_PROJECTS, CONFIRMED_GET_PROJECTS, CONFIRMED_GET_PROJECTS_DETAIL, CONFIRMED_GET_PROJECTS_MANAGEMENT, CONFIRMED_GET_PROJECTS_TYPE, CONFIRMED_GET_TOP_PROJECTS, CONFIRMED_SUBMIT_PROJECTS, CONFIRMED_APPROVE_PROJECTS, CONFIRMED_REMOVE_PROJECTS, CONFIRMED_SET_FEATURED_PROJECTS } from './types/ProjectType';
+import { approveProject, editProject, setFeaturedProject, getProjectByEcosystem, getProjectByType } from './../../services/ProjectService';
+import { CONFIRMED_EDIT_PROJECTS, CONFIRMED_GET_ECOSYSTEM_TYPE, CONFIRMED_GET_HOT_PROJECTS, CONFIRMED_GET_PROJECTS, CONFIRMED_GET_PROJECTS_DETAIL, CONFIRMED_GET_PROJECTS_MANAGEMENT, CONFIRMED_GET_PROJECTS_TYPE, CONFIRMED_GET_TOP_PROJECTS, CONFIRMED_SUBMIT_PROJECTS, CONFIRMED_APPROVE_PROJECTS, CONFIRMED_REMOVE_PROJECTS, CONFIRMED_SET_FEATURED_PROJECTS, CONFIRMED_GET_PROJECTS_ECOSYSTEM, CONFIRMED_GET_PROJECTS_BY_TYPE } from './types/ProjectType';
 
 
 export function confirmedGetProjectAction(projects) {
@@ -84,6 +84,20 @@ export function confirmedSetFeaturedProjectAction(isfeatured) {
     return {
         type: CONFIRMED_SET_FEATURED_PROJECTS,
         payload: isfeatured
+    };
+};
+
+export function confirmedGetProjectByEcosystemtAction(projecteco) {
+    return {
+        type: CONFIRMED_GET_PROJECTS_ECOSYSTEM,
+        payload: projecteco
+    };
+};
+
+export function confirmedGetProjectByTypeAction(projectbytype) {
+    return {
+        type: CONFIRMED_GET_PROJECTS_BY_TYPE,
+        payload: projectbytype
     };
 };
 
@@ -302,5 +316,27 @@ export function setFeaturedProjectAction(projectcode, historyEdit, t) {
     };
 };
 
+
+export function getProjectByEcosystemAction(postData) {
+    return (dispatch) => {
+        getProjectByEcosystem(postData).then((response) => {
+            dispatch(confirmedGetProjectByEcosystemtAction(response.result.data));
+        }).catch((error) => {
+            const errorMessage = formatError(error.response.data);
+            console.error("error" + errorMessage);
+        });
+    };
+};
+
+export function getProjectByProTypeAction(postData) {
+    return (dispatch) => {
+        getProjectByType(postData).then((response) => {
+            dispatch(confirmedGetProjectByTypeAction(response.result.data));
+        }).catch((error) => {
+            const errorMessage = formatError(error.response.data);
+            console.error("error" + errorMessage);
+        });
+    };
+};
 
 
