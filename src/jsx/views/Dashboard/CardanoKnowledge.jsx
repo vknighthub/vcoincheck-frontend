@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 /// Bootstrap
 import { Card, Col, Row } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
@@ -13,6 +13,7 @@ import { isAuthenticated } from '../../../store/selectors/AuthSelectors';
 import CutText from '../../../utils/CutText';
 import PageTitle from '../../layouts/PageTitle';
 import GetContentLanguage from './../../../utils/GetContentLanguage';
+import SearchInput, { createFilter } from 'react-search-input'
 
 
 
@@ -31,16 +32,53 @@ const CardanoKnowledge = (props) => {
     catname: "Cardano Knowledge"
   }
 
+  const [search, setSearch] = useState('')
+  const searchUpdated = (term) => {
+    setSearch(term)
+  }
+  const KEYS_TO_FILTERS = ['search']
+
+  const searchFunc = (list, lang) => {
+    var searchListLanguage = []
+    list.forEach((searchObject) => {
+      var result
+      switch (lang) {
+        case 'en': result = searchObject["title"].en; break;
+        case 'vn': result = searchObject["title"].vn; break;
+        case 'jp': result = searchObject["title"].jp; break;
+        default: result = searchObject["title"].en
+      }
+      searchObject['search'] = result
+      searchListLanguage.push(searchObject)
+    })
+    return searchListLanguage
+  }
+
+  const searchLanguage = searchFunc(knowledgelist, i18nextLng)
+
+  const filtered = searchLanguage.filter(createFilter(search, KEYS_TO_FILTERS))
+
   useEffect(() => {
     props.fetchListCK(postData);
   }, [])
 
   return (
-    <Fragment>
+    <>
       <PageTitle activeMenu={t('cardanoknowledge')} motherMenu={t('library')} path={"library"} />
 
+      <div className="form-head d-flex mb-4 mb-md-5 align-items-start">
+        <div className="input-group search-area d-inline-flex">
+          <div className="input-group-append">
+            <span className="input-group-text">
+              <i className="flaticon-381-search-2" />
+            </span>
+          </div>
+          <SearchInput type="text" inputClassName="form-control" placeholder={t('search')} onChange={searchUpdated} />
+        </div>
+      </div>
+
       <Row>
-        {knowledgelist.map((knowledge, index) => (
+        {filtered.map((knowledge, index) => (
           GetContentLanguage(currentLanguageCode, knowledge.title) &&
           <Col xl='4' key={index}>
             <NavLink to={`${props.match.url}/${btoa(knowledge.id)}`} className='float-right'>
@@ -70,7 +108,7 @@ const CardanoKnowledge = (props) => {
         ))}
 
       </Row>
-    </Fragment >
+    </ >
   )
 }
 

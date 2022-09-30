@@ -2,6 +2,8 @@ import {
     forgotPassword,
     formatError,
     login,
+    loginFace,
+    registerFace,
     runLogoutTimer,
     signUp,
 } from '../../services/AuthService';
@@ -18,6 +20,9 @@ export const LOGOUT_ACTION = '[Logout action] logout action';
 export const RELOAD_SCORE_ACTION = '[User action] Reload score';
 export const RESET_PASSWORD_CONFIRMED_ACTION = '[Reset password action] confirmed';
 export const RESET_PASSWORD_FAILED_ACTION = '[Reset password action] failed';
+export const FACEID_ACTION = '[User action] Loading Face ID';
+export const LOGIN_FACE_CONFIRMED_ACTION = '[Login face action] Face confirmed login';
+export const REGISTER_FACE_CONFIRMED_ACTION = '[Register face action] Face confirmed register';
 
 
 export function signupAction(email, password, history) {
@@ -75,11 +80,11 @@ export function forgotPasswordAction(posdata, history) {
                 } else {
                     dispatch(resetPasswordConfirmedAction(response.data));
                     Swal.fire("Succeed!", "We have sent to your mail a OTP code to vefiy reset password. Please get OTP code and input into page", "success")
-                    .then((response) =>{
-                        if (response) {
-                            history.push("/page-otp-password");
-                        }
-                    });
+                        .then((response) => {
+                            if (response) {
+                                history.push("/page-otp-password");
+                            }
+                        });
                 }
             })
             .catch((error) => {
@@ -115,6 +120,56 @@ export function confirmOTPPasswordAction(posdata, history) {
             });
     };
 }
+
+
+export function loginFaceAuthenAction(username, password, history) {
+    return (dispatch) => {
+        login(username, password)
+            .then((response) => {
+                dispatch(loginConfirmedAction(response.data));
+                history.push("/page-authentication-submit");
+            })
+            .catch((error) => {
+                console.error("error" + error.message);
+                const errorMessage = formatError(error.response.data);
+                dispatch(loginFailedAction(errorMessage));
+            });
+    };
+}
+
+export function loginByFaceAction(postData, history) {
+    return (dispatch) => {
+        loginFace(postData)
+            .then((response) => {
+                dispatch(loginFaceConfirmedAction(response.data));
+                history.push("/");
+            })
+            .catch((error) => {
+                console.error("error" + error.message);
+                const errorMessage = formatError(error.response.data);
+                dispatch(loginFailedAction(errorMessage));
+                history.push("/page-authentication-submit")
+            });
+    };
+}
+
+export function registerFaceAction(postData, history) {
+    return (dispatch) => {
+        registerFace(postData)
+            .then((response) => {
+                dispatch(registerFaceConfirmedAction(response.data));
+                history.push("/");
+            })
+            .catch((error) => {
+                console.error("error" + error.message);
+                const errorMessage = formatError(error.response.data);
+                dispatch(loginFailedAction(errorMessage));
+                history.push("/page-authentication-submit")
+            });
+    };
+}
+
+
 
 export function loginFailedAction(data) {
     return {
@@ -161,6 +216,27 @@ export function resetPasswordFailedAction(data) {
 export function resetPasswordConfirmedAction(data) {
     return {
         type: RESET_PASSWORD_CONFIRMED_ACTION,
+        payload: data,
+    };
+}
+
+export function loadingFaceIdAction(faceId) {
+    return {
+        type: FACEID_ACTION,
+        payload: faceId,
+    };
+}
+
+export function loginFaceConfirmedAction(data) {
+    return {
+        type: LOGIN_FACE_CONFIRMED_ACTION,
+        payload: data,
+    };
+}
+
+export function registerFaceConfirmedAction(data) {
+    return {
+        type: REGISTER_FACE_CONFIRMED_ACTION,
         payload: data,
     };
 }

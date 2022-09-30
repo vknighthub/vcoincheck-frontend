@@ -11,6 +11,7 @@ import UserReviewed from "./UserReviewed";
 export const UserProfile = (props) => {
     const { t } = props;
     const user = props.users;
+    const { faceid } = props;
 
     const [activeToggle, setActiveToggle] = useState("review");
     const [replayModal, setReplayModal] = useState(false);
@@ -107,6 +108,9 @@ export const UserProfile = (props) => {
                                     </li>
                                     <li className="nav-item">
                                         <Link to="#profile-settings" data-toggle="tab" onClick={() => setActiveToggle("setting")} className={`nav-link ${activeToggle === "setting" ? "active show" : ""}`}>{t('setting')}</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link to="#kyc" data-toggle="tab" onClick={() => setActiveToggle("kyc")} className={`nav-link ${activeToggle === "kyc" ? "active show" : ""}`}>{t('KYC')}</Link>
                                     </li>
                                 </ul>
                                 <div className="tab-content">
@@ -206,10 +210,33 @@ export const UserProfile = (props) => {
                                             </div>
                                         </div>
                                     </div>
-
                                     <div id="profile-settings" className={`tab-pane fade ${activeToggle === "setting" ? "active show" : ""}`}>
                                         {user && <ProfileSetting users={user} t={t} />}
                                     </div>
+                                    <div id="kyc" className={`tab-pane fade ${activeToggle === "kyc" ? "active show" : ""}`}>
+                                        <div className="profile-about-me">
+                                            <div className="pt-4 border-bottom-1 pb-3">
+                                                <h4 className="text-primary">{t('KYC')}</h4>
+                                                <p className="mb-2">
+                                                    The table below keeps track of the last enrolled users on this FACEIO application. You can programmatically monitor events like this including new user enrollment, facial authentication sucess, Facial ID deletion, and many other events by simply setting up Webhooks via the application manager to keep your application private backend synchronized.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="profile-personal-info">
+                                            <h4 className="text-primary mb-4">
+                                                {t('kycinfo')}
+                                            </h4>
+                                            <div className="row mb-2">
+                                                <div className="col-3">
+                                                    <h5 className="f-w-500">{t('faceid')}<span className="pull-right">:</span></h5>
+                                                </div>
+                                                <div className="col-9">
+                                                    <span>{`${user.faceid ? user.faceid : faceid ? faceid : `${t('unregistered')}`}`}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -221,7 +248,8 @@ export const UserProfile = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-    users: UserDetails(state)
+    users: UserDetails(state),
+    faceid: state.auth.faceid
 })
 
 const mapDispatchToProps = {}

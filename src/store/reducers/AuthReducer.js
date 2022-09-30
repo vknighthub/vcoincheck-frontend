@@ -1,6 +1,8 @@
 import {
+    FACEID_ACTION,
     LOADING_TOGGLE_ACTION,
     LOGIN_CONFIRMED_ACTION,
+    LOGIN_FACE_CONFIRMED_ACTION,
     LOGIN_FAILED_ACTION,
     LOGOUT_ACTION,
     RESET_PASSWORD_FAILED_ACTION,
@@ -118,6 +120,7 @@ const initialState = {
             failnumber: 0,
             scores: 0,
             avatar: '',
+            faceid: '',
             routes: routes,
             menu: menu,
             project_list: [],
@@ -205,6 +208,22 @@ export function AuthReducer(state = initialState, action) {
         }
     }
     if (action.type === CONFIRMED_CHANGE_AVATAR_USER) {
+        return {
+            ...state,
+            auth: action.payload,
+            errorMessage: '',
+            successMessage: 'Login Successfully Completed',
+            showLoading: false,
+        };
+    }
+    if (action.type === FACEID_ACTION) {
+        return {
+            ...state,
+            faceid: action.payload,
+        };
+    }
+
+    if (action.type === LOGIN_FACE_CONFIRMED_ACTION) {
         return {
             ...state,
             auth: action.payload,

@@ -74,6 +74,9 @@ import ProjectByType from './views/Dashboard/ProjectByType'
 import FileManagement from './views/Dashboard/FileManagement'
 import FileDetails from './views/Dashboard/FileDetails'
 import CoinPage from './views/Dashboard/market/CoinPage'
+import FaceAuthen from './pages/FaceAuthen'
+import RegisterFace from './views/Administrator/UserManagement/RegisterFace'
+import SignInFace from './views/Administrator/UserManagement/SignInFace'
 
 
 const Markup = (props) => {
@@ -124,6 +127,11 @@ const Markup = (props) => {
     { url: 'page-login', component: Login },
     { url: 'page-forgot-password', component: ForgotPassword },
     { url: 'page-otp-password', component: OTPPassword },
+    { url: 'page-face-auticate', component: FaceAuthen },
+    { url: 'page-authentication-submit', component: RegisterFace },
+    { url: 'page-sign-in-face', component: SignInFace },
+
+  
     { url: 'page-error-400', component: Error400 },
     { url: 'page-error-403', component: Error403 },
     { url: 'page-error-404', component: Error404 },

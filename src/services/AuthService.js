@@ -30,6 +30,13 @@ export function login(username, password) {
     );
 }
 
+export function loginFace(postData) {
+    return axios.post(
+        `${process.env.REACT_APP_API_URL}/${process.env.REACT_APP_LOGIN_BY_FACEID_ENDPOINT}`,
+        postData,
+    );
+}
+
 export function forgotPassword(postData) {
     return axios.post(
         `${process.env.REACT_APP_API_URL}/${process.env.REACT_APP_RESET_PASSWORD_USER_ENDPOINT}`,
@@ -68,4 +75,12 @@ export function checkAutoLogin(dispatch, history) {
 
     const timer = expireDate.getTime() - todaysDate.getTime();
     runLogoutTimer(dispatch, timer, history);
+}
+
+
+export function registerFace(postData) {
+    return axios.post(
+        `${process.env.REACT_APP_API_URL}/${process.env.REACT_APP_REGISTER_FACEID_ENDPOINT}`,
+        postData,
+    );
 }

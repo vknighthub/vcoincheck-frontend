@@ -41,7 +41,7 @@ const News = (props) => {
   const filtered = newslist.filter(createFilter(search, KEYS_TO_FILTERS))
 
   return (
-    <Fragment>
+    <>
       <PageTitle activeMenu={t('news')} motherMenu={t('event')} path={"event/news"} />
 
       <div className="form-head d-flex mb-4 mb-md-5 align-items-start">
@@ -90,7 +90,7 @@ const News = (props) => {
         ))}
 
       </Row>
-    </Fragment >
+    </ >
   )
 }
 

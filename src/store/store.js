@@ -69,7 +69,7 @@ const reducers = combineReducers({
 
 const persistConfig = {
     key: 'root',
-    storage: storage('myDB'),
+    storage: storage('voincheck-001'),
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers)
